@@ -1,0 +1,14 @@
+---
+description: Backscatter NASA Space Apps project rules
+alwaysApply: true
+---
+
+Read AGENTS.md and CONTEXT.md first.
+
+Backscatter uses NASA–ISRO NISAR SAR data to detect and communicate surface change.
+
+Keep NISAR scientifically central.
+Do not call any radar change a flood without classification evidence.
+Do not fabricate metrics or citations.
+Prefer GCOV-based inundation MVP before advanced InSAR deformation.
+Build for a reliable hackathon demo, not maximum architecture complexity.

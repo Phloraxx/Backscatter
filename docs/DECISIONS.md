@@ -37,3 +37,15 @@ Kerala/Western Ghats is the first candidate, subject to real scene availability 
 - validation reference;
 - whether GUNW coherence improves the primary case;
 - final tagline and visual identity.
+
+
+## Update — 2026-11-03
+
+### D-008 — Primary research case
+**Decision:** Kuttanad, Kerala, WGS84 bbox `76.42,9.40,76.49,9.47`, with NISAR Sep 14/26 and OPERA Sep 15/27 as candidate observations. Lower Assam is backup. Supersedes the open geography preference in D-006 **for research prioritization only**; final event case is conditional on validated NISAR science.
+
+### D-009 — Evidence boundary
+**Decision:** OPERA-only reported change (net −2.0979 km² classified water) cannot be described as NISAR flood detection. Both NISAR sources currently have only authenticated-file-header checks.
+
+### D-010 — Data and secret hygiene
+**Decision:** keep token, signed redirect links, HDF5/GeoTIFF source products and local `.netrc` outside Git. Commit small research scripts, manifests, metrics and the OPERA-only figure.

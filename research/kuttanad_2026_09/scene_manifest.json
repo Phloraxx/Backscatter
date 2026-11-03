@@ -1,0 +1,65 @@
+{
+  "record_date": "2026-11-03",
+  "phase": "research/data-feasibility",
+  "title": "Kuttanad, Kerala 2026 September water-change candidate",
+  "aoi_wgs84_bbox_lonlat": [
+    76.42,
+    9.4,
+    76.49,
+    9.47
+  ],
+  "nsid": "NASA Earthdata Common Metadata Repository (CMR)",
+  "collections": {
+    "nisar_gcov": "C2854338529-ASF",
+    "opera_dswx_s1": "C2949811996-POCLOUD"
+  },
+  "observations": [
+    {
+      "source": "NISAR",
+      "product": "L2 GCOV provisional L-band",
+      "date": "2026-09-14",
+      "granule_id": "NISAR_L2_PR_GCOV_030_113_A_006_4005_DHDH_A_20260914T003206_20260914T003233_P05023_N_F_J_001",
+      "checked": "HTTP 206 valid HDF5 header",
+      "bytes_by_content_range": 3959422976
+    },
+    {
+      "source": "NISAR",
+      "product": "L2 GCOV provisional L-band",
+      "date": "2026-09-26",
+      "granule_id": "NISAR_L2_PR_GCOV_031_113_A_006_4005_DHDH_A_20260926T003206_20260926T003233_P05023_N_F_J_001",
+      "checked": "HTTP 206 valid HDF5 header",
+      "bytes_by_content_range": 3959422976
+    },
+    {
+      "source": "OPERA",
+      "product": "L3 DSWx-S1 WTR band",
+      "date": "2026-09-15",
+      "granule_id": "OPERA_L3_DSWx-S1_T43PFL_20260915T004012Z_20261012T040218Z_S1D_30_v1.0",
+      "checked": "HTTP 206 TIFF header and full local WTR raster inspected",
+      "wtr_tiff_bytes": 285247
+    },
+    {
+      "source": "OPERA",
+      "product": "L3 DSWx-S1 WTR band",
+      "date": "2026-09-27",
+      "granule_id": "OPERA_L3_DSWx-S1_T43PFL_20260927T004012Z_20261012T121535Z_S1D_30_v1.0",
+      "checked": "HTTP 206 TIFF header and full local WTR raster inspected",
+      "wtr_tiff_bytes": 296005
+    }
+  ],
+  "extracted_nisar_measurement_arrays": false,
+  "water_change_signal_verified_in_nisar": false,
+  "opera_reference_available": true,
+  "opera_interpretation": "Candidate independent sensor comparison, not ground truth",
+  "opera_stats_file": "opera_comparison.json",
+  "documents": [
+    "README.md",
+    "../../docs/PROJECT_STATUS.md",
+    "../../docs/REPRODUCTION.md"
+  ],
+  "links": [
+    "https://cmr.earthdata.nasa.gov/search/granules.json",
+    "https://nisar-docs.asf.alaska.edu/gcov/",
+    "https://www.jpl.nasa.gov/go/opera/products/dswx-product-suite/"
+  ]
+}

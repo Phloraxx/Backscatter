@@ -86,3 +86,10 @@ Repository/product working name: **Backscatter**
 
 Possible descriptor:
 **Backscatter — Radar intelligence for a changing Earth.**
+
+
+---
+
+## Research update — 2026-11-03
+
+Kuttanad (Kerala) is now the **primary research candidate** and Lower Assam remains a backup. Two NISAR L2 provisional GCOV product headers (Sep 14/26, 2026) passed authenticated HTTP range access checks. A separate OPERA DSWx-S1 Sentinel-1 water comparison (Sep 15/27) yielded 59.9067 km² common valid coverage, 3.0483 km² newly classified water/inundated vegetation, 5.1462 km² lost classification, net −2.0979 km². No NISAR radar array has yet been extracted or interpreted. See `docs/PROJECT_STATUS.md` and `research/kuttanad_2026_09/`. Do not promote OPERA results to NISAR-derived detection claims.

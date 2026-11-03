@@ -16,3 +16,12 @@ High-priority questions to answer with real data:
 ## Research rule
 
 Answer these experimentally. Do not make architecture decisions from assumptions when a small data test can decide the issue.
+
+
+## Progress as of 2026-11-03
+
+- Q1 scene discovery: **partial yes** — compatible metadata for Kuttanad NISAR Sep 14/26, with authenticated file headers.
+- Q2 meaningful event / observed SAR change: **unknown** — OPERA shows classified water change; no NISAR interpretation yet.
+- Q3 polarization: naming indicates DHDH; internal measured layer availability and meaning require HDF5 inspection.
+- Q7 independent comparison data: **yes for availability** — OPERA DSWx-S1 WTR Sep 15/27 acquired and inspected; not ground truth.
+- Remaining questions require actual NISAR measurement arrays and validation.

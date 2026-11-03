@@ -83,3 +83,11 @@ Every generated artifact should record:
 - processing parameters;
 - git commit;
 - algorithm version.
+
+
+## Verified input and next technical test — 2026-11-03
+
+- NISAR GCOV collection `C2854338529-ASF`: same-track product headers accessed via Earthdata bearer auth for Sep 14 and Sep 26. HTTP 206 valid HDF5; actual calibration arrays, nodata layers and polarization datasets **not extracted**.
+- OPERA DSWx-S1 collection `C2949811996-POCLOUD`: WTR tiles for Sep 15 and Sep 27 downloaded and compared over Kuttanad.
+- Next: extract a small AOI from each GCOV HDF5, verify rasters align, inspect available polarizations and unit conventions, then produce a **measured** radar delta before interpreting possible inundation. Prefer small subsets/remote GDAL access; never assume a quick-look PNG is adequate scientific evidence.
+- Reproducible preparatory scripts: `scripts/verify_earthdata_access.py` and `scripts/compare_opera_dswx.py`; docs in `docs/REPRODUCTION.md`.

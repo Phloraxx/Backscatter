@@ -26,3 +26,16 @@ data/cache/
 .DS_Store
 .idea/
 .vscode/
+
+# Research data and credentials
+.venv*/
+backscatter-opera-check/
+*.netrc
+.netrc
+*.pem
+*.p12
+*.pfx
+.secrets/
+private-tmp/
+**/OPERA_*_WTR.tif
+__pypackages__/

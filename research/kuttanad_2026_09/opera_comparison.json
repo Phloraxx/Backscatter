@@ -1,0 +1,30 @@
+{
+  "area_bbox_wgs84": [
+    76.42,
+    9.4,
+    76.49,
+    9.47
+  ],
+  "tile": "T43PFL",
+  "dates": [
+    "2026-09-15",
+    "2026-09-27"
+  ],
+  "grid_crs": "EPSG:32643",
+  "pixel_area_m2": 900,
+  "counts": {
+    "valid_both": 66563,
+    "new_water": 3387,
+    "lost_water": 5718,
+    "water_both": 9386,
+    "land_both": 48072
+  },
+  "areas": {
+    "valid_both_km2": 59.9067,
+    "new_water_km2": 3.0483,
+    "lost_water_km2": 5.1462,
+    "water_both_km2": 8.4474,
+    "land_both_km2": 43.2648
+  },
+  "note": "OPERA observational comparison only. Not ground truth or NISAR classification."
+}

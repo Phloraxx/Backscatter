@@ -64,3 +64,8 @@ Avoid:
 - hidden preprocessing steps;
 - hard-coded geographic constants in core algorithms;
 - unnecessary microservices.
+
+
+## Verified data status (2026-11-03)
+
+Review `docs/PROJECT_STATUS.md`, `research/kuttanad_2026_09/README.md`, and `research/kuttanad_2026_09/scene_manifest.json` before implementing. The four source products are real and accessible: NISAR Sep 14/26 HDF5 headers and OPERA Sep 15/27 WTR GeoTIFFs. **OPERA statistics are not NISAR results**; no NISAR pixels, classification or accuracy have yet been produced. Keep all credentials out of code and Git. Treat pre-hackathon scripts as research, and check event restrictions before developing a submission.

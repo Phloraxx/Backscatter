@@ -40,3 +40,8 @@ Cut stretch goals if:
 - UI cannot explain one case clearly.
 
 One excellent case beats five broken cases.
+
+
+## Research snapshot (2026-11-03)
+
+Data access and OPERA reference comparison have been tested before the event; the future NISAR-based application, classifier and UI are **not yet built**. Keep a clear boundary between preliminary feasibility analysis and the actual hackathon deliverable. Ask local organizers whether any research code can be reused during the event.

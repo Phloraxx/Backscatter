@@ -30,7 +30,7 @@ Suggested controls:
 - click-to-inspect evidence;
 - concise "Why?" explanation.
 
-## Example result card
+## Fictional example result card (illustration only, not a measured output)
 
 Surface change detected
 
@@ -64,3 +64,8 @@ After a robust inundation MVP:
 - multi-band L/S comparison where practical.
 
 Do not implement these until the first workflow is validated.
+
+
+## Evidence status (2026-11-03)
+
+The example result card above is **fabricated UX placeholder data**, not a real NISAR measurement or accuracy finding. The only measured results in this repository are from an independent OPERA water-classification comparison; see `research/kuttanad_2026_09/`. Do not use placeholder numbers in a presentation.

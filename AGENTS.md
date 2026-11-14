@@ -114,3 +114,12 @@ Run scripts/export_demo_assets.py and scripts/export_assam_demo.py, then scripts
 The filter applies 3 dB threshold to HH radar change, 3×3 per-date median, and 6/9-neighbor spatial coherence. It never uses OPERA WTR classes to create candidate overlays. Kuttanad's coherent radar area 8.1108 km² and Assam's 0.4329 km² are NOT flooded-area estimates. Kuttanad reference gain F1 0.42389 (median3 actually higher 0.44509); Assam gain/loss F1 zero. Preserve the negative result.
 
 Original Backscatter logo remains under web/public/brand. The viewer exposes SIGNAL CLUSTERS in both cases (teal HH decrease, amber HH increase, no flood label). Two matching validated acquisitions per site; no valid mature historical multi-date baseline yet. NASA/JPL notes OPERA HLS and S1 are not sensor-harmonized.
+
+
+## Cyclone Arnab preflight and new public demo (2026-11-14)
+
+- **Predeclared** AOI 81.82..81.89 E, 16.58..16.65 N near the Oct28 cyclone landfall, not performance-selected. NASA CMR: NISAR GCOV Oct22 / Nov03 and OPERA DSWx-S1 (Sentinel-1D) Oct23 / Nov04, each OPERA ~11.2h after NISAR. The NISAR \`149_D_080_4005_DHDH\` polygons contain the whole AOI. Read \`research/arnab_event/README.md\` and \`scene_manifest.json\`.
+- Two local NASA Harmony jobs were **already submitted**; saved IDs in \`~/Downloads/backscatter-arnab-validated/nisar/job_*.json\`. **Do not submit again**; check/fetch saved jobs and obtain OPERA WTR with token at hidden prompt. No token is saved to Git.
+- \`scripts/compare_arnab_opera.py\` includes predeclared unchanged signal-coherence methods from \`scripts/evaluate_signal_coherence.py\`, plus exploratory reference diagnostics. It has **not yet been run on Arnab pixels**. No claim of detected flooding or validation until actual outputs exist.
+- Cloudflare Pages project \`backscatter-afterimage-2026\` was created, linked to private \`Phloraxx/Backscatter\` main with build root \`web\`; **confirm successful production deployment before claiming public URL**.
+- NASA Space Apps 2026 closes November 15 23:59 event-local. Official GO Team notes challenge-specific work performed before Nov14 09:00 may jeopardize eligibility; project has earlier commits. Do not falsify the work chronology. See \`docs/SPACE_APPS_SUBMISSION.md\`.

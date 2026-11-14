@@ -1,5 +1,19 @@
 # Backscatter status — updated November 14, 2026
 
+
+## Event study candidate — Cyclone Arnab (October 28, 2026)
+
+A predeclared Godavari-delta AOI (81.82–81.89 E, 16.58–16.65 N) was selected from IMD's October 28 Cyclone Arnab landfall information, not from water-label performance. Exact sources were verified in NASA CMR:
+
+- NISAR validated GCOV HHHH **2026-10-22 / 2026-11-03**, matching \`149_D_080_4005_DHDH\`, P05036; both true footprint polygons contain all four study corners.
+- OPERA DSWx-S1 Sentinel-1D \`T44QPD\` **2026-10-23 / 2026-11-04**, ~11.2025 and 11.2022 hours after NISAR.
+- Both NASA Harmony NISAR jobs **submitted, saved locally** under \`~/Downloads/backscatter-arnab-validated/nisar/\`. Authenticated TIFF retrieval and all event raster metrics remain **pending**.
+- Scripts \`scripts/preflight_arnab.py\`, \`scripts/harmony_arnab.py\`, \`scripts/fetch_opera_arnab.py\`, and \`scripts/compare_arnab_opera.py\` prepared. The event analysis reuses the unchanged RAW, MEDIAN3 and COHERENT signal filters; no post-hoc retuning.
+
+Do not show a third "analyzed" case or flood map in the web app until source rasters and results exist. [Event study](../research/arnab_event/README.md).
+
+---
+
 ## Latest research: fixed-rule spatial filtering
 
 Completed real-data radar-change experiments for both cases: RAW (±3 dB), MEDIAN3 (per-date 3×3 median, then ±3 dB), and COHERENT (median-filtered ±3 dB, 6/9 same-direction pixel support). No OPERA water-class labels were used to generate the displayed candidate pixels.

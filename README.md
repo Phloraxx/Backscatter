@@ -1,5 +1,16 @@
 # Backscatter
 
+
+## Event-linked study under investigation — Cyclone Arnab
+
+A stronger **third candidate** has been identified near the October 28 cyclone landfall in coastal Andhra Pradesh. NASA CMR confirms matched **validated NISAR HHHH from October 22 and November 3** and **OPERA Sentinel-1D water classifications from October 23 and November 4**. The OPERA/NISAR time gaps are only about **11 hours 12 minutes** each; both NISAR image footprints cover the full predeclared 7 km study box.
+
+The **four source catalogs and geospatial footprints are verified, but raster pixels are NOT yet processed**. Two NASA Harmony extraction jobs were submitted and saved locally. This is event context and a controlled follow-up experiment, *not* a detected flood extent.
+
+[Study plan and source IDs](research/arnab_event/README.md) · [Reproducible preflight](scripts/preflight_arnab.py) · [Submission draft](docs/SPACE_APPS_SUBMISSION.md).
+
+---
+
 ## Latest science: coherent radar signal regions (November 14, 2026)
 
 Backscatter now provides a SIGNAL CLUSTERS overlay for both Kuttanad and Lower Assam, displaying actual HH radar-signal changes—not flood extents. This reproducible no-training filter requires a 3 dB change, spatial 3×3 median filtering, and 6/9 neighboring pixels supporting the same change direction.

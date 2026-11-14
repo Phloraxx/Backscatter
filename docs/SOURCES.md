@@ -55,3 +55,12 @@ Do not cite this file as authority. Follow the links and verify the current offi
 - [NASA JPL OPERA suite](https://www.jpl.nasa.gov/go/opera/products/dswx-product-suite/) — DSWx-S1 and DSWx-HLS are not harmonized across sensors.
 - [ASF calibrated release notes](https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/) — some pre-November-12 acquisition modes have radiometric residuals.
 - [Original Backscatter signal-coherence experiment](../research/signal_coherence/README.md) — fixed parameters, metrics, limitations and reproduction.
+
+
+## Cyclone Arnab event evidence
+
+- [IMD October 28 cyclone position/landfall bulletin](https://mausam.imd.gov.in/backend/assets/cyclone_pdf/10_Hourly_Bulletin_271026_2300UTC.pdf) — records landfall near 16.45°N 81.9°E.
+- [International Charter activation 1056](https://disasterscharter.org/activations/flood-in-india-activation-1056-) — independently documents affected coastal districts and flood-response imagery.
+- [NASA CMR-verified four-scene manifest](../research/arnab_event/scene_manifest.json) — exact dates, IDs, spacecraft and NISAR polygon checks, but **not pixel results**.
+- [NASA NISAR validated availability](https://nisar-docs.asf.alaska.edu/availability-overview/).
+- [NASA OPERA DSWx suite](https://www.jpl.nasa.gov/go/opera/products/dswx-product-suite/).

@@ -1,0 +1,87 @@
+{
+  "status": "CATALOG VERIFIED ONLY; no Arnab-region NISAR or OPERA pixel analysis at time of manifest creation",
+  "event": "Cyclone Arnab, 28 Oct 2026, coastal Andhra Pradesh",
+  "event_evidence": "IMD landfall near 16.45N,81.9E, International Charter activation 1056",
+  "aoi_wgs84_lonlat": [
+    81.82,
+    16.58,
+    81.89,
+    16.65
+  ],
+  "aoi_preselected_before_pixel_inspection": true,
+  "nisar_observations": [
+    "2026-10-22",
+    "2026-11-03"
+  ],
+  "opera_s1_observations": [
+    "2026-10-23",
+    "2026-11-04"
+  ],
+  "opera_minus_nisar_hours": [
+    11.2025,
+    11.2022
+  ],
+  "polarization": "NISAR frequencyA HHHH",
+  "harmony_variable_id": "V4137651715-ASF",
+  "output_crs": "EPSG:32644",
+  "same_acquisition_geometry": "149_D_080_4005_DHDH",
+  "calibration_crid": "P05036",
+  "opera_tile": "T44QPD",
+  "opera_sensor": "Sentinel-1D C-band",
+  "products": [
+    {
+      "source": "nisar",
+      "collection": "C3622241360-ASF",
+      "concept_id": "G4405748574-ASF",
+      "granule": "NISAR_L2_PR_GCOV_033_149_D_080_4005_DHDH_A_20261022T130952_20261022T131027_P05036_N_F_J_001",
+      "acquired_utc": "2026-10-22T13:09:52.000Z",
+      "CMR_metadata_verified": true,
+      "source_asset_exists_in_catalog": true,
+      "nisar_full_footprint_contains_AOI": true
+    },
+    {
+      "source": "nisar",
+      "collection": "C3622241360-ASF",
+      "concept_id": "G4405145629-ASF",
+      "granule": "NISAR_L2_PR_GCOV_034_149_D_080_4005_DHDH_A_20261103T130953_20261103T131027_P05036_N_F_J_001",
+      "acquired_utc": "2026-11-03T13:09:53.000Z",
+      "CMR_metadata_verified": true,
+      "source_asset_exists_in_catalog": true,
+      "nisar_full_footprint_contains_AOI": true
+    },
+    {
+      "source": "opera-s1",
+      "collection": "C2949811996-POCLOUD",
+      "concept_id": "G4386072092-POCLOUD",
+      "granule": "OPERA_L3_DSWx-S1_T44QPD_20261023T002144Z_20261023T184455Z_S1D_30_v1.0",
+      "acquired_utc": "2026-10-23T00:22:01.000Z",
+      "CMR_metadata_verified": true,
+      "source_asset_exists_in_catalog": true,
+      "nisar_full_footprint_contains_AOI": null
+    },
+    {
+      "source": "opera-s1",
+      "collection": "C2949811996-POCLOUD",
+      "concept_id": "G4405822836-POCLOUD",
+      "granule": "OPERA_L3_DSWx-S1_T44QPD_20261104T002144Z_20261104T180703Z_S1D_30_v1.0",
+      "acquired_utc": "2026-11-04T00:22:01.000Z",
+      "CMR_metadata_verified": true,
+      "source_asset_exists_in_catalog": true,
+      "nisar_full_footprint_contains_AOI": null
+    }
+  ],
+  "limitations": [
+    "Even nearly time-matched OPERA S1 is a satellite classification, not field truth",
+    "This is an event contextual AOI, not proof of flooding in every pixel",
+    "The NISAR and OPERA radar frequencies, incidence and classifications differ",
+    "Calibration residuals can affect some NISAR acquisitions before Nov 12 2026; scene-specific status is unverified",
+    "Only two same-track validated NISAR dates available; do not create a fictitious historical baseline",
+    "Charter/ISRO flood map is background evidence, not a pixel-level ground truth label for this exact box"
+  ],
+  "official_sources": {
+    "charter": "https://disasterscharter.org/activations/flood-in-india-activation-1056-",
+    "india_meteorological_department": "https://mausam.imd.gov.in/backend/assets/cyclone_pdf/10_Hourly_Bulletin_271026_2300UTC.pdf",
+    "nisar_availability": "https://nisar-docs.asf.alaska.edu/availability-overview/",
+    "nisar_known_issues": "https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/"
+  }
+}

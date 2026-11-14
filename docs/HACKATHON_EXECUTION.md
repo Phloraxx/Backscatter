@@ -1,5 +1,7 @@
 # 48-Hour Execution Plan
 
+> Historical execution plan, not current completion status: the live app and three scientific cases were completed later on November 14. See docs/PROJECT_STATUS.md.
+
 ## Before event
 
 Pre-hackathon research may determine:

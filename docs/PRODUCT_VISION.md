@@ -1,5 +1,7 @@
 # Product Vision
 
+> Historical product-vision brainstorming: example values are placeholders. Actual evaluated NISAR and OPERA measurements are in docs/PROJECT_STATUS.md.
+
 ## One-line concept
 
 **Backscatter turns NISAR radar observations into explainable maps of how Earth's surface changed.**

@@ -61,7 +61,7 @@ Do not cite this file as authority. Follow the links and verify the current offi
 
 - [IMD October 28 cyclone position/landfall bulletin](https://mausam.imd.gov.in/backend/assets/cyclone_pdf/10_Hourly_Bulletin_271026_2300UTC.pdf) — records landfall near 16.45°N 81.9°E.
 - [International Charter activation 1056](https://disasterscharter.org/activations/flood-in-india-activation-1056-) — independently documents affected coastal districts and flood-response imagery.
-- [NASA CMR-verified four-scene manifest](../research/arnab_event/scene_manifest.json) — exact dates, IDs, spacecraft and NISAR polygon checks, but **not pixel results**.
+- [NASA CMR-verified four-scene manifest](../research/arnab_event/scene_manifest.json) — exact dates, IDs, spacecraft and NISAR polygon checks; the separate **measured pixel results** are in [the Arnab report](../research/arnab_event/MEASURED_RESULTS.md).
 - [NASA NISAR validated availability](https://nisar-docs.asf.alaska.edu/availability-overview/).
 - [NASA OPERA DSWx suite](https://www.jpl.nasa.gov/go/opera/products/dswx-product-suite/).
 

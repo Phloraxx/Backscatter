@@ -8,6 +8,10 @@
 
 **Status:** Draft for review. NOT submitted.
 
+## Copy-ready form and release review
+
+Use [the fully drafted NASA project fields](PROJECT_FORM_READY.md) and [attribution/release checklist](ATTRIBUTION_AND_RELEASE.md) to avoid omitting required credits. The repository is private and has no team-approved source license yet; this is an **unresolved team decision**, not a completed compliance check.
+
 ## Official team roster
 
 The six names below are taken verbatim from the [AfterImage team page on NASA Space Apps](https://www.spaceappschallenge.org/2026/find-a-team/afterimage/) on November 14, 2026. They appear on the title slide of the seven-slide demo PDF; no member roles are invented.

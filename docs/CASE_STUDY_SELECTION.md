@@ -1,5 +1,7 @@
 # Case Study Selection
 
+> Historical study selection notes: selections were subsequently finalized and evaluated on November 14, 2026. See docs/PROJECT_STATUS.md and the measured reports.
+
 ## Current geographic hypothesis
 
 Try **Kerala / Western Ghats / west-coast monsoon** first because it provides:

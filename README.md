@@ -1,5 +1,16 @@
 # Backscatter
 
+
+## Submission and release readiness
+
+The public [interactive map](https://backscatter-afterimage-2026.pages.dev/), [seven-slide demo](https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf) and [research results](https://backscatter-afterimage-2026.pages.dev/research.html) are verified. The official NASA project form must still be submitted separately.
+
+- [Copy-ready NASA project form](docs/PROJECT_FORM_READY.md)
+- [Data/software attribution and open-source release decisions](docs/ATTRIBUTION_AND_RELEASE.md)
+- [Scientific status](docs/PROJECT_STATUS.md)
+
+An automated GitHub Actions workflow tests the radar signal filters and checks the bundled map assets and website build. **This repository has no team-approved open-source license yet and remains private**; the original code and assets should not be made public until their authors approve publication.
+
 ## Public 7-slide NASA Space Apps demonstration
 
 **Public demo:** [View the seven-slide PDF](https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf) · [Live interactive map](https://backscatter-afterimage-2026.pages.dev/)

@@ -6,9 +6,20 @@
 
 Backscatter is a proposed interactive, evidence-driven application for investigating changes in floodplain and wetland water coverage using repeat **NASA–ISRO NISAR SAR measurements**. Planned outcome: change maps, measurements, uncertainty, and explanation grounded in observable radar evidence.
 
-**Current phase: research/data-feasibility only. No NISAR-derived inundation mask, validation score, live dashboard, or working flood predictor exists yet.** These preparations do not constitute a completed Space Apps submission.
+**Current phase: verified scene inventory and an initial NISAR extraction implementation. No NISAR-derived inundation mask, validation score, live dashboard, or working flood predictor exists yet.**
 
-## Verified data progress — 2026-11-03
+## November 14, 2026 — validated GCOV study pair (current priority)
+
+The November 6 validated NISAR release includes Kuttanad observations **2026-10-29** and **2026-11-10**, matching track/frame `077_D_084_4005_DHDH` and processor `P05036`. These replace the *September provisional pair as our primary candidate*; the earlier OPERA-only September analysis remains useful preliminary research, not a NISAR validation result.
+
+- **Verified today:** NASA CMR collection `C3622241360-ASF` returns both exact granules; the Mac preflight and synthetic numerical tests passed.
+- **Not yet verified:** authenticated retrieval of actual radar arrays from the *new* validated files; aligned HHHH measurements; water classification; accuracy.
+- **New tool:** `scripts/extract_validated_kuttanad.py` discovers the granules, prompts locally for an Earthdata token, reads only an AOI, produces aligned 30 m HHHH backscatter GeoTIFFs plus an **unclassified** dB-difference raster and JSON. Its remote GDAL read remains untested until run with credentials.
+- **Follow-up validation candidates:** OPERA DSWx-HLS optical products including 2026-10-29; OPERA DSWx-S1 2026-10-21/11-02. These are **not date-matched reference pairs** for 10/29 and 11/10.
+
+See [validated data execution](docs/VALIDATED_DATA_EXECUTION.md) and [new scene manifest](research/kuttanad_validated_2026_10_11/scene_manifest.json).
+
+## Earlier research — 2026-11-03
 
 - **Kuttanad, Kerala** is the primary candidate, with a small study box at `[76.42, 9.40, 76.49, 9.47]` (longitude/latitude, WGS84).
 - Two repeat NISAR **L2 provisional GCOV** products were located (2026-09-14 and 2026-09-26); a local Mac test received HTTP **206** and valid HDF5 file signatures for both.

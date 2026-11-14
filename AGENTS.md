@@ -69,3 +69,11 @@ Avoid:
 ## Verified data status (2026-11-03)
 
 Review `docs/PROJECT_STATUS.md`, `research/kuttanad_2026_09/README.md`, and `research/kuttanad_2026_09/scene_manifest.json` before implementing. The four source products are real and accessible: NISAR Sep 14/26 HDF5 headers and OPERA Sep 15/27 WTR GeoTIFFs. **OPERA statistics are not NISAR results**; no NISAR pixels, classification or accuracy have yet been produced. Keep all credentials out of code and Git. Treat pre-hackathon scripts as research, and check event restrictions before developing a submission.
+
+## Current implementation context — 2026-11-14
+
+- Prioritize validated NISAR GCOV V1 `C3622241360-ASF`, Kuttanad 2026-10-29 and 2026-11-10, with matching `_077_D_084_4005_DHDH_`, processor `P05036`.
+- New extraction entry point: `scripts/extract_validated_kuttanad.py`; it was tested in `--self-test` and `--preflight` modes. **Full authenticated remote extraction was NOT run**. Next run: use the user's private local token through getpass, never via version-controlled text, CLI flags, chat, logs or remote connector commands.
+- Output should be actual HHHH backscatter (dB) and a difference raster. Do **not** label it water/flood without a separate physically defensible classifier and checks against independent observations.
+- October 29 DSWx-HLS and nearby OPERA DSWx-S1 are reference *candidates*, with cloud/quality/temporal limitations. Earlier September OPERA estimates belong only to the earlier reference experiment.
+- Relevant docs: `docs/VALIDATED_DATA_EXECUTION.md`, `research/kuttanad_validated_2026_10_11/README.md`, and `docs/PROJECT_STATUS.md`.

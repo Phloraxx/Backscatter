@@ -1,4 +1,20 @@
-# Backscatter project status — 2026-11-03
+# Backscatter project status
+
+## Current progress — November 14, 2026
+
+**New primary candidate:** Kuttanad, Kerala, **validated** NISAR L2 GCOV V1 on Oct 29 and Nov 10 (CMR collection `C3622241360-ASF`). Older Sep 14/26 preliminary GCOV pair stays documented below.
+
+**Verified now:** product IDs and geographic footprints from NASA CMR; Mac preflight discovers both; local mathematics self-test of the extraction program passes.
+
+**Not yet verified:** authenticated reading of either new GCOV measurement array; georeferenced before/after GeoTIFF output; physically meaningful change or classification; independent comparison or accuracy. NASA OPERA DSWx-HLS on Oct 29 and OPERA DSWx-S1 on Oct 21/Nov 2 are candidates requiring quality/temporal checks, not completed validation.
+
+**Next action:** run `scripts/extract_validated_kuttanad.py` on the Mac with an Earthdata token entered at the hidden prompt, inspect generated `nisar_pair_summary.json` and GeoTIFFs, then decide whether this scene pair is useful for the water-change MVP. See `docs/VALIDATED_DATA_EXECUTION.md`.
+
+**Status of earlier feasibility gates:** 2/4 previously established at metadata/reference-data level; do **not** count validated-pair scene discovery as successful scientific processing.
+
+---
+
+## Archived research snapshot — November 3, 2026
 
 ## Scope and decision
 

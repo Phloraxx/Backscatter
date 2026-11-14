@@ -49,3 +49,11 @@ Kerala/Western Ghats is the first candidate, subject to real scene availability 
 
 ### D-010 — Data and secret hygiene
 **Decision:** keep token, signed redirect links, HDF5/GeoTIFF source products and local `.netrc` outside Git. Commit small research scripts, manifests, metrics and the OPERA-only figure.
+
+## D-011 — Use validated GCOV for the current scientific demo (2026-11-14)
+
+Prefer **2026-10-29 and 2026-11-10** Kuttanad validated `NISAR_L2_GCOV_V1` observations over provisional September observations. Both have identical track, frame, acquisition mode and processing version identifiers. Maintain the September work as background research and Assam as fallback. The new pair has not yet produced real measurement arrays or flood classification.
+
+## D-012 — No false validation claim
+
+OPERA DSWx-HLS near Oct 29 and DSWx-S1 near Nov 2 are **candidate independent comparison inputs**, not an exact-date Nov 10 reference; do not report numerical model accuracy until proper temporal-quality checks.

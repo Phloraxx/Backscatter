@@ -1,0 +1,60 @@
+{
+  "record_date": "2026-11-14",
+  "status": "catalogued, preflight/synthetic tests; protected radar arrays unextracted",
+  "dataset_type": "NISAR validated L-band L2 GCOV V1",
+  "cmr_collection": "C3622241360-ASF",
+  "source": "https://cmr.earthdata.nasa.gov/search/granules.json",
+  "area_bbox_wgs84_lonlat": [
+    76.42,
+    9.4,
+    76.49,
+    9.47
+  ],
+  "primary_pair": [
+    {
+      "date": "2026-10-29",
+      "granule_id": "NISAR_L2_PR_GCOV_034_077_D_084_4005_DHDH_A_20261029T132026_20261029T132100_P05036_N_F_J_001",
+      "size_MiB_approx": 5244.46
+    },
+    {
+      "date": "2026-11-10",
+      "granule_id": "NISAR_L2_PR_GCOV_035_077_D_084_4005_DHDH_A_20261110T132027_20261110T132100_P05036_N_F_J_001",
+      "size_MiB_approx": 5100.16
+    }
+  ],
+  "compatibility": "Same relative track 077, descending D, frame 084, 4005 DHDH acquisition and P05036 validated processor; actual pixel grid must still be confirmed",
+  "variable": "//science/LSAR/GCOV/grids/frequencyA/HHHH",
+  "proposed_analysis_resolution_metres": 30,
+  "potential_reference_data": [
+    {
+      "collection": "C2617126679-POCLOUD",
+      "product": "OPERA DSWx-HLS (optical)",
+      "acquisitions": [
+        "2026-10-29",
+        "2026-11-05"
+      ],
+      "caveat": "Only candidate; clouds and quality masks not inspected"
+    },
+    {
+      "collection": "C2949811996-POCLOUD",
+      "product": "OPERA DSWx-S1 (Sentinel-1 radar)",
+      "acquisitions": [
+        "2026-10-21",
+        "2026-11-02"
+      ],
+      "caveat": "Only candidate; dates do not align with both NISAR observations"
+    }
+  ],
+  "verified": [
+    "Both NISAR CMR records available for AOI",
+    "Preflight succeeded on local Mac",
+    "Synthetic difference arithmetic tests passed"
+  ],
+  "not_verified": [
+    "Authenticated extraction of validated source pixels",
+    "Data quality and comparable grid",
+    "Meaningful physical water extent change",
+    "Ground-truth or reference agreement",
+    "Flood mask, validation metrics or dashboard"
+  ]
+}

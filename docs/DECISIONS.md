@@ -109,3 +109,12 @@ As of November 14, 2026, the selected matched validated NISAR repeat tracks have
 ## D-024 — Different OPERA products are not a common ground truth
 
 NASA JPL explicitly states that DSWx-HLS optical and DSWx-S1 radar products are not harmonized across sensors. OPERA references have different date offsets and class definitions. Our scores measure product agreement, not verified flood accuracy.
+
+
+## D-025 — Require raster-grid overlap, not just catalog intersection (2026-11-14)
+
+The Cyclone Arnab CMR query returned OPERA tiles T44QPD and T44QND on the same reference dates. Initially T44QPD was selected but its **actual 30 m UTM grid did not overlap** the 10 m NISAR subset (0 strict reference cells). Switch to **T44QND**, which contains the original AOI in projected coordinates. No geographic AOI or NISAR dates were changed. The source correction was based on georeferencing, not detection performance. All future preflights should inspect real raster bounds before comparing pixels.
+
+## D-026 — Treat cyclone event test as independent negative evidence
+
+Validated NISAR Oct22/Nov03 and OPERA Sentinel-1D Oct23/Nov04 provide ~11.2-hour reference offsets around documented Oct28 Cyclone Arnab. However the **unchanged coherent HH rule has F1=0.0 for OPERA new/open-water loss transitions** (842/75 strict reference transitions). Do not present coherent radar change as cyclone flooding. A locally fitted static-water threshold F1=.8987 does not establish water-change reliability. Publish the scientific negative result and retain the stable two-study public viewer.

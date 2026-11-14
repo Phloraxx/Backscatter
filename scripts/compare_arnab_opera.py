@@ -38,7 +38,7 @@ def load_reference(day):
     import numpy as np
     import rasterio
     candidates=list((ROOT/"opera_s1").glob(
-        "OPERA_L3_DSWx-S1_T44QPD_"+day.replace("-","")+"*_B01_WTR.tif"))
+        "OPERA_L3_DSWx-S1_T44QND_"+day.replace("-","")+"*_B01_WTR.tif"))
     if len(candidates)!=1:
         raise FileNotFoundError("Expected exactly one downloaded OPERA DSWx-S1 WTR for "+day)
     return candidates[0]
@@ -171,7 +171,7 @@ def main():
          "bbox_wgs84_lonlat":list(BBOX),
        },
        "reference_calendar_day_offsets":[1,1],
-       "reference_hour_offsets":[11.2025,11.2022],
+       "reference_hour_offsets":json.loads((Path(__file__).resolve().parent.parent / "research" / "arnab_event" / "scene_manifest.json").read_text())["opera_minus_nisar_hours"],
        "event_context":"IMD Cyclone Arnab landfall 28 Oct 2026 near 16.45N, 81.9E; this AOI is near that landfall, not field-verified flooded",
        "fixed_signal_methods_without_opera_training":fixed_methods,
        "reference_type":"Sentinel-1 C-band OPERA SAR water classification, NOT field ground truth",

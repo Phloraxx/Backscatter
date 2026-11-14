@@ -110,3 +110,17 @@ Evaluated three fixed, label-free methods against OPERA reference labels only af
 Kuttanad: stable reference non-water flagged 4.303% RAW vs 0.319% COHERENT; gain F1 0.34097 RAW, 0.44509 MEDIAN3, 0.42389 COHERENT. Assam: gain/loss F1 0 with COHERENT, despite radar signal variation. The areas 8.1108 and 0.4329 km² represent signal change only, never confirmed flooding.
 
 Multi-date validated-only baselines require further same-track acquisitions. Detailed methodology, limitations and full metrics: [signal-coherence study](../research/signal_coherence/README.md).
+
+
+## Executed Cyclone Arnab documented-event test (November 14, 2026)
+
+The predefined Godavari-delta AOI (81.82..81.89 E,16.58..16.65 N) has both validated NISAR L-band HHHH dates Oct22/Nov03 and independently classified OPERA S1 Sentinel-1D dates Oct23/Nov04, only 11.2031/11.2025 hours after the NISAR acquisitions. The original first-choice OPERA tile T44QPD had no raster-grid overlap; corrected to T44QND based on data extents without changing AOI or model parameters.
+
+We reran the original **fixed** RAW ±3 dB, MEDIAN3 and 6/9-neighbor COHERENT filters from scripts/evaluate_signal_coherence.py, with **no water-label training** for their masks. There were 64,495 shared radar-valid 30 m cells, 58,085 strict OPERA 0/1 cells, 842 reference 0→1 and 75 reference 1→0 transitions.
+
+- COHERENT HH radar area 4.4163 km² is *not flood extent*.
+- COHERENT vs OPERA gain/loss F1 **0.0/0.0**, missing all strict open-water transition events.
+- Supervised locally fitted -14.5 dB static-water east-held-out F1 **0.8987**. Candidate change F1 was **0.1347 gain / 0.0122 loss**, still unreliable.
+- The unchanged Kerala -10.75 dB cutoff gives gain F1 **0.0049**, loss **0.0**.
+
+Despite a documented cyclone, pixelwise causal attribution is **not** possible without ground truth or independent flood-extent validation. OPERA is a separate satellite classification; source quality has mode-specific calibration caveats. See research/arnab_event/MEASURED_RESULTS.md and source_checksums.json. Public evidence page: https://backscatter-afterimage-2026.pages.dev/research.html.

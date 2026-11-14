@@ -1,8 +1,8 @@
 # Cyclone Arnab — event-linked NISAR investigation
 
-**State as of November 14, 2026: source metadata and radar footprints verified; actual event pixels NOT YET analyzed.**
+**Status as of November 14, 2026: real NISAR and OPERA pixels downloaded and evaluated.** [Read the measured case study](MEASURED_RESULTS.md), [actual metrics](arnab_nisar_opera_diagnostic.json), and [original source checksums](source_checksums.json). **Not field-confirmed flooding.**
 
-Backscatter's earlier case studies (Kuttanad, Kerala and Lower Assam) demonstrated that simple radar-change thresholds do not reliably detect open-water transitions. This **third candidate** is selected because it brackets a *documented natural hazard*, rather than relying on an unconfirmed assumption that flooding happened during two arbitrary satellite passes.
+Backscatter's earlier case studies (Kuttanad, Kerala and Lower Assam) demonstrated that simple radar-change thresholds do not reliably detect open-water transitions. This **third independent event-linked case** was selected because it brackets a *documented natural hazard*, rather than relying on an unconfirmed assumption that flooding happened during two arbitrary satellite passes.
 
 ## Event and location
 
@@ -12,14 +12,14 @@ India Meteorological Department records show that Very Severe Cyclonic Storm **A
 
 We will not copy or republish ISRO/Charter imagery marked for official use. Those reports are linked for event context only.
 
-## Four NASA catalog-verified satellite products
+## Four NASA catalog-verified and measured satellite products
 
 | Product | Pre-event | Post-event | Acquisition relationship |
 |---|---|---|---|
 | NASA–ISRO NISAR validated L-band GCOV V1, frequency-A HHHH | **Oct 22, 2026**, 13:09:52 UTC | **Nov 3, 2026**, 13:09:53 UTC | Same track/frame, same 40 MHz dual-HH configuration and P05036 processing |
-| NASA OPERA DSWx-S1 v1.0 WTR, derived from Sentinel-1D C-band | **Oct 23, 2026**, 00:22:01 UTC | **Nov 4, 2026**, 00:22:01 UTC | Same OPERA tile T44QPD, both ~11 hours 12 minutes AFTER their respective NISAR pass |
+| NASA OPERA DSWx-S1 v1.0 WTR, derived from Sentinel-1D C-band | **Oct 23, 2026**, 00:22:03 UTC | **Nov 4, 2026**, 00:22:02 UTC | Same OPERA tile T44QND, both ~11 hours 12 minutes AFTER their respective NISAR pass |
 
-**This is the closest pair yet found for Backscatter**: the reference observation gaps are **11.2025 and 11.2022 hours**. These are still separate radar instruments with different wavelengths, processing pipelines, and noise characteristics. OPERA WTR is *not* field ground truth.
+**This is the closest pair yet found for Backscatter**: the reference observation gaps are **11.2031 and 11.2025 hours**. These are still separate radar instruments with different wavelengths, processing pipelines, and noise characteristics. OPERA WTR is *not* field ground truth.
 
 The NISAR granules are:
 
@@ -28,14 +28,14 @@ The NISAR granules are:
 
 The OPERA DSWx-S1 granules are:
 
-- \`G4386072092-POCLOUD\` — Oct 23, tile \`T44QPD\`, Sentinel-1D
-- \`G4405822836-POCLOUD\` — Nov 4, tile \`T44QPD\`, Sentinel-1D
+- \`G4386072108-POCLOUD\` — Oct 23, tile \`T44QPD\`, Sentinel-1D
+- \`G4405822843-POCLOUD\` — Nov 4, tile \`T44QPD\`, Sentinel-1D
 
-All four identifiers were verified against NASA CMR; **both NISAR polygons contain all four corners** of the study AOI. The complete names, timestamps, collection IDs, and limits are recorded in the [machine-readable manifest](scene_manifest.json).
+All four source records were verified in NASA CMR; **both NISAR polygons contain all four corners** of the AOI, and actual Rasterio grids confirm the corrected **T44QND** reference overlaps the NISAR subset. We originally selected neighboring tile **T44QPD** from a CMR catalog match, but its 30 m grid did not intersect this AOI; that pair correctly failed with zero reference cells. The original AOI and NISAR acquisition dates were *not changed* to improve scores. Full provenance is in the [scene manifest](scene_manifest.json) and [measured report](MEASURED_RESULTS.md).
 
 ## Reproduction
 
-The two NISAR Harmony subset requests **were already submitted** on November 14. Their saved job IDs reside only on the authorized Mac:
+Both NISAR Harmony requests completed on November 14, and the 2 NISAR plus 2 correct T44QND OPERA source TIFFs have been downloaded and measured. Saved Harmony job IDs remain only on the authorized Mac:
 
 \`~/Downloads/backscatter-arnab-validated/nisar/job_2026-10-22_HHHH.json\` and \`job_2026-11-03_HHHH.json\`.
 
@@ -56,7 +56,7 @@ The comparison reuses the **unchanged, label-free** signal-change methods used i
 - 3×3 median-filtered per-date HH change at ±3 dB;
 - coherent HH radar changes with at least 6/9 neighboring strong same-direction cells and at least seven valid neighbors.
 
-These rules require **no OPERA labels** to create a candidate signal map. The eventual comparison will report OPERA 0→1 and 1→0 transition agreement separately and preserve OPERA **class 3, inundated vegetation**, as a separate reference class. A local water-threshold fit is an exploratory comparison only and **not** the main event test.
+These rules require **no OPERA labels** to create a candidate signal map. The completed comparison reports OPERA 0→1 and 1→0 transition agreement separately, with OPERA **class 3, inundated vegetation**, treated as a separate reference class. A local water-threshold fit is an exploratory comparison only and **not** the main event test.
 
 ## Evidence standards
 
@@ -64,7 +64,7 @@ This event is **documented**, but we must still establish whether our *particula
 
 The NISAR validated collection was released in November 2026 and our scenes use processing CRID **P05036**. ASF's [release notes](https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/) flag residual radiometric errors in some pre-November-12 observations; the precise affected status of these scenes has not been verified. No flood-area, damage, population or prediction accuracy figure is claimed.
 
-**Do not place this event in the public viewer as a completed study until actual pixels and the failed/successful outcomes are verified.**
+**The two-region interactive map remains the stable public demonstration.** This third event has independently measured rasters and a public, clearly caveated [research page](https://backscatter-afterimage-2026.pages.dev/research.html), but is not presented as a verified flood-detection map.
 
 ## Sources
 

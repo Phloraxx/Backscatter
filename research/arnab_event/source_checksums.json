@@ -1,0 +1,25 @@
+{
+  "description": "Non-sensitive SHA-256 hashes of 4 downloaded original source subsets, kept off Git",
+  "products": [
+    {
+      "name": "nisar_2026-10-22_HHHH.tif",
+      "sha256": "8385d59b6c221f96172246c3d723abc525b730890ac7f8073a03d6440a0df957",
+      "size_bytes": 2800203
+    },
+    {
+      "name": "nisar_2026-11-03_HHHH.tif",
+      "sha256": "73b60fdaf42b2385313ad437349455c5d584f5c8f5bffdb86018f05da323503d",
+      "size_bytes": 2813993
+    },
+    {
+      "name": "OPERA_L3_DSWx-S1_T44QND_20261023T002144Z_20261023T184455Z_S1D_30_v1.0_B01_WTR.tif",
+      "sha256": "7a250abb5155b690e12cf32bfbb75b1eae04dde6e944fad615890a1f840a66c5",
+      "size_bytes": 774235
+    },
+    {
+      "name": "OPERA_L3_DSWx-S1_T44QND_20261104T002144Z_20261104T180703Z_S1D_30_v1.0_B01_WTR.tif",
+      "sha256": "bb8ace2bb7660c837a1db995cdbfa1ef5b8d76b6b895207f2f44795d20f7474b",
+      "size_bytes": 744034
+    }
+  ]
+}

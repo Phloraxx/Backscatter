@@ -26,7 +26,7 @@ Backscatter deliberately separates **measured radar evidence**, **satellite-deri
 - Independent NASA OPERA DSWx-HLS optical and DSWx-S1 Sentinel-1 C-band reference classes with acquisition dates displayed.
 - Reproducible Earthdata extraction, raster processing, tests and documented negative scientific results.
 
-The Cyclone Arnab event study is currently catalog-verified with excellent pre/post date alignment but **must not be listed as completed** until its pixels are processed.
+A **third independent research test is completed** using validated NISAR observations before/after documented Cyclone Arnab and OPERA Sentinel-1 water references ~11.2 hours later. The unchanged coherent radar-signal rule still fails to identify the strict OPERA water-class transitions (gain/loss F1 **0.0000/0.0000**). The event is a scientific negative-result study, **not a confirmed flood map**. See the [public research page](https://backscatter-afterimage-2026.pages.dev/research.html).
 
 ## Suggested 7-slide demonstration
 
@@ -36,14 +36,15 @@ The Cyclone Arnab event study is currently catalog-verified with excellent pre/p
 4. **Understand the evidence:** Screenshot showing HH/HV pixel inspector and OPERA class labels.
 5. **Careful change visualization:** Screenshot showing coherent signal clusters and explicit "not flooded area."
 6. **Actual scientific findings:** Show Kuttanad false-highlight reduction and the failure to generalize to Assam.
-7. **Impact, limits & next experiment:** Users can investigate signals transparently; open issue of date-matched flood-event validation.
+7. **Impact, limits & independent event test:** The documented Cyclone Arnab comparison also failed to validate the unchanged water-change rule; next step is more robust field/event-based labels.
 
 Keep the demo within **seven slides**, including title and closing slides. Alternatively, provide a **30-second video**. Host the demo on a public link accessible without requesting access.
 
 ## Public links — verify before submitting
 
 - **Verified production website:** https://backscatter-afterimage-2026.pages.dev/ — published, independently tested for both geographic studies.
-- **Public demonstration deck:** https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf — generated exactly seven landscape pages; visual inspection completed; verify after publishing this commit.
+- **Public demonstration deck:** https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf — a visually verified, exactly seven-page landscape PDF, accessible in a browser.
+- **Public scientific methods/results:** https://backscatter-afterimage-2026.pages.dev/research.html — includes all three studies, raw-source identifiers, metrics and caveats.
 - **Code repository:** https://github.com/Phloraxx/Backscatter — currently **private**; reviewers cannot access it without permission. Do not list this as the only public final-project link.
 - **Official submission:** https://www.spaceappschallenge.org/2026/ — Project tab on Team Afterimage's page; submitting is a separate user action.
 

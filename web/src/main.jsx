@@ -200,10 +200,7 @@ function App() {
           <div className="status-block">
             <div className="status-top"><span className="panel-label">RESEARCH STATUS</span><span className="status-tag">EXPERIMENTAL</span></div>
             <p><span className="signal-dot"/>{ASSAM ? 'The Kerala-trained water threshold fails in Assam; coherent radar-change clusters do not identify its reference transitions.' : 'Filtering makes radar signal patterns less noisy here, but the detected changes are not always water-related.'} <strong>No validated flood detector yet.</strong></p>
-            <a href={ASSAM
-              ? "https://github.com/Phloraxx/Backscatter/blob/main/research/assam_validated_2026_10_11/MEASURED_RESULTS.md"
-              : "https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md"}
-              target="_blank" rel="noreferrer">Read the methods &amp; limitations <span aria-hidden="true">↗</span></a>
+            <a href="/research.html" target="_blank" rel="noopener noreferrer">Read the methods &amp; limitations <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 

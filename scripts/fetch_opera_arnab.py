@@ -14,7 +14,7 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 COLLECTION = "C2949811996-POCLOUD"
 CMR = "https://cmr.earthdata.nasa.gov/search/granules.json"
 DATES = ("2026-10-23", "2026-11-04")
-TILE = "_T44QPD_"
+TILE = "_T44QND_"
 OUT = Path.home() / "Downloads" / "backscatter-arnab-validated" / "opera_s1"
 HOSTS = {
     "deotb6e7tfubr.cloudfront.net",

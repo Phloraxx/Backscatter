@@ -8,13 +8,19 @@ The demo shows real NISAR data, the original team logo, two finished study areas
 
 
 
-## Event-linked study under investigation — Cyclone Arnab
+## Third measured case — Cyclone Arnab (October 28, 2026)
 
-A stronger **third candidate** has been identified near the October 28 cyclone landfall in coastal Andhra Pradesh. NASA CMR confirms matched **validated NISAR HHHH from October 22 and November 3** and **OPERA Sentinel-1D water classifications from October 23 and November 4**. The OPERA/NISAR time gaps are only about **11 hours 12 minutes** each; both NISAR image footprints cover the full predeclared 7 km study box.
+We tested the same unchanged radar signal-clustering rule near the documented October 28 cyclone landfall in the Godavari delta, Andhra Pradesh. Actual validated NISAR GCOV HHHH observations **October 22 / November 3** were compared against OPERA Sentinel-1D DSWx-S1 water classifications **October 23 / November 4**, only **~11.2 hours** after each NISAR acquisition.
 
-The **four source catalogs and geospatial footprints are verified, but raster pixels are NOT yet processed**. Two NASA Harmony extraction jobs were submitted and saved locally. This is event context and a controlled follow-up experiment, *not* a detected flood extent.
+The original AOI remained unchanged; a neighboring OPERA tile initially returned by the catalog did not overlap in raster coordinates. We corrected the reference tile to **T44QND** based on real georeferencing, **not classification results**.
 
-[Study plan and source IDs](research/arnab_event/README.md) · [Reproducible preflight](scripts/preflight_arnab.py) · [Submission draft](docs/SPACE_APPS_SUBMISSION.md).
+- **58.0455 km²** of common radar-valid area and **58,085** strict 0/1 reference cells.
+- OPERA reference classes changed non-water → open-water in **842 cells** and the reverse in **75 cells**. These are product-class transitions, **not confirmed flood area**.
+- The fixed 3 dB / 3×3 median / six-neighbor coherent method scored **F1 0.0000** for both reference water gain and loss. A locally fitted *static*-water threshold reached held-out F1 **0.8987** but still failed to track water changes reliably.
+
+The additional event test **strengthens the negative conclusion**: even closer-timed independent satellite classifications do not make simple HH change rules reliable flood detectors. This third case is available as documented research, not as a fabricated flood overlay.
+
+[Public research and evidence page](https://backscatter-afterimage-2026.pages.dev/research.html) · [Full measured case study](research/arnab_event/MEASURED_RESULTS.md) · [Actual confusion matrices](research/arnab_event/arnab_nisar_opera_diagnostic.json) · [Source checksums](research/arnab_event/source_checksums.json) · [Submission preparation](docs/SPACE_APPS_SUBMISSION.md).
 
 ---
 

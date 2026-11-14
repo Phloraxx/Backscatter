@@ -1,16 +1,18 @@
 # Backscatter status — updated November 14, 2026
 
 
-## Event study candidate — Cyclone Arnab (October 28, 2026)
+## Third event-linked study measured — Cyclone Arnab (October 28, 2026)
 
-A predeclared Godavari-delta AOI (81.82–81.89 E, 16.58–16.65 N) was selected from IMD's October 28 Cyclone Arnab landfall information, not from water-label performance. Exact sources were verified in NASA CMR:
+The originally selected Godavari-delta AOI, **81.82–81.89°E / 16.58–16.65°N**, is now an actual measured independent test, not a catalog-only candidate.
 
-- NISAR validated GCOV HHHH **2026-10-22 / 2026-11-03**, matching \`149_D_080_4005_DHDH\`, P05036; both true footprint polygons contain all four study corners.
-- OPERA DSWx-S1 Sentinel-1D \`T44QPD\` **2026-10-23 / 2026-11-04**, ~11.2025 and 11.2022 hours after NISAR.
-- Both NASA Harmony NISAR jobs **submitted, saved locally** under \`~/Downloads/backscatter-arnab-validated/nisar/\`. Authenticated TIFF retrieval and all event raster metrics remain **pending**.
-- Scripts \`scripts/preflight_arnab.py\`, \`scripts/harmony_arnab.py\`, \`scripts/fetch_opera_arnab.py\`, and \`scripts/compare_arnab_opera.py\` prepared. The event analysis reuses the unchanged RAW, MEDIAN3 and COHERENT signal filters; no post-hoc retuning.
+- Both **NISAR validated GCOV HHHH** October 22 / November 3 source subsets were retrieved from the saved NASA Harmony jobs. Matching acquisition geometry: `149_D_080_4005_DHDH`, processing P05036.
+- **OPERA DSWx-S1 Sentinel-1D** October 23 / November 4 was downloaded from tile **T44QND**, each observation ~11.203 / 11.203 hours after its paired NISAR pass. Initial catalog-matched tile T44QPD had no raster overlap; corrected **by georeferencing**, with no AOI change.
+- Shared radar: **64,495 30 m cells / 58.0455 km²**; strict OPERA 0/1 both dates: **58,085 cells**. OPERA references show **842** non-water→open-water and **75** reverse transitions.
+- **Unmodified** 3 dB/3×3/6-of-9 radar coherence rule: gain F1 **0.0**, loss F1 **0.0** against OPERA transitions. It is NOT a validated flood detector. Filtered radar-signal area **4.4163 km²** is **not flood extent**.
+- New locally fitted -14.5 dB threshold: static east-half F1 **0.8987**, but water-change gain/loss F1 **0.1347 / 0.0122**. Good static classifications do not establish change detection.
+- Raw TIFFs and Earthdata credentials remain on the Mac; non-sensitive hashes, actual JSON metrics and maps are stored in research. The public two-study viewer remains stable and a [public research page](https://backscatter-afterimage-2026.pages.dev/research.html) explains the third test.
 
-Do not show a third "analyzed" case or flood map in the web app until source rasters and results exist. [Event study](../research/arnab_event/README.md).
+[Complete Arnab measured report](../research/arnab_event/MEASURED_RESULTS.md) · [Experimental JSON](../research/arnab_event/arnab_nisar_opera_diagnostic.json).
 
 ---
 

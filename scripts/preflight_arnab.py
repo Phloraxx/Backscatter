@@ -24,9 +24,9 @@ ITEMS = [
        collection="C3622241360-ASF", asset=".h5"),
   dict(type="nisar", id="G4405145629-ASF", day="2026-11-03",
        collection="C3622241360-ASF", asset=".h5"),
-  dict(type="opera-s1", id="G4386072092-POCLOUD", day="2026-10-23",
+  dict(type="opera-s1", id="G4386072108-POCLOUD", day="2026-10-23",
        collection="C2949811996-POCLOUD", asset="_B01_WTR.tif"),
-  dict(type="opera-s1", id="G4405822836-POCLOUD", day="2026-11-04",
+  dict(type="opera-s1", id="G4405822843-POCLOUD", day="2026-11-04",
        collection="C2949811996-POCLOUD", asset="_B01_WTR.tif"),
 ]
 CORNERS=[(AOI[0],AOI[1]),(AOI[0],AOI[3]),(AOI[2],AOI[1]),(AOI[2],AOI[3])]
@@ -68,7 +68,7 @@ def get_record(item):
         if not polygon or not all(inside(*pt,polygon) for pt in CORNERS):
             raise RuntimeError("NISAR footprint does not contain full AOI")
     else:
-        if "_T44QPD_" not in name or "_S1D_30_v1.0" not in name:
+        if "_T44QND_" not in name or "_S1D_30_v1.0" not in name:
             raise RuntimeError("Unexpected OPERA tile / source sensor")
     return {
         "source":item["type"],"collection":item["collection"],
@@ -100,7 +100,7 @@ def main():
       "output_crs":"EPSG:32644",
       "same_acquisition_geometry":"149_D_080_4005_DHDH",
       "calibration_crid":"P05036",
-      "opera_tile":"T44QPD","opera_sensor":"Sentinel-1D C-band",
+      "opera_tile":"T44QND","opera_sensor":"Sentinel-1D C-band",
       "products":records,
       "limitations":[
         "Even nearly time-matched OPERA S1 is a satellite classification, not field truth",
@@ -119,11 +119,20 @@ def main():
     }
     OUT.mkdir(parents=True,exist_ok=True)
     p=OUT/"scene_manifest.json"
+    if p.exists():
+        previous=json.loads(p.read_text())
+        if previous.get("analysis") and previous.get("products"):
+            old=[r.get("concept_id") for r in previous["products"]]
+            new=[r.get("concept_id") for r in records]
+            if old!=new:
+                raise RuntimeError("Measured manifest source IDs differ; review before updating")
+            manifest["analysis"]=previous["analysis"]
+            manifest["status"]=previous.get("status",manifest["status"])
     p.write_text(json.dumps(manifest,indent=2)+"\n")
     for row in records:
         print("VERIFIED",row["source"],row["acquired_utc"],row["concept_id"])
     print("TIME_GAPS_HOURS",intervals)
-    print("SUCCESS: four source products and both NISAR footprints confirmed; pixels NOT analyzed")
+    print("SUCCESS: catalog sources and NISAR footprints checked; measured results are tracked separately")
     print("MANIFEST",p)
 
 if __name__=="__main__":

@@ -119,3 +119,10 @@ The [seven-slide Backscatter demonstration deck](public/backscatter-demo.pdf) ac
 Public: https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf
 
 The deck does not present the catalog-verified Cyclone Arnab follow-up as completed, and it does not label the signal-highlighted regions as confirmed flooding.
+
+
+## Public research and three-case verification
+
+The public [research and methods page](https://backscatter-afterimage-2026.pages.dev/research.html) contains scientifically grounded Kuttanad/Assam metrics plus an event-linked third test around **Cyclone Arnab**. Arnab is research-only, not another flood-colored interactive layer, because the unchanged HH coherence rule failed to identify reference-class water transitions even with reference observations ~11.2 hours after NISAR.
+
+Rebuild the static research page and its non-sensitive source-derived public JSON/figure assets with `python scripts/export_public_research.py`. This website and its PDF include the team's original Backscatter logo.

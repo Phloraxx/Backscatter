@@ -64,3 +64,9 @@ Do not cite this file as authority. Follow the links and verify the current offi
 - [NASA CMR-verified four-scene manifest](../research/arnab_event/scene_manifest.json) — exact dates, IDs, spacecraft and NISAR polygon checks, but **not pixel results**.
 - [NASA NISAR validated availability](https://nisar-docs.asf.alaska.edu/availability-overview/).
 - [NASA OPERA DSWx suite](https://www.jpl.nasa.gov/go/opera/products/dswx-product-suite/).
+
+
+## Public three-study research page
+
+- [Backscatter public research and full method limitations](https://backscatter-afterimage-2026.pages.dev/research.html): all three measured cases, test results and actual source lineage, not confirmed flood extent.
+- [Cyclone Arnab measured report](../research/arnab_event/MEASURED_RESULTS.md): original AOI, corrected T44QND source tile, reference date alignment, fixed-rules failure.

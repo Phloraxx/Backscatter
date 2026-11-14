@@ -10,7 +10,8 @@ proj4.defs('EPSG:32643', '+proj=utm +zone=43 +datum=WGS84 +units=m +no_defs');
 const LAYERS = [
   { id: 'oct29', label: '29 OCT', detail: 'NISAR · before', file: 'oct29.png' },
   { id: 'nov10', label: '10 NOV', detail: 'NISAR · after', file: 'nov10.png' },
-  { id: 'change', label: 'RADAR CHANGE', detail: '10 Nov − 29 Oct', file: 'change.png' },
+  { id: 'change', label: 'RADAR CHANGE', detail: 'HH · 10 Nov − 29 Oct', file: 'change.png' },
+  { id: 'hvchange', label: 'HV CHANGE', detail: 'HV · 10 Nov − 29 Oct', file: 'hv_change.png' },
   { id: 'opera', label: 'OPERA WATER', detail: 'Optical · 29 Oct', file: 'opera_oct29.png' },
 ];
 
@@ -21,7 +22,7 @@ function Legend({mode}) {
   if (mode === 'opera') return (
     <div className="legend-row"><span><i className="dot water"/>Open water</span><span><i className="dot partial"/>Partial water</span><span><i className="dot land"/>Non-water</span><span><i className="dot invalid"/>Excluded</span></div>
   );
-  if (mode === 'change') return (
+  if (mode === 'change' || mode === 'hvchange') return (
     <div className="legend-heat"><span>−8 dB</span><div className="bar difference"/><span>+8 dB</span></div>
   );
   return <div className="legend-heat"><span>−27 dB</span><div className="bar strength"/><span>0 dB</span></div>;
@@ -71,7 +72,9 @@ function App() {
     const len = meta.rows*meta.cols;
     const before = new Float32Array(buffer,0,len);
     const after = new Float32Array(buffer,4*len,len);
-    const optical = new Uint8Array(buffer,8*len,len);
+    const hvBefore = new Float32Array(buffer,8*len,len);
+    const hvAfter = new Float32Array(buffer,12*len,len);
+    const optical = new Uint8Array(buffer,16*len,len);
     const lngs=meta.image_coordinates_lonlat.map(x=>x[0]);
     const lats=meta.image_coordinates_lonlat.map(x=>x[1]);
     map.on('load', () => {
@@ -96,8 +99,9 @@ function App() {
         return;
       }
       const i=row*meta.cols+col;
-      const a=before[i],b=after[i];
-      setSelected({lng:e.lngLat.lng,lat:e.lngLat.lat,a,b,
+      const a=before[i],b=after[i], hvA=hvBefore[i], hvB=hvAfter[i];
+      setSelected({lng:e.lngLat.lng,lat:e.lngLat.lat,a,b,hvA,hvB,
+        hvDelta:Number.isFinite(hvA)&&Number.isFinite(hvB)?hvB-hvA:NaN,
         delta:Number.isFinite(a)&&Number.isFinite(b)?b-a:NaN,
         reference:optical[i]});
       if(pinRef.current)pinRef.current.remove();
@@ -166,13 +170,13 @@ function App() {
           <div className="panel-rule"/>
           <div className="status-block">
             <div className="status-top"><span className="panel-label">RESEARCH STATUS</span><span className="status-tag">EXPERIMENTAL</span></div>
-            <p><span className="signal-dot"/>Measured radar changes are real. <strong>Water-gain/loss classification is not validated.</strong></p>
-            <a href="https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md"
+            <p><span className="signal-dot"/>HH + HV improves static-water agreement but worsens change-mask results. <strong>No validated flood detector yet.</strong></p>
+            <a href="https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md"
               target="_blank" rel="noreferrer">Read the methods &amp; limitations <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
-        <div className="map-annotation"><span className="annotation-accent"/> {active?.detail?.toUpperCase()} <span className="annotation-sep">/</span> {mode === "opera" ? "SENTINEL-2B / OPERA DSWx-HLS V1.1" : "HHHH / NISAR GCOV V1"}</div>
+        <div className="map-annotation"><span className="annotation-accent"/> {active?.detail?.toUpperCase()} <span className="annotation-sep">/</span> {mode === "opera" ? "SENTINEL-2B / OPERA DSWx-HLS V1.1" : mode === "hvchange" ? "HVHV / NISAR GCOV V1" : "HHHH / NISAR GCOV V1"}</div>
 
         <section className="data-card">
           <div className="data-card-header"><span className="panel-label">MEASURED EVIDENCE</span><span className="data-indicator">VERIFIED</span></div>
@@ -185,7 +189,7 @@ function App() {
             <div><strong>{meta?.statistics?.same_day_opera_auc?.toFixed(3) ?? '—'}</strong><span>Oct 29 water/land ROC-AUC*</span></div>
           </div>
           <div className="card-divider"/>
-          <p className="small-note">*Agreement with OPERA optical classification, not field ground truth. Candidate water gain and loss F1: <b>{meta?.statistics?.gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.loss_f1?.toFixed(3) ?? '—'}</b> (date-mismatched reference).</p>
+          <p className="small-note">*OPERA product agreement, not field ground truth. HH-only change F1 gain/loss: <b>{meta?.statistics?.gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.loss_f1?.toFixed(3) ?? '—'}</b>. Dual-pol F1: <b>{meta?.statistics?.dualpol_gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.dualpol_loss_f1?.toFixed(3) ?? '—'}</b> (five-day reference gap).</p>
         </section>
 
         <section className="pixel-card">
@@ -195,7 +199,9 @@ function App() {
               <div className="coordinates">{selected.lat.toFixed(5)}° N &nbsp;/&nbsp; {selected.lng.toFixed(5)}° E</div>
               <div className="pixel-row"><span>29 Oct · HHHH</span><b>{getDb(selected.a)}</b></div>
               <div className="pixel-row"><span>10 Nov · HHHH</span><b>{getDb(selected.b)}</b></div>
-              <div className="pixel-row emphasis"><span>Paired change</span><b>{getDb(selected.delta)}</b></div>
+              <div className="pixel-row emphasis"><span>HH change</span><b>{getDb(selected.delta)}</b></div>
+              <div className="pixel-row"><span>HV · 29 Oct / 10 Nov</span><b>{getDb(selected.hvA)} / {getDb(selected.hvB)}</b></div>
+              <div className="pixel-row emphasis"><span>HV change</span><b>{getDb(selected.hvDelta)}</b></div>
               <div className="pixel-row"><span>OPERA · 29 Oct</span><b>{getOpClass(selected.reference)}</b></div>
               <small className="pixel-disclaimer">Values sampled on the 30 m reference grid. No physical cause is assigned.</small>
             </>

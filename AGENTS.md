@@ -86,3 +86,9 @@ Both real validated NISAR HHHH GeoTIFFs for Oct 29 and Nov 10 have been extracte
 ## Latest reference experiment (2026-11-14)
 
 Run `scripts/fetch_opera_hls.py`, `scripts/compare_nisar_opera_hls.py`, `scripts/evaluate_change_baseline.py` on the existing local NISAR files. Scientific note: OPERA-derived static water-vs-land labels show ROC-AUC 0.983 and east-half F1 0.944 with a threshold trained on the west. **Actual gain/loss F1 is only 0.201/0.218** against a date-mismatched OPERA change reference. Never describe this as validated flood detection. A water-extent map is not the same as a water-*change* map. See `research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md`.
+
+## Latest dual-polarization evidence — 2026-11-14
+
+Scripts: \`scripts/harmony_extra_layers.py\` obtains GCOV frequency-A HVHV, mask and numberOfLooks for both dates; \`scripts/evaluate_dualpol_quality.py\` reproduces OPERA agreement metrics and ablations; \`scripts/export_demo_assets.py\` prepares five web map layers. Native extra TIFFs remain local; compact JSON and figures are in \`research/kuttanad_validated_2026_10_11/\`.
+
+Measured static open-water held-out F1: HHHH 0.9435 vs weighted HH/HV 0.9533. **Change masks worsened**: gain 0.2022→0.1053; loss 0.2185→0.0981. Subswath mask had no invalid in-coverage pixels. Do not confuse these with field-validation scores or flood extent. The OPERA November reference is 5 days earlier than NISAR. Read \`DUAL_POLARIZATION.md\` before implementing classifier claims.

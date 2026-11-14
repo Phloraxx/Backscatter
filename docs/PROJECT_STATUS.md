@@ -1,5 +1,20 @@
 # Backscatter status — updated November 14, 2026
 
+## Latest experiment: dual-polarization and actual GCOV mask layers
+
+- **Six additional NASA Harmony subsets succeeded:** HVHV cross-pol, valid-subsample mask, and number-of-looks × both Kuttanad acquisitions.
+- **Quality:** 594,958 readable in-footprint 10 m pixels per date, all mask=1 (valid); 3,338 out-of-footprint/no-data pixels. Median looks ≈4.502; an arbitrary ≥4-looks sensitivity filter did not improve change agreement.
+- **Same-grid OPERA diagnostic:** HH-only east-half static open-water F1 **0.9435**, optimally weighted HH/HV **0.9533** (0.75 HV weight selected on west-half Oct 29).
+- **Change masks get worse:** gain F1 **0.2022 → 0.1053**, loss F1 **0.2185 → 0.0981**. A ±2 dB two-channel sign gate increased gain precision to 0.269 but reduced recall to 0.055.
+- **Web application:** fifth layer for HVHV dB change and dual-channel pixel inspector; verified on desktop/mobile. No maps of alleged confirmed inundation are published.
+
+**Conclusion:** dual-pol adds useful radar evidence, not a validated flood-change detector. The OPERA second reference remains five days earlier than the second NISAR scene.
+
+[Full research record](../research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md).
+
+---
+
+
 ## Interactive demonstration — implemented November 14, 2026
 
 The `web/` Vite/React/MapLibre app builds and runs with real, small local NISAR/OPERA sample assets (no token in browser). Desktop and 390×844 mobile headless Brave checks pass without JavaScript errors; map layer toggles and pixel inspector were tested with actual dB data. It shows before/after HHHH, unclassified dB change, and OPERA Oct 29 classified water. It is **not a validated water-gain/loss detector** and has not been deployed to a public URL. See `web/README.md` and `scripts/export_demo_assets.py`.
@@ -46,11 +61,11 @@ The first **real NISAR measurement workflow** for Kuttanad, Kerala is proven for
 | Pixels with delta below −3 dB | 14.02% |
 | Pixels with delta above +3 dB | 24.50% |
 
-**Not yet complete:** water/flood classification, source-quality calibration beyond positive-power masking, independent OPERA comparison for this Oct/Nov pair, error metrics, interactive app or competition submission. Different agricultural field conditions could explain much of the radar contrast.
+**Historical status after first radar extraction (before later tests above):** Independent OPERA product comparisons, quality-layer checks, and the interactive app have since been completed. **Still not complete:** reliable flood-change classification, field validation or competition submission. Different agricultural field conditions could explain much of the radar contrast.
 
-## Next science step
+## Next science step (after current experiments)
 
-Acquire and quality-screen OPERA DSWx-HLS (Oct 29 optical) and DSWx-S1 (Oct 21 / Nov 2 radar) over same area; check temporal mismatch and assess whether a simple backscatter-change rule provides a defensible water-change indicator. Reject simplistic "red = flooded" interpretations and report failures.
+Test a second independent NISAR interval or a better-aligned reference, including more than one geography. Improve quality analysis and surface-change interpretation without turning HHHH/HVHV threshold transitions into unsupported flood-extent estimates. Keep the 5-day OPERA reference mismatch visible.
 
 ## Historical research
 

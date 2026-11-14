@@ -1,5 +1,16 @@
 # Backscatter
 
+## Dual-polarization study and evidence viewer — November 14, 2026
+
+The web app now has an **HVHV cross-polarization change layer** and HH/HV pixel inspector, based on actual NISAR subsets for October 29 and November 10.
+
+Adding HV improved held-out **existing open-water** agreement with OPERA (F1 **0.9435 → 0.9533**) but **worsened** gain/loss masks (F1 **0.2022/0.2185 → 0.1053/0.0981**). We preserve both the useful evidence and the failure cases. The validity mask marks every readable in-footprint pixel as valid; it did not remove false positives.
+
+![Dual-polarization layer in the web map](web/preview-dualpol.jpg)
+
+[Experiment details](research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md) · [Experimental metrics](research/kuttanad_validated_2026_10_11/dualpol_quality_evaluation.json) · [Runnable app](web/README.md).
+
+
 ## Interactive evidence map — 14 November 2026
 
 **The first working Backscatter web demo now exists.** Built in React + MapLibre, it displays real validated NISAR HHHH before/after imagery, a measured radar-difference overlay, and the independently classified OPERA October 29 water layer over Kuttanad. Click map cells to inspect actual before/after dB values and the OPERA class. Works on desktop and mobile.

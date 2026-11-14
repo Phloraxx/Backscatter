@@ -74,3 +74,8 @@ Our first independent product-to-product comparison is informative but mixed. St
 ## D-016 — Reference quality and temporal validity
 
 Use OPERA DSWx-HLS class 0/1 for strict binary assessment; treat class 2 (partial water) separately, and mask invalid 252/253/254/255. Exclude zero-coverage scenes (Oct 29 S2A, Nov 01 S2B) rather than considering them water-free. Use native 30 m reference cells, not upscaled 10 m pseudo-samples. Identify same-calendar-day vs 5-day-offset comparisons explicitly.
+
+
+## D-017 — Dual-polarization evidence, not a flood classifier (2026-11-14)
+
+Both validated NISAR scenes now include extracted GCOV frequency-A HVHV, subswath mask and number-of-looks rasters. A weighted HH+HV score improves same-day held-out static open-water F1 from 0.9435 to 0.9533, **but worsens** gain/loss F1 from 0.2022/0.2185 to 0.1053/0.0981 against temporally offset OPERA reference. The mask marks all in-footprint pixels as valid, and a looks threshold did not fix the change problem. Add HVHV **measured radar change** as an evidence layer, but do not promote dual-pol masks as confirmed water gain/loss. Keep the HH change layer primary.

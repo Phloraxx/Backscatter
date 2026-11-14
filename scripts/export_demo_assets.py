@@ -21,6 +21,7 @@ from matplotlib import colormaps, colors
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT/"scripts"))
 from compare_nisar_opera_hls import ROOT as DATA, read_pair
+from evaluate_dualpol_quality import read_dual
 
 OUTPUT = ROOT/"web"/"public"/"data"
 OUT_META = OUTPUT/"meta.json"
@@ -50,12 +51,18 @@ def main():
     pre=np.asarray(a["radar_db"],dtype=np.float32).astype("<f4")
     post=np.asarray(b["radar_db"],dtype=np.float32).astype("<f4")
     delta=post-pre
+    dual_before=read_dual("2026-10-29",a)
+    dual_after=read_dual("2026-11-10",a)
+    hv_before=np.asarray(dual_before["hv_db"],dtype=np.float32).astype("<f4")
+    hv_after=np.asarray(dual_after["hv_db"],dtype=np.float32).astype("<f4")
+    hv_delta=hv_after-hv_before
     optical=np.asarray(a["label"],dtype=np.uint8)
     Image.fromarray(rgba_float(pre,-27,0,"viridis")).save(OUTPUT/"oct29.png",optimize=True)
     Image.fromarray(rgba_float(post,-27,0,"viridis")).save(OUTPUT/"nov10.png",optimize=True)
     Image.fromarray(rgba_float(delta,-8,8,"coolwarm")).save(OUTPUT/"change.png",optimize=True)
+    Image.fromarray(rgba_float(hv_delta,-8,8,"coolwarm")).save(OUTPUT/"hv_change.png",optimize=True)
     Image.fromarray(optical_rgba(optical)).save(OUTPUT/"opera_oct29.png",optimize=True)
-    (OUTPUT/"pixels.bin").write_bytes(pre.tobytes()+post.tobytes()+optical.tobytes())
+    (OUTPUT/"pixels.bin").write_bytes(pre.tobytes()+post.tobytes()+hv_before.tobytes()+hv_after.tobytes()+optical.tobytes())
 
     tf=a["transform"]
     x0,y0=tf.c,tf.f
@@ -66,6 +73,7 @@ def main():
     reference=json.loads((DATA/"independent_comparison/nisar_opera_diagnostic.json").read_text())
     baseline=json.loads((DATA/"independent_comparison/change_baseline.json").read_text())
     radar=json.loads((DATA/"nisar_pair_summary.json").read_text())
+    dual=json.loads((DATA/"independent_comparison/dualpol_quality_evaluation.json").read_text())
     meta={
         "title":"Backscatter — Kuttanad experimental SAR surface-change viewer",
         "bbox_wgs84":[76.42,9.4,76.49,9.47],
@@ -76,14 +84,17 @@ def main():
         "primary_dates":["2026-10-29","2026-11-10"],
         "opera_date":"2026-10-29",
         "opera_product":reference["comparisons"][0]["opera_product"],
-        "data_binary_format":"little-endian Float32 pre[N], Float32 post[N], Uint8 OPERA_WTR[N]; N=rows*cols",
+        "data_binary_format":"little-endian Float32 HH_before[N], Float32 HH_after[N], Float32 HV_before[N], Float32 HV_after[N], Uint8 OPERA_WTR[N]; N=rows*cols",
         "statistics":{
             "radar_shared_valid_km2":radar["shared_valid_km2"],
             "radar_paired_median_delta_db":radar["paired_median_delta_db"],
             "same_day_opera_auc":reference["comparisons"][0]["diagnostic_auc_openwater_vs_nonwater"],
             "east_holdout_static_f1":baseline["static_water_test_east"]["f1"],
-            "gain_f1":baseline["candidate_gain_vs_opera_5day_offset"]["f1"],
-            "loss_f1":baseline["candidate_loss_vs_opera_5day_offset"]["f1"],
+            "gain_f1":dual["results"]["single_hh"]["gain"]["f1"],
+            "loss_f1":dual["results"]["single_hh"]["loss"]["f1"],
+            "dualpol_static_east_f1":dual["results"]["weighted_hh_hv"]["static_east"]["f1"],
+            "dualpol_gain_f1":dual["results"]["weighted_hh_hv"]["gain"]["f1"],
+            "dualpol_loss_f1":dual["results"]["weighted_hh_hv"]["loss"]["f1"],
         },
         "limitations":[
             "Not a flood detection or prediction product",
@@ -91,6 +102,7 @@ def main():
             "OPERA layer is an optical satellite classification, not ground truth",
             "The second reference used in comparison was 2026-11-05; five days before NISAR 2026-11-10",
             "Spatially correlated pixels and crops affect reference agreement",
+            "HVHV helps static discrimination in this test but worsens candidate gain/loss mask F1",
         ],
         "credits":"NISAR validated GCOV V1 / NASA and ISRO; NASA OPERA DSWx-HLS v1.1; NASA Earthdata/ASF/PO.DAAC",
         "source_manifest":"https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/scene_manifest.json"

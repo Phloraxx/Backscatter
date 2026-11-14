@@ -48,3 +48,8 @@ The new cross-polarized **HVHV** layer, subswath mask and number-of-looks grids 
 See [dual-polarization experiments](../research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md).
 
 ![Dual-polarization change layer on the map](preview-dualpol.jpg)
+
+
+## Original Backscatter logo
+
+The header contains the original globe-and-radar mark selected for Backscatter in our September 2026 team logo review; the actual unmodified 1254 × 1254 source PNG is stored at `public/brand/backscatter-original.png`. The smaller mark and favicon are faithful crops of that user-provided original, not generated replacements. Click the header logo to view the complete artwork.

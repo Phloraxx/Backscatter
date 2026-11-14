@@ -135,7 +135,7 @@ function App() {
       <div className="map-canvas" ref={mapNode} role="region" aria-label="Interactive NISAR radar image map of Kuttanad, Kerala"/>
       <div className="map-grain" aria-hidden="true"/>
       <header className="top-bar">
-        <div className="brand-mark" aria-hidden="true"><span className="brand-orbit"/><span className="brand-cross"/></div>
+        <a className="brand-mark" href="/brand/backscatter-original.png" target="_blank" rel="noreferrer" aria-label="View our original Backscatter globe-and-radar logo"><img src="/brand/backscatter-mark.png" alt="Backscatter globe-and-radar mark"/></a>
         <div className="identity">
           <div className="wordmark">BACKSCATTER<span className="tiny-star">✳</span></div>
           <div className="subheading">RADAR EVIDENCE FOR A CHANGING EARTH</div>

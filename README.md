@@ -1,5 +1,8 @@
 # Backscatter
 
+**Team identity:** The web app now uses our original Backscatter logo (globe, radar beam, returning echoes and wordmark), preserved unchanged in [web/public/brand/backscatter-original.png](web/public/brand/backscatter-original.png). The logo mark also powers the site header and favicon.
+
+
 ## Dual-polarization study and evidence viewer — November 14, 2026
 
 The web app now has an **HVHV cross-polarization change layer** and HH/HV pixel inspector, based on actual NISAR subsets for October 29 and November 10.

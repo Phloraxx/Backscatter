@@ -1,5 +1,22 @@
 # Backscatter
 
+## November 14: Independent water-reference experiment
+
+**Current verified position: NISAR water/land discrimination works on this limited example; robust gain/loss detection does not.**
+
+- Same-calendar-day Oct 29 NISAR HHHH versus clear OPERA DSWx-HLS (Sentinel-2B) open-water/non-water labels: **ROC-AUC 0.983** (descriptive, not ground truth).
+- A single dB cutoff calibrated on the west half of Oct 29 (-10.75 dB) gave **F1 0.944** on east-half, spatially separated OPERA labels.
+- On Nov 10 radar against **Nov 05 optical observations**, static-water F1 was **0.895**; the **five-day mismatch** limits inference.
+- Using the same threshold to derive change masks, agreement with OPERA Oct 29 → Nov 05 was only **gain F1 0.201**, **loss F1 0.218**. **Do not call this accurate flood mapping.**
+- Pixels that OPERA classifies as new open water show negative NISAR changes in **89.5%** of cases; open-water-loss pixels show positive NISAR changes in **89.6%**. These are conditional directional associations, not a reliable NISAR-only change mask.
+
+![OPERA and NISAR change-map diagnostic; not same-date validation](research/kuttanad_validated_2026_10_11/change_baseline_preview.jpg)
+
+[Scientific evaluation and failure analysis](research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md) · [Metrics JSON](research/kuttanad_validated_2026_10_11/change_baseline.json) · [Reproducible code](scripts/evaluate_change_baseline.py).
+
+The MVP should show observed radar change **and** provenance/uncertainty, not claim every radar change represents flooding.
+
+
 ## Verified breakthrough — November 14, 2026
 
 **Actual validated NISAR radar pixels have now been extracted for Kuttanad, Kerala.** NASA Harmony produced HHHH GeoTIFFs for **2026-10-29 and 2026-11-10**. Both rasters share an identical EPSG:32643 grid at **10 m resolution** (776 × 771 pixels).

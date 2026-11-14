@@ -1,0 +1,143 @@
+{
+  "title": "Kuttanad static-water and candidate-change diagnostic",
+  "nisar_dates": [
+    "2026-10-29",
+    "2026-11-10"
+  ],
+  "opera_dates": [
+    "2026-10-29",
+    "2026-11-05"
+  ],
+  "optical_reference_date_mismatch_second_days": 5,
+  "grid_m": 30,
+  "threshold_trained_on": "Oct 29 west-half cells, OPERA classes 0 vs 1 (partial class 2 excluded)",
+  "threshold_train_west": {
+    "threshold_db": -10.75,
+    "TP": 16083,
+    "FP": 526,
+    "FN": 700,
+    "TN": 8723,
+    "precision": 0.9683,
+    "recall": 0.9583,
+    "f1": 0.9633,
+    "iou": 0.9292
+  },
+  "static_water_test_east": {
+    "TP": 13525,
+    "FP": 815,
+    "FN": 804,
+    "TN": 9792,
+    "precision": 0.9432,
+    "recall": 0.9439,
+    "f1": 0.9435,
+    "iou": 0.8931
+  },
+  "static_water_test_east_pixels": 24936,
+  "static_water_transfer_nov05_optical_vs_nov10_radar": {
+    "TP": 27183,
+    "FP": 3305,
+    "FN": 3056,
+    "TN": 19615,
+    "precision": 0.8916,
+    "recall": 0.8989,
+    "f1": 0.8953,
+    "iou": 0.8104
+  },
+  "candidate_gain_vs_opera_5day_offset": {
+    "TP": 139,
+    "FP": 527,
+    "FN": 576,
+    "TN": 43942,
+    "precision": 0.2087,
+    "recall": 0.1944,
+    "f1": 0.2013,
+    "iou": 0.1119
+  },
+  "candidate_loss_vs_opera_5day_offset": {
+    "TP": 413,
+    "FP": 2061,
+    "FN": 901,
+    "TN": 41809,
+    "precision": 0.1669,
+    "recall": 0.3143,
+    "f1": 0.2181,
+    "iou": 0.1224
+  },
+  "change_evaluation_cells": 45184,
+  "reference_transition_nisar_sign_test": {
+    "stable_nonwater": {
+      "cells": 17242,
+      "area_km2": 15.5178,
+      "median_nisar_change_db": 0.2168,
+      "fraction_radar_decreased": 0.431,
+      "fraction_radar_increased": 0.569,
+      "p10_p90_db": [
+        -1.4884,
+        1.9368
+      ]
+    },
+    "stable_openwater": {
+      "cells": 25913,
+      "area_km2": 23.3217,
+      "median_nisar_change_db": 0.9231,
+      "fraction_radar_decreased": 0.3016,
+      "fraction_radar_increased": 0.6984,
+      "p10_p90_db": [
+        -1.3691,
+        5.834
+      ]
+    },
+    "new_openwater": {
+      "cells": 715,
+      "area_km2": 0.6435,
+      "median_nisar_change_db": -3.1647,
+      "fraction_radar_decreased": 0.8951,
+      "fraction_radar_increased": 0.1049,
+      "p10_p90_db": [
+        -7.6184,
+        0.1305
+      ]
+    },
+    "lost_openwater": {
+      "cells": 1314,
+      "area_km2": 1.1826,
+      "median_nisar_change_db": 4.3778,
+      "fraction_radar_decreased": 0.1035,
+      "fraction_radar_increased": 0.8965,
+      "p10_p90_db": [
+        -0.0806,
+        11.2185
+      ]
+    },
+    "new_any_optical_water": {
+      "cells": 1920,
+      "area_km2": 1.728,
+      "median_nisar_change_db": -0.6828,
+      "fraction_radar_decreased": 0.6255,
+      "fraction_radar_increased": 0.3745,
+      "p10_p90_db": [
+        -5.1557,
+        1.597
+      ]
+    },
+    "lost_any_optical_water": {
+      "cells": 3517,
+      "area_km2": 3.1653,
+      "median_nisar_change_db": 1.1314,
+      "fraction_radar_decreased": 0.3025,
+      "fraction_radar_increased": 0.6975,
+      "p10_p90_db": [
+        -1.5618,
+        7.5007
+      ]
+    }
+  },
+  "interpretation": [
+    "A good static water-vs-land classifier does not imply reliable change mapping.",
+    "New/lost open-water class transitions show directional radar changes, but gain/loss mask precision remains poor.",
+    "OPERA is satellite-derived, not independent field ground truth.",
+    "The second OPTICAL observation was Nov 05 while the second NISAR date was Nov 10.",
+    "Threshold was supervised against OPERA on Oct 29 west half; east half is a geographically disjoint internal check.",
+    "This script does not validate NISAR flood extent or disaster impacts."
+  ]
+}

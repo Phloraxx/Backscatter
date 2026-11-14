@@ -1,0 +1,205 @@
+{
+  "purpose": "Experimental consistency checks; no flood classifier",
+  "study": "Kuttanad, Kerala",
+  "reference_collection": "C2617126679-POCLOUD",
+  "reference_product": "OPERA DSWx-HLS v1.1",
+  "nisar_collection": "C3622241360-ASF",
+  "comparisons": [
+    {
+      "opera_product": "OPERA_L3_DSWx-HLS_T43PFL_20261029T050929Z_20261031T153533Z_S2B_30_v1.1_B01_WTR.tif",
+      "sensor": "S2B",
+      "optical_date": "2026-10-29",
+      "radar_date": "2026-10-29",
+      "days_radar_minus_optical": 0,
+      "grid_resolution_m": [
+        30,
+        30
+      ],
+      "aoi_grid_cells": 66563,
+      "optically_valid_cells_0_1_2": 59950,
+      "optically_invalid_or_masked_cells": 6613,
+      "radar_plus_optical_valid_cells": 59781,
+      "strict_openwater_nonwater_cells": 50968,
+      "classes": {
+        "0": {
+          "n_common_with_radar": 19856,
+          "median_radar_db": -5.0692
+        },
+        "1": {
+          "n_common_with_radar": 31112,
+          "median_radar_db": -18.0946
+        },
+        "2": {
+          "n_common_with_radar": 8813,
+          "median_radar_db": -8.9112
+        }
+      },
+      "diagnostic_auc_openwater_vs_nonwater": 0.98306,
+      "water_score": "-NISAR HHHH dB (lower backscatter implies higher open-water likelihood)",
+      "note": "Single-scene same-day classification discrimination if offset is 0 days; not flood-change validation",
+      "fixed_threshold_checks": {
+        "-22": {
+          "tp": 9,
+          "fp": 0,
+          "fn": 31103,
+          "tn": 19856,
+          "precision": 1,
+          "recall": 0.0003,
+          "f1": 0.0006
+        },
+        "-20": {
+          "tp": 1588,
+          "fp": 0,
+          "fn": 29524,
+          "tn": 19856,
+          "precision": 1,
+          "recall": 0.051,
+          "f1": 0.0971
+        },
+        "-18": {
+          "tp": 16444,
+          "fp": 12,
+          "fn": 14668,
+          "tn": 19844,
+          "precision": 0.9993,
+          "recall": 0.5285,
+          "f1": 0.6914
+        },
+        "-16": {
+          "tp": 25708,
+          "fp": 158,
+          "fn": 5404,
+          "tn": 19698,
+          "precision": 0.9939,
+          "recall": 0.8263,
+          "f1": 0.9024
+        },
+        "-14": {
+          "tp": 27874,
+          "fp": 477,
+          "fn": 3238,
+          "tn": 19379,
+          "precision": 0.9832,
+          "recall": 0.8959,
+          "f1": 0.9375
+        }
+      }
+    },
+    {
+      "opera_product": "OPERA_L3_DSWx-HLS_T43PFL_20261105T051231Z_20261111T194115Z_S2A_30_v1.1_B01_WTR.tif",
+      "sensor": "S2A",
+      "optical_date": "2026-11-05",
+      "radar_date": "2026-11-10",
+      "days_radar_minus_optical": 5,
+      "grid_resolution_m": [
+        30,
+        30
+      ],
+      "aoi_grid_cells": 66563,
+      "optically_valid_cells_0_1_2": 61827,
+      "optically_invalid_or_masked_cells": 4736,
+      "radar_plus_optical_valid_cells": 61632,
+      "strict_openwater_nonwater_cells": 53159,
+      "classes": {
+        "0": {
+          "n_common_with_radar": 22920,
+          "median_radar_db": -5.3235
+        },
+        "1": {
+          "n_common_with_radar": 30239,
+          "median_radar_db": -17.0308
+        },
+        "2": {
+          "n_common_with_radar": 8473,
+          "median_radar_db": -7.8879
+        }
+      },
+      "diagnostic_auc_openwater_vs_nonwater": 0.94726,
+      "water_score": "-NISAR HHHH dB (lower backscatter implies higher open-water likelihood)",
+      "note": "Single-scene same-day classification discrimination if offset is 0 days; not flood-change validation",
+      "fixed_threshold_checks": {
+        "-22": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 30239,
+          "tn": 22920,
+          "precision": 0,
+          "recall": 0,
+          "f1": 0
+        },
+        "-20": {
+          "tp": 326,
+          "fp": 1,
+          "fn": 29913,
+          "tn": 22919,
+          "precision": 0.9969,
+          "recall": 0.0108,
+          "f1": 0.0213
+        },
+        "-18": {
+          "tp": 8538,
+          "fp": 53,
+          "fn": 21701,
+          "tn": 22867,
+          "precision": 0.9938,
+          "recall": 0.2824,
+          "f1": 0.4398
+        },
+        "-16": {
+          "tp": 19653,
+          "fp": 392,
+          "fn": 10586,
+          "tn": 22528,
+          "precision": 0.9804,
+          "recall": 0.6499,
+          "f1": 0.7817
+        },
+        "-14": {
+          "tp": 23762,
+          "fp": 1478,
+          "fn": 6477,
+          "tn": 21442,
+          "precision": 0.9414,
+          "recall": 0.7858,
+          "f1": 0.8566
+        }
+      }
+    }
+  ],
+  "optical_change": {
+    "optical_dates": [
+      "2026-10-29",
+      "2026-11-05"
+    ],
+    "sensors": [
+      "S2B",
+      "S2A"
+    ],
+    "counts": {
+      "valid_both": 56062,
+      "new_optical_water": 1925,
+      "lost_optical_water": 3517,
+      "stable_optical_water": 33340,
+      "stable_optical_nonwater": 17280
+    },
+    "area_km2": {
+      "valid_both": 50.4558,
+      "new_optical_water": 1.7325,
+      "lost_optical_water": 3.1653,
+      "stable_optical_water": 30.006,
+      "stable_optical_nonwater": 15.552
+    },
+    "net_optical_water_change_km2": -1.4328,
+    "note": "7-day independent optical DSWx classified-state change, not NISAR flood validation; cloud/partial water may influence results"
+  },
+  "limitations": [
+    "OPERA is optical satellite-derived classification, not field ground truth",
+    "Second NISAR acquisition is five days later than second OPERA reference",
+    "Class 2 partial surface water excluded from strict binary ROC-AUC",
+    "OPERA class 252/253/254/255 excluded as invalid or ambiguous",
+    "Radar power was averaged to native 30 m optical grid before log10",
+    "Spatial correlation and crop management can bias diagnostic metrics",
+    "AUC and fixed thresholds measure single-date discrimination, not flood change",
+    "No spatial holdout threshold calibration or uncertainty calibration"
+  ]
+}

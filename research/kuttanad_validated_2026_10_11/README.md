@@ -43,3 +43,11 @@ These changes can arise from **water extent, agricultural fields, vegetation, ro
 Assess candidate water-change interpretations against independent products, with explicit date offset and quality masks. OPERA DSWx-HLS around Oct 29 and OPERA DSWx-S1 Oct 21/Nov 2 are **potential evidence**, not a validated reference pair spanning Oct 29/Nov 10. If the agreement is poor, reconsider the case or method.
 
 Local TIFFs remain off GitHub to avoid committing imagery and large source files. The September OPERA-only experiment is a separate study: `../kuttanad_2026_09/`.
+
+## Independent optical reference evaluation — completed November 14, 2026
+
+New data: NASA OPERA DSWx-HLS WTR v1.1 for the Kuttanad tile. The actual product dates and cloud/invalid coverage were inspected. The same-day Oct 29 Sentinel-2B product is usable; a second Oct 29 Sentinel-2A product contains zero valid pixels over the study area and was excluded. Nov 05 Sentinel-2A is available, but precedes NISAR Nov 10 by 5 days.
+
+[Detailed experiments, provenance and limitations](INDEPENDENT_COMPARISON.md) · [Reference availability](opera_reference_quality.json) · [Source checksums](opera_hls_manifest.json) · [Radar/OPERA diagnostic](nisar_opera_diagnostic.json) · [Baseline/change evaluation](change_baseline.json).
+
+The strongest current result is not an inundation map. NISAR distinguishes existing optical open-water and non-water classes well (same-day AUC 0.983), whereas the simple change-mask baseline agrees poorly (F1 0.201 gain, 0.218 loss). Treat flood inference as an unresolved goal.

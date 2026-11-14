@@ -82,3 +82,7 @@ Review `docs/PROJECT_STATUS.md`, `research/kuttanad_2026_09/README.md`, and `res
 ## Verified extraction outcome — 2026-11-14
 
 Both real validated NISAR HHHH GeoTIFFs for Oct 29 and Nov 10 have been extracted through **NASA Harmony** and analyzed. Do not reuse the original `scripts/extract_validated_kuttanad.py` NETCDF-over-/vsicurl flow on macOS GDAL 3.9; it failed. Use `scripts/harmony_validated_kuttanad.py` (submit/fetch) and `scripts/analyze_harmony_kuttanad.py`, or the existing local raster results. Results: 594,958 common 10 m pixels; paired median delta +0.6231 dB. No flood inference or accuracy measurement yet. Read `research/kuttanad_validated_2026_10_11/README.md` and the summary JSON first. Never share/copy the Earthdata secret.
+
+## Latest reference experiment (2026-11-14)
+
+Run `scripts/fetch_opera_hls.py`, `scripts/compare_nisar_opera_hls.py`, `scripts/evaluate_change_baseline.py` on the existing local NISAR files. Scientific note: OPERA-derived static water-vs-land labels show ROC-AUC 0.983 and east-half F1 0.944 with a threshold trained on the west. **Actual gain/loss F1 is only 0.201/0.218** against a date-mismatched OPERA change reference. Never describe this as validated flood detection. A water-extent map is not the same as a water-*change* map. See `research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md`.

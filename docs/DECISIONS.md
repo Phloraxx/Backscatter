@@ -66,3 +66,11 @@ Direct NETCDF-over-/vsicurl GDAL 3.9 raster reading failed on macOS. NASA Harmon
 ## D-014 — Measured radar changes do not establish flooding
 
 Record actual paired NISAR HHHH differences (median +0.6231 dB, 594,958 common valid pixels), but do not label any proportion of positive/negative dB change as flood extent until independently checked.
+
+## D-015 — Preserve evidence and failure modes (2026-11-14)
+
+Our first independent product-to-product comparison is informative but mixed. Static water/nonwater NISAR HHHH discrimination is strong on Oct 29; candidate gained/lost water masks show low precision when compared against OPERA with an offset second date. Prioritize an explainable *radar surface-change* product with clearly separated observed measurements vs uncertain interpretations. Do not publish a flood-extent accuracy claim.
+
+## D-016 — Reference quality and temporal validity
+
+Use OPERA DSWx-HLS class 0/1 for strict binary assessment; treat class 2 (partial water) separately, and mask invalid 252/253/254/255. Exclude zero-coverage scenes (Oct 29 S2A, Nov 01 S2B) rather than considering them water-free. Use native 30 m reference cells, not upscaled 10 m pseudo-samples. Identify same-calendar-day vs 5-day-offset comparisons explicitly.

@@ -1,0 +1,132 @@
+{
+  "source": "OPERA DSWx-HLS WTR v1.1, C2617126679-POCLOUD",
+  "study": "Kuttanad NISAR-overlap bbox, 30m grid",
+  "water_classes": [
+    1,
+    2
+  ],
+  "strict_evaluation_classes": [
+    0,
+    1
+  ],
+  "invalid_classes": [
+    252,
+    253,
+    254,
+    255
+  ],
+  "products": [
+    {
+      "acquired": "2026-10-29T05:26:21.806Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261029T050929Z_20261031T153533Z_S2B_30_v1.1",
+      "tile": "T43PFL",
+      "window_shape": [
+        259,
+        257
+      ],
+      "total_cells": 66563,
+      "valid_0_1_2": 59950,
+      "valid_fraction": 0.90065,
+      "class_counts": {
+        "0": 19917,
+        "1": 31200,
+        "2": 8833,
+        "252": 5116,
+        "253": 1489,
+        "255": 8
+      },
+      "status": "usable"
+    },
+    {
+      "acquired": "2026-10-29T05:36:21.712Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261029T052231Z_20261031T133737Z_S2A_30_v1.1",
+      "tile": "T43PFL",
+      "window_shape": [
+        259,
+        257
+      ],
+      "total_cells": 66563,
+      "valid_0_1_2": 0,
+      "valid_fraction": 0,
+      "class_counts": {
+        "255": 66563
+      },
+      "status": "excluded_empty_AOI"
+    },
+    {
+      "acquired": "2026-11-01T05:36:16.513Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261101T051949Z_20261103T045229Z_S2B_30_v1.1",
+      "tile": "T43PFL",
+      "window_shape": [
+        259,
+        257
+      ],
+      "total_cells": 66563,
+      "valid_0_1_2": 0,
+      "valid_fraction": 0,
+      "class_counts": {
+        "255": 66563
+      },
+      "status": "excluded_empty_AOI"
+    },
+    {
+      "acquired": "2026-11-03T05:26:17.180Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261103T050951Z_20261107T133623Z_S2C_30_v1.1",
+      "tile": "T43PFL",
+      "window_shape": [
+        259,
+        257
+      ],
+      "total_cells": 66563,
+      "valid_0_1_2": 60146,
+      "valid_fraction": 0.9036,
+      "class_counts": {
+        "0": 21081,
+        "1": 31225,
+        "2": 7840,
+        "252": 3705,
+        "253": 2712
+      },
+      "status": "usable"
+    },
+    {
+      "acquired": "2026-11-03T05:11:46.699Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261103T051146Z_20261107T174147Z_L9_30_v1.1",
+      "tile": "T43PFL",
+      "window_shape": [
+        259,
+        257
+      ],
+      "total_cells": 66563,
+      "valid_0_1_2": 65833,
+      "valid_fraction": 0.98903,
+      "class_counts": {
+        "0": 15488,
+        "1": 32830,
+        "2": 17515,
+        "253": 730
+      },
+      "status": "usable"
+    },
+    {
+      "acquired": "2026-11-05T05:26:27.047Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261105T051231Z_20261111T194115Z_S2A_30_v1.1",
+      "tile": "T43PFL",
+      "window_shape": [
+        259,
+        257
+      ],
+      "total_cells": 66563,
+      "valid_0_1_2": 61827,
+      "valid_fraction": 0.92885,
+      "class_counts": {
+        "0": 22984,
+        "1": 30337,
+        "2": 8506,
+        "252": 1555,
+        "253": 3181
+      },
+      "status": "usable"
+    }
+  ]
+}

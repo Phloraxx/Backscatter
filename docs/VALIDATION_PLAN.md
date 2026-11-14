@@ -69,3 +69,16 @@ The demo should include at least one acknowledged failure mode. That increases c
 OPERA DSWx-S1 WTR tiles `T43PFL` for 2026-09-15 and 2026-09-27 have been acquired and compared. They are processed Sentinel-1 classifications (not ground truth). NISAR scenes are 2026-09-14 and 2026-09-26, introducing a one-day offset per comparison. For binary exploratory water masks, OPERA codes 1 (open water) and 3 (inundated vegetation) were grouped; keep per-class results when possible. The net observed OPERA-only classified-water change is −2.0979 km² on 59.9067 km² common valid area.
 
 **No NISAR validation metric is yet available.** Future metrics must refer to NISAR-derived candidate classifications and not be calculated from OPERA compared against itself. Include grid alignment, invalid masks, reference limitations and temporal mismatch. See `docs/PROJECT_STATUS.md`.
+
+## Real Kuttanad validation experiment (November 14, 2026)
+
+**Measured product-to-product comparison; not ground-truth validation.** NASA OPERA DSWx-HLS v1.1 WTR optical classes (0 nonwater, 1 open water, 2 partial surface water, 252/253/254/255 excluded) were compared with NISAR validated GCOV HHHH. Radar 10-metre power was averaged onto optical 30-metre cells *before* converting to dB. Strict binary metrics exclude class 2.
+
+- Oct 29 same-calendar-day open-water ROC-AUC 0.98306; optical class-1 median HHHH −18.0946 dB vs class-0 −5.0692 dB.
+- Train a single open-water threshold on **west-half Oct 29** against OPERA labels; east-half spatial holdout F1 **0.9435**.
+- Transfer unchanged threshold to Nov 10 radar against Nov 05 OPERA labels: F1 **0.8953**, **5-day date mismatch**.
+- Candidate water-gain/loss mask comparison against OPERA Oct 29/Nov 05: F1 **0.2013 gain**, **0.2181 loss**, precision **0.2087/0.1669**. Thus static-water classification is NOT a validated flood-change detector.
+- Conditional strict OPERA class transitions are directionally supported by NISAR: new open-water classes (715 cells) exhibit reduced backscatter in 89.51%; lost open-water classes (1,314 cells) exhibit increased backscatter in 89.65%. This does not imply overall mask accuracy.
+- Failure modes: changing crops/field water management, partial-water categories, radar speckle, different sensing times, optical clouds/quality masks, and spatially correlated classification labels.
+
+Do not report 0.9435 as "flood detection accuracy". Complete experimental artifacts and source granule IDs are under `research/kuttanad_validated_2026_10_11/`.

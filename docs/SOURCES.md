@@ -32,3 +32,11 @@ Prefer official sources for scientific/technical claims.
 ## Source policy
 
 Do not cite this file as authority. Follow the links and verify the current official text before using a claim in the final presentation.
+
+## Independent OPERA water reference documentation
+
+- OPERA DSWx-HLS product specification: https://d2pn8kiwq2w21t.cloudfront.net/documents/OPERA_DSWx-HLS_ProductSpec_v1.0.0_D-107395_RevB.pdf
+- OPERA water product suite: https://www.jpl.nasa.gov/go/opera/products/dswx-product-suite/
+- NASA Earthdata CMR: https://cmr.earthdata.nasa.gov/search/granules.json
+- OPERA DSWx-HLS collection `C2617126679-POCLOUD`
+- Reproducible reference tests: `research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md`

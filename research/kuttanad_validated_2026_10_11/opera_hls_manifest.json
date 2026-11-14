@@ -1,0 +1,49 @@
+{
+  "source": "NASA CMR OPERA DSWx-HLS v1.1",
+  "collection": "C2617126679-POCLOUD",
+  "files": [
+    {
+      "acquired": "2026-10-29T05:26:21.806Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261029T050929Z_20261031T153533Z_S2B_30_v1.1",
+      "file": "OPERA_L3_DSWx-HLS_T43PFL_20261029T050929Z_20261031T153533Z_S2B_30_v1.1_B01_WTR.tif",
+      "bytes": 337339,
+      "sha256": "83291267ea7e578029dca07d0fa4865db4da8c539520c5877c8558c9d28243ce"
+    },
+    {
+      "acquired": "2026-10-29T05:36:21.712Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261029T052231Z_20261031T133737Z_S2A_30_v1.1",
+      "file": "OPERA_L3_DSWx-HLS_T43PFL_20261029T052231Z_20261031T133737Z_S2A_30_v1.1_B01_WTR.tif",
+      "bytes": 123925,
+      "sha256": "3a62cd2708fe3b47d643e4decee8f04699ea815e3ba29b919e860da2e5d5b311"
+    },
+    {
+      "acquired": "2026-11-01T05:36:16.513Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261101T051949Z_20261103T045229Z_S2B_30_v1.1",
+      "file": "OPERA_L3_DSWx-HLS_T43PFL_20261101T051949Z_20261103T045229Z_S2B_30_v1.1_B01_WTR.tif",
+      "bytes": 119072,
+      "sha256": "0292611c4e0aff81320ecc65e3fea4235f4ab141a8da6c8639f9f3fed55567cb"
+    },
+    {
+      "acquired": "2026-11-03T05:26:17.180Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261103T050951Z_20261107T133623Z_S2C_30_v1.1",
+      "file": "OPERA_L3_DSWx-HLS_T43PFL_20261103T050951Z_20261107T133623Z_S2C_30_v1.1_B01_WTR.tif",
+      "bytes": 445567,
+      "sha256": "c70d5021abb6da3ff974d704c1d8ff0aca08f16d81d90e50575fafc7f1eb72f5"
+    },
+    {
+      "acquired": "2026-11-03T05:11:46.699Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261103T051146Z_20261107T174147Z_L9_30_v1.1",
+      "file": "OPERA_L3_DSWx-HLS_T43PFL_20261103T051146Z_20261107T174147Z_L9_30_v1.1_B01_WTR.tif",
+      "bytes": 506003,
+      "sha256": "44082bcd062cfcdc13743cbb5020d06356c451f99d00c95b5ce178cc89d64312"
+    },
+    {
+      "acquired": "2026-11-05T05:26:27.047Z",
+      "granule_id": "OPERA_L3_DSWx-HLS_T43PFL_20261105T051231Z_20261111T194115Z_S2A_30_v1.1",
+      "file": "OPERA_L3_DSWx-HLS_T43PFL_20261105T051231Z_20261111T194115Z_S2A_30_v1.1_B01_WTR.tif",
+      "bytes": 490175,
+      "sha256": "cee90d4a57cbbc4cbb5de287ee037026112d3bbaf59af9620611594488edc279"
+    }
+  ],
+  "warning": "Independent optical classification only; not validated ground truth"
+}

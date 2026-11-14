@@ -62,3 +62,19 @@ Both dates are resampled with **nearest neighbor** onto the same EPSG:32643 30 m
 5. If remote GDAL requests fail, consider NASA Harmony's current extraction/spatial-subsetting feature: https://nisar-docs.asf.alaska.edu/harmony/ . Do not disable CDN allowlisting or reveal signed download URLs in troubleshooting logs.
 
 The project remains experimental until actual source pixels, interpretation and independent checks succeed.
+
+## OPERA HLS comparison — completed November 14, 2026
+
+Requires NISAR Harmony GeoTIFF files from the earlier steps and local Earthdata access.
+
+```bash
+python scripts/fetch_opera_hls.py             # hidden token prompt, WTR files local only
+python scripts/compare_nisar_opera_hls.py     # NISAR 10m linear power -> OPERA native 30m grid
+python scripts/evaluate_change_baseline.py   # west-half threshold fit, east-half test and change diagnostics
+```
+
+Outputs: `~/Downloads/backscatter-validated-kuttanad/independent_comparison/` (JSON and images) and `~/Downloads/backscatter-validated-kuttanad/opera_hls/` (local GeoTIFFs and manifest).
+
+The script downloads **OPERA DSWx-HLS WTR** for Oct 29, Nov 01/03/05 where available, inspects class coverage, and uses Oct 29 S2B and Nov 05 S2A for the diagnostic. Oct 29 S2A and Nov 01 S2B have no usable study-area classifications. Radar has Oct 29 and Nov 10; the Nov 05 optical comparator is **5 days earlier**. OPERA labels are reference satellite classifications, not ground truth; partial water (class 2) and masked/invalid classes 252/253/254/255 are excluded from strict 0/1 evaluation.
+
+Class codes: official OPERA DSWx-HLS specification [PDF](https://d2pn8kiwq2w21t.cloudfront.net/documents/OPERA_DSWx-HLS_ProductSpec_v1.0.0_D-107395_RevB.pdf). Result: static water/land separation is strong, but simple gain/loss masks have low precision, so do not promote them as accurate inundation maps. See `research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md`.

@@ -42,7 +42,8 @@ Keep the demo within **seven slides**, including title and closing slides. Alter
 
 ## Public links — verify before submitting
 
-- **Candidate web project:** https://backscatter-afterimage-2026.pages.dev/ — newly created Cloudflare Pages project; **verify a successful deployment before using**.
+- **Verified production website:** https://backscatter-afterimage-2026.pages.dev/ — published, independently tested for both geographic studies.
+- **Public demonstration deck:** https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf — generated exactly seven landscape pages; visual inspection completed; verify after publishing this commit.
 - **Code repository:** https://github.com/Phloraxx/Backscatter — currently **private**; reviewers cannot access it without permission. Do not list this as the only public final-project link.
 - **Official submission:** https://www.spaceappschallenge.org/2026/ — Project tab on Team Afterimage's page; submitting is a separate user action.
 

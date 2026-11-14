@@ -111,3 +111,11 @@ Kuttanad has **8.11 km²** of strong coherent radar signal regions, and Lower As
 In Kuttanad the spatially coherent filter reduced the fraction of OPERA-classified stable non-water pixels flagged by ≈93% versus raw ±3 dB thresholding, but it missed additional true water-class changes. **In Assam it captured zero strict open-water transitions**, demonstrating that denoising cannot make the method universally reliable.
 
 [Full reproducible research](../research/signal_coherence/README.md) · [Kerala metrics](../research/signal_coherence/kuttanad_metrics.json) · [Assam metrics](../research/signal_coherence/assam_metrics.json).
+
+## Public seven-slide NASA demonstration
+
+The [seven-slide Backscatter demonstration deck](public/backscatter-demo.pdf) accompanies the interactive website. It contains the **original team logo** and actual screenshots, measured Kuttanad/Assam results and scientific limitations. It is produced from the source [HTML slide design](../docs/space-apps-demo.html) and exported with Chromium to an exactly seven-page PDF. A link is available in the website header.
+
+Public: https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf
+
+The deck does not present the catalog-verified Cyclone Arnab follow-up as completed, and it does not label the signal-highlighted regions as confirmed flooding.

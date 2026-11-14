@@ -1,5 +1,12 @@
 # Backscatter
 
+## Public 7-slide NASA Space Apps demonstration
+
+**Public demo:** [View the seven-slide PDF](https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf) · [Live interactive map](https://backscatter-afterimage-2026.pages.dev/)
+
+The demo shows real NISAR data, the original team logo, two finished study areas, a conservative signal overlay, and both the improvement and failure cases. It does **not** claim field-validated flood detection.
+
+
 
 ## Event-linked study under investigation — Cyclone Arnab
 

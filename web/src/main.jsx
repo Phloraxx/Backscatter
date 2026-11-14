@@ -165,6 +165,7 @@ function App() {
         <div className="mission">
           <span className="live-dot"/>NASA SPACE APPS 2026 <span className="mission-sep">/</span> AFTERIMAGE
         </div>
+        <a className="deck-link" href="/backscatter-demo.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open Backscatter seven-slide NASA Space Apps demo PDF">7-SLIDE DEMO ↗</a>
       </header>
 
       <main className="workspace">

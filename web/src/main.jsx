@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import * as maplibregl from 'maplibre-gl';
 import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import proj4 from 'proj4';
+import {imageAffineCss, percentFromClientX, clampSwipePercent} from './comparison.js';
+import {explainPixel, formatEvidenceReport, getOpClass} from './evidence.js';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './styles.css';
 
@@ -18,12 +20,14 @@ const signedDb = (v) => Number.isFinite(v) ? (v>=0?'+':'')+v.toFixed(2) : '—';
 const LAYERS = ASSAM ? [
   { id:'oct29', label:'28 OCT', detail:'NISAR · before', file:'before.png' },
   { id:'nov10', label:'09 NOV', detail:'NISAR · after', file:'after.png' },
+  { id:'compare', label:'SWIPE COMPARE', detail:'28 Oct ↔ 09 Nov · HH', file:null },
   { id:'change', label:'RADAR CHANGE', detail:'HH · 09 Nov − 28 Oct', file:'change.png' },
   { id:'signal', label:'SIGNAL CLUSTERS', detail:'Coherent HH changes · NOT flood', file:'coherent_change.png' },
   { id:'opera', label:'OPERA WATER', detail:'Sentinel-1 · 31 Oct', file:'opera.png' },
 ] : [
   { id:'oct29', label:'29 OCT', detail:'NISAR · before', file:'oct29.png' },
   { id:'nov10', label:'10 NOV', detail:'NISAR · after', file:'nov10.png' },
+  { id:'compare', label:'SWIPE COMPARE', detail:'29 Oct ↔ 10 Nov · HH', file:null },
   { id:'change', label:'RADAR CHANGE', detail:'HH · 10 Nov − 29 Oct', file:'change.png' },
   { id:'signal', label:'SIGNAL CLUSTERS', detail:'Coherent HH changes · NOT flood', file:'coherent_change.png' },
   { id:'hvchange', label:'HV CHANGE', detail:'HV · 10 Nov − 29 Oct', file:'hv_change.png' },
@@ -31,9 +35,13 @@ const LAYERS = ASSAM ? [
 ];
 
 const getDb = (v) => Number.isFinite(v) ? v.toFixed(2) + ' dB' : 'No valid reading';
-const getOpClass = (v) => ({0:'Non-water',1:'Open water',2:'Partial water (HLS)',3:'Inundated vegetation (S1)',250:'HAND masked',251:'Layover/shadow masked',252:'Snow/ice masked',253:'Cloud/shadow masked',254:'Ocean mask',255:'No data'}[v] ?? 'Other / masked');
-
 function Legend({mode}) {
+  if (mode === 'compare') return (
+    <div className="legend-row comparison-legend">
+      <span><i className="dot before-dot"/>Left: first NISAR pass</span>
+      <span><i className="dot after-dot"/>Right: second NISAR pass</span>
+    </div>
+  );
   if (mode === 'opera') return (
     <div className="legend-row"><span><i className="dot water"/>Open water</span><span><i className="dot partial"/>{ASSAM?'Inundated vegetation':'Partial water'}</span><span><i className="dot land"/>Non-water</span><span><i className="dot invalid"/>Masked</span></div>
   );
@@ -55,11 +63,13 @@ function App() {
   const [error,setError] = useState('');
   const [mode,setMode] = useState('change');
   const [opacity,setOpacity] = useState(0.88);
+  const [comparePos,setComparePos] = useState(50);
   const [selected,setSelected] = useState(null);
   const [mapReady,setMapReady] = useState(false);
   const mapRef = useRef(null);
   const pinRef = useRef(null);
   const mapNode = useRef(null);
+  const swipeImageRef = useRef(null);
 
   useEffect(() => {
     let active = true;
@@ -77,6 +87,8 @@ function App() {
       center: ASSAM ? [90.315,26.195] : [76.455,9.435],
       zoom: 12.7,
       pitch: 0,
+      minPitch: 0, maxPitch: 0,
+      dragRotate: false, touchPitch: false,
       attributionControl: false,
       style: {
         version: 8,
@@ -99,8 +111,17 @@ function App() {
     const optical = new Uint8Array(buffer,16*len,len);
     const lngs=meta.image_coordinates_lonlat.map(x=>x[0]);
     const lats=meta.image_coordinates_lonlat.map(x=>x[1]);
+    const alignSwipeImage=()=>{
+      const img=swipeImageRef.current;
+      if(!img) return;
+      const pts=meta.image_coordinates_lonlat.map(c=>map.project(c));
+      const transform=imageAffineCss(pts,meta.cols,meta.rows);
+      if(transform) img.style.transform=transform;
+    };
+    map.on('move',alignSwipeImage);
+    map.on('resize',alignSwipeImage);
     map.on('load', () => {
-      for(const layer of LAYERS){
+      for(const layer of LAYERS.filter(l=>l.file)){
         map.addSource('image-'+layer.id,{type:'image',url:DATA_ROOT+layer.file,
           coordinates:meta.image_coordinates_lonlat});
         map.addLayer({id:'layer-'+layer.id,source:'image-'+layer.id,type:'raster',
@@ -110,6 +131,7 @@ function App() {
       map.fitBounds([[Math.min(...lngs),Math.min(...lats)],[Math.max(...lngs),Math.max(...lats)]],
         {padding:{top:100,bottom:95,left:65,right:65},duration:0,maxZoom:15});
       setMapReady(true);
+      alignSwipeImage();
     });
     map.on('click',(e) => {
       const [x,y]=proj4('EPSG:4326',meta.crs,[e.lngLat.lng,e.lngLat.lat]);
@@ -143,19 +165,52 @@ function App() {
   useEffect(()=>{
     const map=mapRef.current;
     if(!map || !mapReady) return;
-    for(const layer of LAYERS){
+    for(const layer of LAYERS.filter(l=>l.file)){
       if(map.getLayer('layer-'+layer.id)){
-        map.setLayoutProperty('layer-'+layer.id,'visibility',mode===layer.id?'visible':'none');
-        map.setPaintProperty('layer-'+layer.id,'raster-opacity',opacity);
+        const show=mode===layer.id || (mode==='compare' && layer.id==='oct29');
+        map.setLayoutProperty('layer-'+layer.id,'visibility',show?'visible':'none');
+        map.setPaintProperty('layer-'+layer.id,'raster-opacity',mode==='compare'?1:opacity);
       }
     }
   },[mode,opacity,mapReady]);
 
+  useEffect(()=>{
+    const map=mapRef.current;
+    if(mode!=='compare'||!mapReady||!meta||!map||!swipeImageRef.current) return;
+    const pts=meta.image_coordinates_lonlat.map(c=>map.project(c));
+    const transform=imageAffineCss(pts,meta.cols,meta.rows);
+    if(transform)swipeImageRef.current.style.transform=transform;
+  },[mode,mapReady,meta]);
+
+  const changeSwipePosition=(e)=>{
+    const rect=mapNode.current?.getBoundingClientRect();
+    setComparePos(percentFromClientX(e.clientX,rect));
+  };
+  const saveEvidenceNote=()=>{
+    if(!selected||!meta)return;
+    const text=formatEvidenceReport({selected,meta,study:STUDY});
+    const blob=new Blob([text],{type:'text/plain;charset=utf-8'});
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement('a');
+    link.href=url;
+    link.download='backscatter-'+STUDY+'-'+selected.lat.toFixed(4)+'-'+selected.lng.toFixed(4)+'.txt';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(()=>URL.revokeObjectURL(url),3000);
+  };
+  const explanation=selected?explainPixel(selected,ASSAM):null;
   const active=LAYERS.find(l=>l.id===mode);
   return (
     <div className="shell">
       <div className="map-canvas" ref={mapNode} role="region" aria-label={"Interactive NISAR radar image map of "+(ASSAM?"Lower Assam":"Kuttanad")}/>
       <div className="map-grain" aria-hidden="true"/>
+      {mode==='compare' && mapReady && meta && <div className="swipe-visual" aria-hidden="true">
+        <div className="swipe-reveal" style={{clipPath:'inset(0 0 0 '+comparePos+'%)'}}>
+          <img ref={swipeImageRef} className="swipe-image" src={DATA_ROOT+(ASSAM?'after.png':'nov10.png')}
+            width={meta.cols} height={meta.rows} alt=""/>
+        </div>
+      </div>}
       <header className="top-bar">
         <a className="brand-mark" href="/brand/backscatter-original.png" target="_blank" rel="noreferrer" aria-label="View our original Backscatter globe-and-radar logo"><img src="/brand/backscatter-mark.png" alt="Backscatter globe-and-radar mark"/></a>
         <div className="identity">
@@ -192,9 +247,17 @@ function App() {
             </button>)}
           </div>
           <div className="opacity">
-            <div className="opacity-caption"><span>OVERLAY OPACITY</span><output>{Math.round(opacity*100)}%</output></div>
-            <input type="range" min="0" max="100" value={Math.round(opacity*100)}
-              onChange={e=>setOpacity(Number(e.target.value)/100)} aria-label="Raster overlay opacity"/>
+            {mode==='compare' ? <>
+              <div className="opacity-caption"><span>SWIPE DIVIDER</span><output>{Math.round(comparePos)}% left</output></div>
+              <input type="range" min="5" max="95" value={Math.round(comparePos)}
+                onChange={e=>setComparePos(clampSwipePercent(Number(e.target.value)))}
+                aria-label="Before after comparison position" />
+              <p className="compare-hint">Drag the divider on the map or use this slider. Both radar images are displayed at full strength; neither shows flood extent.</p>
+            </> : <>
+              <div className="opacity-caption"><span>OVERLAY OPACITY</span><output>{Math.round(opacity*100)}%</output></div>
+              <input type="range" min="0" max="100" value={Math.round(opacity*100)}
+                onChange={e=>setOpacity(Number(e.target.value)/100)} aria-label="Raster overlay opacity"/>
+            </>}
           </div>
           <div className="panel-rule"/>
           <div className="status-block">
@@ -204,9 +267,28 @@ function App() {
           </div>
         </section>
 
-        <div className="map-annotation"><span className="annotation-accent"/> {active?.detail?.toUpperCase()} <span className="annotation-sep">/</span> {mode==="opera" ? (ASSAM?"SENTINEL-1D / OPERA DSWx-S1 V1.0":"SENTINEL-2B / OPERA DSWx-HLS V1.1") : mode==="hvchange"?"HVHV / NISAR GCOV V1":mode==="signal"?"HHHH / FILTERED SIGNAL, NOT WATER":"HHHH / NISAR GCOV V1"}</div>
+        <div className="map-annotation"><span className="annotation-accent"/> {active?.detail?.toUpperCase()} <span className="annotation-sep">/</span> {mode==="opera" ? (ASSAM?"SENTINEL-1D / OPERA DSWx-S1 V1.0":"SENTINEL-2B / OPERA DSWx-HLS V1.1") : mode==="hvchange"?"HVHV / NISAR GCOV V1":mode==="signal"?"HHHH / FILTERED SIGNAL, NOT WATER":mode==="compare"?"TWO OBSERVATIONS / HHHH, NOT FLOODING":"HHHH / NISAR GCOV V1"}</div>
 
-        <div className="right-stack">
+        {mode==='compare' && mapReady && <div className="swipe-ui">
+          <div className="swipe-guide" aria-hidden="true" style={{left:comparePos+'%'}}/>
+          <div className="swipe-label swipe-before">BEFORE · {dateLabel(meta?.primary_dates?.[0])}</div>
+          <div className="swipe-label swipe-after">AFTER · {dateLabel(meta?.primary_dates?.[1])}</div>
+          <div className="swipe-drag-handle" role="slider" tabIndex={0}
+            aria-label="Before after image comparison divider" aria-valuemin={5} aria-valuemax={95}
+            aria-valuenow={Math.round(comparePos)} aria-valuetext={Math.round(comparePos)+' percent before'}
+            style={{left:comparePos+'%'}}
+            onPointerDown={e=>{e.preventDefault();e.stopPropagation();e.currentTarget.setPointerCapture(e.pointerId);changeSwipePosition(e);}}
+            onPointerMove={e=>{if(e.currentTarget.hasPointerCapture(e.pointerId))changeSwipePosition(e);}}
+            onPointerUp={e=>{if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);}}
+            onKeyDown={e=>{
+              const steps={ArrowLeft:-5,ArrowDown:-5,ArrowRight:5,ArrowUp:5};
+              if(e.key in steps){e.preventDefault();setComparePos(v=>clampSwipePercent(v+steps[e.key]));}
+              else if(e.key==='Home'){e.preventDefault();setComparePos(5);}
+              else if(e.key==='End'){e.preventDefault();setComparePos(95);}
+            }}><span aria-hidden="true">↔</span></div>
+        </div>}
+
+        <div className={'right-stack '+(selected?'has-selection':'')}>
         <section className="data-card">
           <div className="data-card-header"><span className="panel-label">MEASURED EVIDENCE</span><span className="data-indicator">VERIFIED</span></div>
           <div className="metric-main">
@@ -218,6 +300,7 @@ function App() {
             <div><strong>{meta?.statistics?.east_holdout_static_f1?.toFixed(3) ?? '—'}</strong><span>Held-out open-water F1*</span></div>
           </div>
           <div className="card-divider"/>
+          {mode==='compare' && <p className="small-note signal-explain">Left and right are real HH radar images from two NISAR dates. Swipe to compare reflectivity, <strong>not confirmed flooding.</strong></p>}
           {mode==='signal' && <p className="small-note signal-explain">Filtered strong HH radar-change signatures: <strong>{meta?.statistics?.coherent_signal_area_km2?.toFixed(2) ?? '—'} km²</strong>. Fixed ±3 dB rule, 3×3 median filter, at least 6 agreeing neighbors. <strong>This is not flooded area.</strong></p>}
           <p className="small-note">*Agreement with {ASSAM?'OPERA Sentinel-1 (C-band, +3/+1-day gaps)':'OPERA Sentinel-2 optical classes'}, not field truth. HH-only water gain/loss F1: <b>{meta?.statistics?.gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.loss_f1?.toFixed(3) ?? '—'}</b>.
           {ASSAM
@@ -225,8 +308,11 @@ function App() {
             : <> Weighted HH/HV gain/loss F1: <b>{meta?.statistics?.dualpol_gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.dualpol_loss_f1?.toFixed(3) ?? '—'}</b> (5-day reference gap).</>}</p>
         </section>
 
-        <section className="pixel-card">
-          <div className="pixel-card-top"><span className="panel-label">PIXEL INSPECTOR</span><span className="reticle">⌖</span></div>
+        <section className="pixel-card" aria-label="Pixel evidence inspector">
+          <div className="pixel-card-top"><span className="panel-label">PIXEL INSPECTOR</span>{selected
+            ? <button className="pixel-close" type="button" aria-label="Close selected pixel"
+                onClick={()=>{setSelected(null);if(pinRef.current){pinRef.current.remove();pinRef.current=null;}}}>×</button>
+            : <span className="reticle">⌖</span>}</div>
           {!selected ? <p className="empty-pixel">Click anywhere inside the study area to inspect the underlying measurements.</p> :
             <>
               <div className="coordinates">{selected.lat.toFixed(5)}° N &nbsp;/&nbsp; {selected.lng.toFixed(5)}° E</div>
@@ -238,7 +324,15 @@ function App() {
                 <div className="pixel-row emphasis"><span>HV change</span><b>{getDb(selected.hvDelta)}</b></div>
               </>}
               <div className="pixel-row"><span>OPERA · {dateLabel(meta?.opera_date)}</span><b>{getOpClass(selected.reference)}</b></div>
-              <small className="pixel-disclaimer">Values sampled on the 30 m reference grid. No physical cause is assigned.</small>
+              <div className="evidence-explanation" aria-live="polite">
+                <p><strong>RADAR EVIDENCE</strong>{explanation?.radar}</p>
+                <p><strong>INDEPENDENT REFERENCE</strong>{explanation?.reference}</p>
+                <p className="timing-note"><strong>DATE ALIGNMENT</strong>{explanation?.timing}</p>
+              </div>
+              <button type="button" className="evidence-download" onClick={saveEvidenceNote}>
+                Download source-backed evidence note ↓
+              </button>
+              <small className="pixel-disclaimer">Measurements on the aligned 30 m grid. No AI classification or physical cause assigned.</small>
             </>
           }
         </section>
@@ -249,6 +343,8 @@ function App() {
           <Legend mode={mode}/>
           <div className="legend-note">{mode==='opera'
             ? (ASSAM?'OPERA DSWx-S1, 31 Oct. C-band classes are not direct ground truth.':'OPERA DSWx-HLS, 29 Oct. Cloud/invalid pixels transparent.')
+            : mode==='compare'
+              ? 'Swipe between two actual radar observations. Neither image is a flood extent. Click a pixel to inspect both values.'
             : mode==='signal'
               ? 'Only strong, spatially consistent HH radar signal changes are highlighted. Teal = decrease, amber = increase. Neither color means flooding.'
               : 'Radar intensity is not water extent. Select OPERA to inspect a different satellite-derived classification.'}</div>

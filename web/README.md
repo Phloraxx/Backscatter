@@ -126,3 +126,22 @@ The deck does not present the catalog-verified Cyclone Arnab follow-up as comple
 The public [research and methods page](https://backscatter-afterimage-2026.pages.dev/research.html) contains scientifically grounded Kuttanad/Assam metrics plus an event-linked third test around **Cyclone Arnab**. Arnab is research-only, not another flood-colored interactive layer, because the unchanged HH coherence rule failed to identify reference-class water transitions even with reference observations ~11.2 hours after NISAR.
 
 Rebuild the static research page and its non-sensitive source-derived public JSON/figure assets with `python scripts/export_public_research.py`. This website and its PDF include the team's original Backscatter logo.
+
+
+![Real Kuttanad before/after swipe with sampled evidence](preview-swipe-kuttanad.jpg)
+
+[Lower Assam swipe screenshot](preview-swipe-assam.jpg)
+
+## Swipe comparison and source-backed pixel evidence
+
+The existing Kuttanad and Lower Assam studies now include **SWIPE COMPARE**, a before/after interactive view of the **two real NISAR HHHH observations**. Drag the vertical handle or use the panel slider; the handle supports arrow keys, Home and End. Both images display at full strength; this is **radar backscatter, not a flooded-area comparison**.
+
+The map-aligned after image is a viewport-clipped DOM raster driven by MapLibre's projected source-image corners. Comparison is presentation-only: it cannot change pixel values, science masks or summary metrics. Map pitch is fixed to 0 to keep the small regional image warp affine; image coordinates are taken from real raster metadata.
+
+Click a point to open the **evidence inspector**. It reports the signed HH change (and Kerala HV when available), distinguishes single-pixel changes from coherent-neighbor evidence, states the specific OPERA reference date and its mismatch, and explicitly avoids assigning flood cause or confidence. The inspector is now available in the mobile interface. **Download source-backed evidence note** exports a text file with measurements, dates, classification context, original scene manifest, and limitations. It is not a certified report or flood warning.
+
+Reproducible offline tests for the wording, masking, geographic alignment helpers and export formatting:
+
+    cd web && npm test
+
+These test cases also run in the GitHub Actions workflow. The original logo and independent scientific results are retained.

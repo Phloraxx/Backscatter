@@ -1,6 +1,12 @@
 # Backscatter
 
 
+## Interactive before/after investigation
+
+Beyond static radar evidence layers, the [live viewer](https://backscatter-afterimage-2026.pages.dev/) supports **swiping between two NISAR observations**, map-click measurements with date-accurate OPERA context, and downloading a reproducible, source-backed point evidence note. These are **visualization and descriptive tools**, not machine-learning flood detection. Both Kuttanad and Lower Assam retain their original scientific data and outcomes.
+
+
+
 ## Submission and release readiness
 
 The public [interactive map](https://backscatter-afterimage-2026.pages.dev/), [seven-slide demo](https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf) and [research results](https://backscatter-afterimage-2026.pages.dev/research.html) are verified. The official NASA project form must still be submitted separately.

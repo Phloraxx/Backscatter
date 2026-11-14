@@ -70,3 +70,42 @@ h1{font-family:"Space Grotesk";font-weight:500;font-size:31px;line-height:1.14;l
 .deck-link{border:1px solid rgba(229,202,139,.54);color:#f0d59b;font-size:9px;font-weight:700;letter-spacing:.08em;white-space:nowrap;border-radius:4px;padding:10px 13px;transition:background .15s,color .15s}
 .deck-link:hover,.deck-link:focus-visible{background:rgba(229,202,139,.2);color:#fff}
 @media(max-width:790px){.deck-link{margin-left:auto;font-size:9px;padding:9px 10px}}
+
+/* Swipe comparison: a map-aligned second date, clipped in viewport space.
+ * MapLibre's first-date raster remains underneath. Pitch is disabled to keep
+ * the small regional image warp affine; no analytical pixels are modified.
+ */
+.swipe-visual{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.swipe-reveal{position:absolute;inset:0;pointer-events:none}
+.swipe-image{position:absolute;left:0;top:0;max-width:none;max-height:none;object-fit:fill;image-rendering:pixelated;transform-origin:0 0;pointer-events:none;user-select:none}
+.swipe-ui{position:absolute;inset:0;pointer-events:none}
+.swipe-guide{position:absolute;top:0;bottom:0;width:2px;background:#f5e2b1;box-shadow:0 0 0 1px rgba(0,0,0,.65),0 0 17px rgba(241,211,143,.7);pointer-events:none;transform:translateX(-1px)}
+.swipe-drag-handle{position:absolute;top:55%;transform:translate(-50%,-50%);width:48px;height:48px;display:flex;align-items:center;justify-content:center;border:2px solid #e9d9af;border-radius:50%;background:#1b2728;color:#fae6b6;font-size:25px;box-shadow:0 4px 20px rgba(0,0,0,.65);z-index:2;pointer-events:auto;cursor:ew-resize;touch-action:none;user-select:none}
+.swipe-drag-handle:focus-visible{outline:3px solid #69d4e2;outline-offset:4px}
+.swipe-label{position:absolute;top:53%;transform:translateY(-100%);border:1px solid #6b7165;background:rgba(15,23,26,.9);padding:8px 11px;font-weight:700;font-size:10px;letter-spacing:.06em;color:#f6e6b9;white-space:nowrap}
+.swipe-before{left:calc(50% - 235px)}.swipe-after{left:calc(50% + 90px)}
+.dot.before-dot{background:#d6bd88}.dot.after-dot{background:#7ec9d3}
+.compare-hint{font-size:10px;line-height:1.55;color:#d5bc8c;margin:10px 0 0}
+.opacity input:disabled{cursor:not-allowed;opacity:.55}
+.pixel-card-top{gap:10px}.pixel-close{background:transparent;border:1px solid rgba(240,238,220,.25);border-radius:4px;color:#cfd7ca;font-size:18px;line-height:1;width:26px;height:26px;flex:none}.pixel-close:hover{color:#fff;border-color:#d4be8e}
+.evidence-explanation{border-top:1px solid rgba(230,236,224,.15);padding-top:10px}
+.evidence-explanation p{font-size:10px;line-height:1.6;color:#bdc9c3;margin:6px 0 12px}
+.evidence-explanation strong{color:#edd5a4;letter-spacing:.07em;font-size:9px;display:block;margin-bottom:4px}
+.evidence-explanation .timing-note{color:#9bb5ae}
+.evidence-download{display:block;width:100%;border:1px solid rgba(225,198,138,.58);background:rgba(224,193,127,.12);color:#f0d4a2;font-weight:700;letter-spacing:.01em;font-size:11px;border-radius:4px;padding:11px 8px;text-align:center;white-space:normal}
+.evidence-download:hover,.evidence-download:focus-visible{background:rgba(224,193,127,.23);outline-color:#8dd5d5}
+@media(max-width:790px){
+  .swipe-drag-handle{top:58%;height:44px;width:44px;font-size:24px}
+  .swipe-label{display:none}
+  .right-stack.has-selection{bottom:112px;max-height:min(37vh,310px);overflow-y:auto;overflow-x:hidden;display:flex;gap:0}
+  .right-stack.has-selection .data-card{display:none}
+  .right-stack.has-selection .pixel-card{display:block;width:100%;max-height:none}
+  .right-stack.has-selection .pixel-card .pixel-row{padding:7px 0}
+  .right-stack.has-selection .evidence-explanation p{margin:6px 0 9px}
+  .compare-hint{font-size:9px}
+  .swipe-guide{opacity:.95}
+}
+
+/* Keep draggable comparison affordances underneath all opaque information panels. */
+.swipe-ui{z-index:2}
+.control-panel,.right-stack,.map-annotation,.legend-panel{z-index:3}

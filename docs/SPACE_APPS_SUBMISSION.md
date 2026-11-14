@@ -37,10 +37,11 @@ Backscatter deliberately separates **measured radar evidence**, **satellite-deri
 
 ## What is actually working
 
-- React + MapLibre two-region website with the team's own original logo and labeled raster overlays.
+- React + MapLibre two-region website with the team's own original logo, labeled raster overlays and a draggable, map-aligned before/after NISAR radar swipe.
 - Real validated NISAR L-band GCOV HHHH imagery, Kuttanad HVHV cross-polarization evidence, and a click-to-inspect 30 m measurement grid.
 - Radar before/after, raw difference and optional coherent-signal overlay (teal decrease, amber increase; **not water colors**).
 - Independent NASA OPERA DSWx-HLS optical and DSWx-S1 Sentinel-1 C-band reference classes with acquisition dates displayed.
+- A click-to-inspect explanation of actual radar readings, OPERA reference timing, and exportable source-backed point evidence text notes. No AI flood predictions.
 - Reproducible Earthdata extraction, raster processing, tests and documented negative scientific results.
 
 A **third independent research test is completed** using validated NISAR observations before/after documented Cyclone Arnab and OPERA Sentinel-1 water references ~11.2 hours later. The unchanged coherent radar-signal rule still fails to identify the strict OPERA water-class transitions (gain/loss F1 **0.0000/0.0000**). The event is a scientific negative-result study, **not a confirmed flood map**. See the [public research page](https://backscatter-afterimage-2026.pages.dev/research.html).

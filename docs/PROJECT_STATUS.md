@@ -1,6 +1,15 @@
 # Backscatter status — updated November 14, 2026
 
 
+## Evidence investigation workflow: swipe and export (November 14, 2026)
+
+Implemented a NISAR **SWIPE COMPARE** layer in both real study areas, driven by geospatially aligned first-date MapLibre raster and a clipped, map-projected second-date image. Mouse, touch and keyboard controls allow comparison without changing analytical pixels. Image opacity is intentionally full-strength in swipe mode.
+
+The existing pixel inspector now adds deterministic English evidence interpretation (HH single-pixel signal ≠ flood/confirmed water), explicit separate OPERA reference and acquisition-date offsets, and downloadable source-backed text notes. Mobile inspector is accessible after a study-area tap. This is **not AI classification**, field validation or a flood report.
+
+Source code: web/src/comparison.js, web/src/evidence.js, web/src/main.jsx and web/src/styles.css. Offline helper tests: web/tests/comparison-evidence.test.mjs and \`npm test\`; GitHub CI verifies tests and builds.
+
+
 ## Third event-linked study measured — Cyclone Arnab (October 28, 2026)
 
 The originally selected Godavari-delta AOI, **81.82–81.89°E / 16.58–16.65°N**, is now an actual measured independent test, not a catalog-only candidate.

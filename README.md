@@ -1,6 +1,24 @@
 # Backscatter
 
-## Second study candidate: Lower Assam (November 14, 2026)
+**NISAR radar backscatter for water mapping in Kuttanad, Kerala.** A NASA Space Apps Challenge 2026 project (Team Afterimage) asking a narrow question: what can L-band SAR tell you about water on the ground, and where does it fail?
+
+The answer so far: NISAR separates water from land well on this example, and radar-only change detection does not. Both results are in this repository, with the code and metrics that produced them.
+
+- **Static water, same-day reference** — ROC-AUC **0.983** against OPERA DSWx-HLS open-water labels; a threshold calibrated on the west half scored F1 **0.944** on the spatially separated east half.
+- **Change detection** — agreement with OPERA for new and lost water was F1 **0.201 / 0.218**. The classifier is not a flood map, and the app does not present it as one.
+- **What ships** — an interactive MapLibre evidence viewer over real NISAR HHHH and HVHV subsets, a pixel inspector, and the evaluation scripts behind every number above.
+
+![Backscatter evidence viewer](web/preview.jpg)
+
+[Run the viewer](web/README.md) · [Scientific evaluation and failure analysis](research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md) · [Metrics JSON](research/kuttanad_validated_2026_10_11/change_baseline.json)
+
+> An evidence viewer, not a flood detector. Every claim is scoped to the acquisition dates and the OPERA reference it was compared against.
+
+## Log
+
+Newest first. Each entry is a dated record of what was measured.
+
+### Second study candidate: Lower Assam (November 14, 2026)
 
 We verified two compatible validated NISAR L-band GCOV catalog scenes from October 28 and November 9, plus independent OPERA Sentinel-1 DSWx-S1 water reference products from October 31 and November 10. Their calendar-day offsets are +3 and +1, respectively. **No Assam satellite pixels or water-change accuracy results are available yet.**
 
@@ -12,7 +30,7 @@ See [Lower Assam research plan](research/assam_validated_2026_10_11/README.md) a
 **Team identity:** The web app now uses our original Backscatter logo (globe, radar beam, returning echoes and wordmark), preserved unchanged in [web/public/brand/backscatter-original.png](web/public/brand/backscatter-original.png). The logo mark also powers the site header and favicon.
 
 
-## Dual-polarization study and evidence viewer — November 14, 2026
+### Dual-polarization study and evidence viewer — November 14, 2026
 
 The web app now has an **HVHV cross-polarization change layer** and HH/HV pixel inspector, based on actual NISAR subsets for October 29 and November 10.
 
@@ -23,7 +41,7 @@ Adding HV improved held-out **existing open-water** agreement with OPERA (F1 **0
 [Experiment details](research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md) · [Experimental metrics](research/kuttanad_validated_2026_10_11/dualpol_quality_evaluation.json) · [Runnable app](web/README.md).
 
 
-## Interactive evidence map — 14 November 2026
+### Interactive evidence map — 14 November 2026
 
 **The first working Backscatter web demo now exists.** Built in React + MapLibre, it displays real validated NISAR HHHH before/after imagery, a measured radar-difference overlay, and the independently classified OPERA October 29 water layer over Kuttanad. Click map cells to inspect actual before/after dB values and the OPERA class. Works on desktop and mobile.
 
@@ -40,7 +58,7 @@ npm run dev
 The website is an **evidence viewer, not a flood detector**. The current simple gain/loss classifier has poor OPERA agreement (F1 about 0.20/0.22), and the map deliberately does not display those experimental masks as confirmed flooding. [App instructions](web/README.md) · [Science and limitations](research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md).
 
 
-## November 14: Independent water-reference experiment
+### November 14: Independent water-reference experiment
 
 **Current verified position: NISAR water/land discrimination works on this limited example; robust gain/loss detection does not.**
 
@@ -57,7 +75,7 @@ The website is an **evidence viewer, not a flood detector**. The current simple 
 The MVP should show observed radar change **and** provenance/uncertainty, not claim every radar change represents flooding.
 
 
-## Verified breakthrough — November 14, 2026
+### Verified breakthrough — November 14, 2026
 
 **Actual validated NISAR radar pixels have now been extracted for Kuttanad, Kerala.** NASA Harmony produced HHHH GeoTIFFs for **2026-10-29 and 2026-11-10**. Both rasters share an identical EPSG:32643 grid at **10 m resolution** (776 × 771 pixels).
 
@@ -76,7 +94,7 @@ Backscatter is a proposed interactive, evidence-driven application for investiga
 
 **Current phase: verified scene inventory and an initial NISAR extraction implementation. No NISAR-derived inundation mask, validation score, live dashboard, or working flood predictor exists yet.**
 
-## November 14, 2026 — validated GCOV study pair (current priority)
+### November 14, 2026 — validated GCOV study pair (current priority)
 
 The November 6 validated NISAR release includes Kuttanad observations **2026-10-29** and **2026-11-10**, matching track/frame `077_D_084_4005_DHDH` and processor `P05036`. These replace the *September provisional pair as our primary candidate*; the earlier OPERA-only September analysis remains useful preliminary research, not a NISAR validation result.
 
@@ -87,7 +105,7 @@ The November 6 validated NISAR release includes Kuttanad observations **2026-10-
 
 See [validated data execution](docs/VALIDATED_DATA_EXECUTION.md) and [new scene manifest](research/kuttanad_validated_2026_10_11/scene_manifest.json).
 
-## Earlier research — 2026-11-03
+### Earlier research — 2026-11-03
 
 - **Kuttanad, Kerala** is the primary candidate, with a small study box at `[76.42, 9.40, 76.49, 9.47]` (longitude/latitude, WGS84).
 - Two repeat NISAR **L2 provisional GCOV** products were located (2026-09-14 and 2026-09-26); a local Mac test received HTTP **206** and valid HDF5 file signatures for both.
@@ -111,7 +129,9 @@ python scripts/compare_opera_dswx.py
 
 A free NASA Earthdata account/token is required; scripts request a token interactively and **never store it**. Downloaded source TIFFs are placed outside the repository in `~/Downloads/backscatter-opera-check/`. Full instructions: [docs/REPRODUCTION.md](docs/REPRODUCTION.md).
 
-## Intended MVP (not yet built)
+## MVP scope
+
+The original scope, kept for reference. Steps 1, 2 and 5 are implemented in the web viewer. Step 3 exists but does not meet an acceptable standard for change detection. Step 4 is implemented for the two acquisition dates only.
 
 1. Select a compatible NISAR radar pair.
 2. Extract and quality-check matching radar measurements; calculate change features.

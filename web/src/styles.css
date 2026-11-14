@@ -41,3 +41,22 @@ h1{font-family:"Space Grotesk";font-weight:500;font-size:31px;line-height:1.14;l
 @media(max-width:1120px){.data-card,.pixel-card{right:14px;width:240px}.control-panel{left:14px;width:310px}.map-annotation,.legend-panel{left:340px}.intro{font-size:11px}}
 @media(max-width:790px){html,body,#root{min-height:0}.shell{min-height:0}.top-bar{height:68px;padding:0 15px}.mission{display:none}.wordmark{font-size:17px}.subheading{font-size:7px}.workspace{inset:68px 0 28px}.control-panel{left:12px;top:12px;width:calc(100% - 24px);max-height:293px;padding:16px;overflow-y:auto}.control-panel h1{font-size:25px;margin:9px 0}.control-panel .intro,.control-panel .scene-meta,.control-panel .panel-rule:first-of-type{display:none}.layer-options{display:grid;grid-template-columns:repeat(2,1fr)}.layer-option{padding:9px 10px}.layer-index,.layer-title small{display:none}.opacity{margin-top:10px}.status-block{display:none}.control-panel .panel-rule{margin:11px 0}.map-annotation{top:322px;left:12px;padding:10px;font-size:8px}.data-card{top:auto;bottom:137px;right:12px;left:12px;width:auto;max-width:none;padding:13px 16px}.data-card .metric-main{display:none}.metric-duo{gap:30px}.data-card .small-note{font-size:9px}.data-card .card-divider{margin:9px 0}.pixel-card{display:none}.legend-panel{left:12px;right:12px;bottom:15px;min-width:0;max-width:none;padding:10px 13px}.legend-caption{margin-bottom:8px}.legend-note{display:none}.bottom-line{font-size:7px;padding:0 12px}.bottom-line span:last-child{display:none}.maplibregl-ctrl-bottom-right{bottom:330px;right:12px}}
 @media(max-height:700px) and (min-width:790px){.control-panel{padding-top:14px}.control-panel h1{font-size:27px;margin:13px 0 8px}.intro{font-size:11px}.control-panel .panel-rule{margin:13px 0}.layer-option{padding:8px 12px}.opacity{margin-top:11px}.pixel-card{top:283px}.legend-panel{bottom:10px}}
+
+/* Distinct studies share a single evidence viewer and the original logo. */
+.study-switch{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:-6px 0 18px}
+.study-switch a{padding:9px 7px;text-align:center;border:1px solid rgba(218,221,205,.22);border-radius:4px;color:#96aaa3;font-size:9px;font-weight:700;letter-spacing:.07em;white-space:nowrap;transition:background .15s,color .15s}
+.study-switch a:hover{color:#f2e6c9;border-color:#b9ab87}
+.study-switch a.selected{background:rgba(226,192,117,.17);color:#f4ddae;border-color:rgba(226,192,117,.53)}
+@media(max-width:790px){
+ .study-switch{margin:-1px 0 11px}
+ .study-switch a{padding:8px 4px;font-size:8px}
+ .control-panel{max-height:330px}
+ .map-annotation{top:365px}
+}
+@media(max-height:750px) and (min-width:791px){.study-switch{margin:0 0 10px}.study-switch a{padding:7px 4px}}
+
+/* Right-side evidence cards stack without overlapping as their text grows. */
+.right-stack{position:absolute;top:18px;right:24px;width:281px;max-height:calc(100% - 36px);overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin;scrollbar-color:#54615e transparent;pointer-events:auto}
+.right-stack .data-card,.right-stack .pixel-card{position:relative;top:auto;left:auto;right:auto;bottom:auto;width:100%;flex:none}
+@media(max-width:1120px){.right-stack{right:14px;width:240px}}
+@media(max-width:790px){.right-stack{top:auto;bottom:137px;left:12px;right:12px;width:auto;max-height:190px;overflow:hidden;display:block}.right-stack .data-card{width:100%}.right-stack .pixel-card{display:none}}

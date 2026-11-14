@@ -1,5 +1,19 @@
 # Backscatter status — updated November 14, 2026
 
+## Two real geographic studies and original-brand app
+
+- Kuttanad: NISAR validated HH/HV and OPERA optical HLS products analyzed. Existing-water held-out F1 0.944; HH-only gain/loss agreement F1 about 0.20/0.22, not reliable flooding estimates.
+- Lower Assam: NISAR validated HHHH Oct 28/Nov 09 and OPERA DSWx-S1 Sentinel-1 Oct 31/Nov 10 are downloaded and measured. 60,640 shared 30 m radar-valid cells, 54.576 square km. Paired median HHHH change +0.1012 dB; this is signal, not established environmental change.
+- Assam-specific west-half threshold -17.75 dB gives east-half static-water F1 0.6755; gain/loss masks score F1 0.0353/0.0336. Applying unchanged Kuttanad -10.75 dB gives static F1 0.4275 (all strict first-scene cells) and gain/loss 0/0.
+- OPERA S1 and optical HLS class schemes differ; Assam has WTR class 3 inundated vegetation. Satellite-product agreement scores are not directly comparable flood accuracy. Assam reference offsets are +3/+1 days from radar.
+- React/MapLibre web app now provides switchable real-measurement maps for both regions. Original Backscatter logo stays in header. Vite production bundles MapLibre v6 worker explicitly; desktop and mobile browser tests pass and evidence panels do not overlap.
+- Source satellite TIFFs and Earthdata credential stay local. SHA-256 manifests, actual metric JSON and compact visualization assets are stored in Git.
+- No independent field validation, flood extent or impact estimate has been achieved.
+
+Measured Assam report: [scientific write-up](../research/assam_validated_2026_10_11/MEASURED_RESULTS.md). Web app: [instructions](../web/README.md).
+
+---
+
 ## New status: Lower Assam second-case discovery (November 14, 2026)
 
 NASA CMR preflight confirmed all four scene identifiers and appropriate source assets. NISAR (Oct 28 / Nov 09) is a matching validated 12-day acquisition pair; OPERA DSWx-S1 (Oct 31 / Nov 10) is available for reference with +3/+1 calendar-day offsets. Pixel extraction, classification, and second-case validation remain pending. The Mac submitted the two Harmony jobs but disconnected before completion could be checked. Check existing local job files before making new submissions.

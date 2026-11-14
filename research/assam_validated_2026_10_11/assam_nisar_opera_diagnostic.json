@@ -1,0 +1,283 @@
+{
+  "study": "Lower Assam second case: real validated NISAR HHHH vs OPERA DSWx-S1",
+  "sources": {
+    "nisar_dates": [
+      "2026-10-28",
+      "2026-11-09"
+    ],
+    "opera_s1_dates": [
+      "2026-10-31",
+      "2026-11-10"
+    ],
+    "opera_granules": [
+      "OPERA_L3_DSWx-S1_T46RBQ_20261031T235432Z_20261101T200652Z_S1D_30_v1.0_B01_WTR.tif",
+      "OPERA_L3_DSWx-S1_T46RBQ_20261110T120427Z_20261110T210338Z_S1D_30_v1.0_B01_WTR.tif"
+    ],
+    "nisar_collection": "C3622241360-ASF",
+    "opera_collection": "C2949811996-POCLOUD",
+    "bbox_wgs84_lonlat": [
+      90.28,
+      26.16,
+      90.35,
+      26.23
+    ]
+  },
+  "reference_calendar_day_offsets": [
+    3,
+    1
+  ],
+  "reference_type": "Sentinel-1 C-band OPERA SAR water classification, NOT field ground truth",
+  "evaluation_grid": "EPSG:32646",
+  "aoi_grid_shape": [
+    263,
+    238
+  ],
+  "valid_radar_both_cells": 60640,
+  "strict_class0_1_both_cells": 50500,
+  "valid_reference_cells_first": 53648,
+  "valid_reference_cells_second": 53241,
+  "opera_class_counts": {
+    "2026-10-31": {
+      "0": 48170,
+      "1": 7267,
+      "3": 7150,
+      "251": 7
+    },
+    "2026-11-10": {
+      "0": 47884,
+      "1": 7108,
+      "3": 7593,
+      "251": 9
+    }
+  },
+  "median_nisar_delta_db": 0.1012,
+  "shared_valid_radar_area_km2": 54.576,
+  "unmodified_kerala_threshold_transfer": {
+    "threshold_db": -10.75,
+    "first_reference_all_strict": {
+      "tp": 6967,
+      "fp": 18653,
+      "fn": 10,
+      "tn": 28018,
+      "precision": 0.2719,
+      "recall": 0.9986,
+      "f1": 0.4275
+    },
+    "second_reference_all_strict": {
+      "tp": 6827,
+      "fp": 19290,
+      "fn": 5,
+      "tn": 27119,
+      "precision": 0.2614,
+      "recall": 0.9993,
+      "f1": 0.4144
+    },
+    "candidate_gain_agreement": {
+      "tp": 0,
+      "fp": 3937,
+      "fn": 192,
+      "tn": 46371,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "candidate_loss_agreement": {
+      "tp": 0,
+      "fp": 2864,
+      "fn": 319,
+      "tn": 47317,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "caveat": "No Assam threshold fitting; dates are offset and the reference is OPERA DSWx-S1 rather than DSWx-HLS."
+  },
+  "opera_class_radar_medians_db": {
+    "0": {
+      "2026-10-31": {
+        "cells_with_radar": 46671,
+        "median_hhhh_db": -9.7867
+      },
+      "2026-11-10": {
+        "cells_with_radar": 46409,
+        "median_hhhh_db": -9.9612
+      }
+    },
+    "1": {
+      "2026-10-31": {
+        "cells_with_radar": 6977,
+        "median_hhhh_db": -17.9358
+      },
+      "2026-11-10": {
+        "cells_with_radar": 6832,
+        "median_hhhh_db": -17.066
+      }
+    },
+    "3": {
+      "2026-10-31": {
+        "cells_with_radar": 6985,
+        "median_hhhh_db": -12.1886
+      },
+      "2026-11-10": {
+        "cells_with_radar": 7390,
+        "median_hhhh_db": -11.7553
+      }
+    },
+    "250": {
+      "2026-10-31": {
+        "cells_with_radar": 0,
+        "median_hhhh_db": null
+      },
+      "2026-11-10": {
+        "cells_with_radar": 0,
+        "median_hhhh_db": null
+      }
+    },
+    "251": {
+      "2026-10-31": {
+        "cells_with_radar": 7,
+        "median_hhhh_db": -9.4173
+      },
+      "2026-11-10": {
+        "cells_with_radar": 9,
+        "median_hhhh_db": -5.4162
+      }
+    },
+    "254": {
+      "2026-10-31": {
+        "cells_with_radar": 0,
+        "median_hhhh_db": null
+      },
+      "2026-11-10": {
+        "cells_with_radar": 0,
+        "median_hhhh_db": null
+      }
+    },
+    "255": {
+      "2026-10-31": {
+        "cells_with_radar": 0,
+        "median_hhhh_db": null
+      },
+      "2026-11-10": {
+        "cells_with_radar": 0,
+        "median_hhhh_db": null
+      }
+    }
+  },
+  "opera_class_transitions_vs_nisar_delta": {
+    "0_to_0": {
+      "cells": 43369,
+      "median_radar_delta_db": -0.0203,
+      "fraction_radar_decreased": 0.5055,
+      "fraction_radar_increased": 0.4945
+    },
+    "1_to_1": {
+      "cells": 6620,
+      "median_radar_delta_db": 0.5142,
+      "fraction_radar_decreased": 0.379,
+      "fraction_radar_increased": 0.621
+    },
+    "3_to_3": {
+      "cells": 4251,
+      "median_radar_delta_db": 0.3923,
+      "fraction_radar_decreased": 0.3844,
+      "fraction_radar_increased": 0.6156
+    },
+    "0_to_1": {
+      "cells": 192,
+      "median_radar_delta_db": -0.0687,
+      "fraction_radar_decreased": 0.5156,
+      "fraction_radar_increased": 0.4844
+    },
+    "1_to_0": {
+      "cells": 319,
+      "median_radar_delta_db": -0.0209,
+      "fraction_radar_decreased": 0.5078,
+      "fraction_radar_increased": 0.4922
+    },
+    "0_to_3": {
+      "cells": 3101,
+      "median_radar_delta_db": 0.4329,
+      "fraction_radar_decreased": 0.3799,
+      "fraction_radar_increased": 0.6201
+    },
+    "3_to_0": {
+      "cells": 2714,
+      "median_radar_delta_db": 0.3268,
+      "fraction_radar_decreased": 0.4049,
+      "fraction_radar_increased": 0.5951
+    },
+    "1_to_3": {
+      "cells": 38,
+      "median_radar_delta_db": 0.6036,
+      "fraction_radar_decreased": 0.3684,
+      "fraction_radar_increased": 0.6316
+    },
+    "3_to_1": {
+      "cells": 20,
+      "median_radar_delta_db": -0.4367,
+      "fraction_radar_decreased": 0.65,
+      "fraction_radar_increased": 0.35
+    }
+  },
+  "fitted_water_threshold_db": -17.75,
+  "first_reference_west_train": {
+    "tp": 262,
+    "fp": 532,
+    "fn": 191,
+    "tn": 25064,
+    "precision": 0.33,
+    "recall": 0.5784,
+    "f1": 0.4202
+  },
+  "first_reference_east_test": {
+    "tp": 3508,
+    "fp": 355,
+    "fn": 3016,
+    "tn": 20720,
+    "precision": 0.9081,
+    "recall": 0.5377,
+    "f1": 0.6755
+  },
+  "second_reference_transfer": {
+    "tp": 2264,
+    "fp": 817,
+    "fn": 4568,
+    "tn": 45592,
+    "precision": 0.7348,
+    "recall": 0.3314,
+    "f1": 0.4568
+  },
+  "candidate_gain_agreement": {
+    "tp": 18,
+    "fp": 809,
+    "fn": 174,
+    "tn": 49499,
+    "precision": 0.0218,
+    "recall": 0.0938,
+    "f1": 0.0353
+  },
+  "candidate_loss_agreement": {
+    "tp": 44,
+    "fp": 2253,
+    "fn": 275,
+    "tn": 47928,
+    "precision": 0.0192,
+    "recall": 0.1379,
+    "f1": 0.0336
+  },
+  "reference_gain_cells": 192,
+  "reference_loss_cells": 319,
+  "inundated_vegetation_class3_cells": {
+    "2026-10-31": 7150,
+    "2026-11-10": 7593
+  },
+  "limitations": [
+    "The first OPERA reference is 3 days after first NISAR acquisition; the second is 1 calendar day after second NISAR.",
+    "OPERA S1 is an independent C-band radar classification, not field-confirmed water extent.",
+    "Class 3 inundated vegetation is excluded from strict 0-versus-1 evaluation.",
+    "This water-change experiment uses only one region and a date-mismatched two-scene pair.",
+    "ASF documents possible pre-Nov-12 calibration residuals in some radar modes; affected RCIDs have not been identified for these granules.",
+    "No causal attribution, flood impacts, or field-validation accuracy is established."
+  ]
+}

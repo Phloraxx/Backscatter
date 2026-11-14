@@ -112,6 +112,39 @@ def main():
     with np.errstate(invalid="ignore"):
         delta=b-a
     vals=delta[common]
+
+    # A genuine transfer test: apply Kerala's fitted HH-only cutoff unchanged.
+    # The separately fitted Assam threshold is *not* a transfer experiment.
+    kerala_threshold=-10.75
+    transfer0=a<=kerala_threshold
+    transfer1=b<=kerala_threshold
+    transferred={
+      "threshold_db":kerala_threshold,
+      "first_reference_all_strict":metrics(transfer0,y0,strict_first),
+      "second_reference_all_strict":metrics(transfer1,y1,strict_second),
+      "candidate_gain_agreement":metrics(~transfer0&transfer1,~y0&y1,strict_pair),
+      "candidate_loss_agreement":metrics(transfer0&~transfer1,y0&~y1,strict_pair),
+      "caveat":"No Assam threshold fitting; dates are offset and the reference is OPERA DSWx-S1 rather than DSWx-HLS."
+    }
+    medians={}
+    for label in (0,1,3,250,251,254,255):
+        medians[str(label)]={}
+        for day,labels,radar in ((REFERENCES[0],oa,a),(REFERENCES[1],ob,b)):
+            mask=(labels==label)&np.isfinite(radar)
+            medians[str(label)][day]={
+              "cells_with_radar":int(mask.sum()),
+              "median_hhhh_db":round(float(np.median(radar[mask])),4) if mask.any() else None
+            }
+    transitions={}
+    for left,right in ((0,0),(1,1),(3,3),(0,1),(1,0),(0,3),(3,0),(1,3),(3,1)):
+        mask=(oa==left)&(ob==right)&common
+        v=delta[mask]
+        transitions[f"{left}_to_{right}"]={
+          "cells":int(mask.sum()),
+          "median_radar_delta_db":round(float(np.median(v)),4) if len(v) else None,
+          "fraction_radar_decreased":round(float((v<0).mean()),4) if len(v) else None,
+          "fraction_radar_increased":round(float((v>0).mean()),4) if len(v) else None
+        }
     result={
        "study":"Lower Assam second case: real validated NISAR HHHH vs OPERA DSWx-S1",
        "sources":{
@@ -131,6 +164,10 @@ def main():
        "valid_reference_cells_second":valid1,
        "opera_class_counts":{REFERENCES[0]:first["class_counts"],REFERENCES[1]:second["class_counts"]},
        "median_nisar_delta_db":round(float(np.median(vals)),4) if len(vals) else None,
+       "shared_valid_radar_area_km2":round(float(common.sum()*first["pixel_area_km2"]),5),
+       "unmodified_kerala_threshold_transfer":transferred,
+       "opera_class_radar_medians_db":medians,
+       "opera_class_transitions_vs_nisar_delta":transitions,
        "fitted_water_threshold_db":threshold,
        "first_reference_west_train":best[1],
        "first_reference_east_test":metrics(pa,y0,test),
@@ -175,6 +212,9 @@ def main():
               "fitted_water_threshold_db","first_reference_east_test","second_reference_transfer",
               "candidate_gain_agreement","candidate_loss_agreement"):
         print(k,result[k])
+    print("KERALA_THRESHOLD_TRANSFER",transferred)
+    print("CLASS_MEDIANS",medians)
+    print("REFERENCE_CLASS_TRANSITIONS",transitions)
 
 if __name__=="__main__":
     main()

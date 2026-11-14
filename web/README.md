@@ -14,6 +14,27 @@ npm run dev
 
 Visit the local address printed by Vite. No Earthdata token is needed to view the curated, already-prepared sample.
 
+## Two actual geographic studies
+
+After starting the web server:
+
+- Kuttanad, Kerala: http://127.0.0.1:5173/?study=kuttanad — NISAR Oct 29/Nov 10, HH/HV radar, OPERA DSWx-HLS Sentinel-2 optical October 29.
+- Lower Assam, India: http://127.0.0.1:5173/?study=assam — NISAR Oct 28/Nov 09, HHHH radar and OPERA DSWx-S1 Sentinel-1 WTR October 31. The second reference is November 10 (+3/+1 calendar days relative to NISAR).
+
+Use the 01 KUTTANAD / 02 ASSAM switch inside the app. Both use **real satellite raster measurements**, not manually painted maps. Assam has four layers (before, after, HHHH change, and OPERA S1); Kuttanad has a fifth HVHV radar-change layer. No HV measurements are invented for Assam.
+
+![Lower Assam evidence map with the original Backscatter logo](preview-assam.jpg)
+
+### What the second case reveals
+
+- Common valid 30 m NISAR area: 54.576 km2; median paired HH backscatter signal +0.1012 dB.
+- Threshold fitted in Assam to reference OPERA class 0/1 (west half) gives held-out static F1 0.6755, but gain/loss F1 only 0.0353/0.0336.
+- An unchanged Kerala-trained -10.75 dB cutoff gives Assam static F1 0.4275 and gain/loss F1 0/0.
+- OPERA S1 class 3 means **inundated vegetation**, not HLS partial-water class 2.
+- These are agreements with satellite-derived references, not field-confirmed flood extent. Different reference products and offsets prevent treating F1 across regions as a controlled accuracy comparison.
+
+[Full measured report](../research/assam_validated_2026_10_11/MEASURED_RESULTS.md) · [Actual metrics](../research/assam_validated_2026_10_11/assam_nisar_opera_diagnostic.json)
+
 ## What it shows
 
 - NISAR 2026-10-29 HHHH backscatter.
@@ -33,6 +54,7 @@ On a machine with the locally downloaded NISAR/OPERA GeoTIFFs from [the research
 
 ```bash
 python scripts/export_demo_assets.py
+python scripts/export_assam_demo.py   # after authenticated NISAR / OPERA Assam TIFFs exist
 ```
 
 This generates small RGBA PNG layers and a little-endian binary 30-metre measurement grid. It does **not** export large source HDF5/GeoTIFFs or user tokens.
@@ -53,3 +75,17 @@ See [dual-polarization experiments](../research/kuttanad_validated_2026_10_11/DU
 ## Original Backscatter logo
 
 The header contains the original globe-and-radar mark selected for Backscatter in our September 2026 team logo review; the actual unmodified 1254 × 1254 source PNG is stored at `public/brand/backscatter-original.png`. The smaller mark and favicon are faithful crops of that user-provided original, not generated replacements. Click the header logo to view the complete artwork.
+
+
+## Production-build test
+
+The application uses **MapLibre GL JS v6**. Its ES module worker must be bundled explicitly with Vite's worker&url import and setWorkerUrl; otherwise production maps can appear blank even when pages load.
+
+Build and test:
+
+    cd web
+    npm install
+    npm run build
+    npm run preview
+
+The original Backscatter PNG, derived mark and favicon are all available at public/brand/. The raster image overlays and 30 m measurement grids are served from public/data/ for Kerala and public/data/assam/ for Assam. The web demo requires no Earthdata bearer token or external analysis service.

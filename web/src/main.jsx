@@ -1,26 +1,39 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import * as maplibregl from 'maplibre-gl';
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import proj4 from 'proj4';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './styles.css';
 
+maplibregl.setWorkerUrl(maplibreWorkerUrl);
 proj4.defs('EPSG:32643', '+proj=utm +zone=43 +datum=WGS84 +units=m +no_defs');
+proj4.defs('EPSG:32646', '+proj=utm +zone=46 +datum=WGS84 +units=m +no_defs');
+const STUDY = new URLSearchParams(window.location.search).get('study') === 'assam' ? 'assam' : 'kuttanad';
+const ASSAM = STUDY === 'assam';
+const DATA_ROOT = ASSAM ? '/data/assam/' : '/data/';
+const dateLabel = (date) => date ? new Date(date+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',timeZone:'UTC'}) : '—';
+const signedDb = (v) => Number.isFinite(v) ? (v>=0?'+':'')+v.toFixed(2) : '—';
 
-const LAYERS = [
-  { id: 'oct29', label: '29 OCT', detail: 'NISAR · before', file: 'oct29.png' },
-  { id: 'nov10', label: '10 NOV', detail: 'NISAR · after', file: 'nov10.png' },
-  { id: 'change', label: 'RADAR CHANGE', detail: 'HH · 10 Nov − 29 Oct', file: 'change.png' },
-  { id: 'hvchange', label: 'HV CHANGE', detail: 'HV · 10 Nov − 29 Oct', file: 'hv_change.png' },
-  { id: 'opera', label: 'OPERA WATER', detail: 'Optical · 29 Oct', file: 'opera_oct29.png' },
+const LAYERS = ASSAM ? [
+  { id:'oct29', label:'28 OCT', detail:'NISAR · before', file:'before.png' },
+  { id:'nov10', label:'09 NOV', detail:'NISAR · after', file:'after.png' },
+  { id:'change', label:'RADAR CHANGE', detail:'HH · 09 Nov − 28 Oct', file:'change.png' },
+  { id:'opera', label:'OPERA WATER', detail:'Sentinel-1 · 31 Oct', file:'opera.png' },
+] : [
+  { id:'oct29', label:'29 OCT', detail:'NISAR · before', file:'oct29.png' },
+  { id:'nov10', label:'10 NOV', detail:'NISAR · after', file:'nov10.png' },
+  { id:'change', label:'RADAR CHANGE', detail:'HH · 10 Nov − 29 Oct', file:'change.png' },
+  { id:'hvchange', label:'HV CHANGE', detail:'HV · 10 Nov − 29 Oct', file:'hv_change.png' },
+  { id:'opera', label:'OPERA WATER', detail:'Sentinel-2 · 29 Oct', file:'opera_oct29.png' },
 ];
 
 const getDb = (v) => Number.isFinite(v) ? v.toFixed(2) + ' dB' : 'No valid reading';
-const getOpClass = (v) => ({0:'Non-water',1:'Open water',2:'Partial water',252:'Masked / ice or sediment',253:'Cloud / cloud shadow',254:'Ocean mask',255:'No data'}[v] ?? 'Other / masked');
+const getOpClass = (v) => ({0:'Non-water',1:'Open water',2:'Partial water (HLS)',3:'Inundated vegetation (S1)',250:'HAND masked',251:'Layover/shadow masked',252:'Snow/ice masked',253:'Cloud/shadow masked',254:'Ocean mask',255:'No data'}[v] ?? 'Other / masked');
 
 function Legend({mode}) {
   if (mode === 'opera') return (
-    <div className="legend-row"><span><i className="dot water"/>Open water</span><span><i className="dot partial"/>Partial water</span><span><i className="dot land"/>Non-water</span><span><i className="dot invalid"/>Excluded</span></div>
+    <div className="legend-row"><span><i className="dot water"/>Open water</span><span><i className="dot partial"/>{ASSAM?'Inundated vegetation':'Partial water'}</span><span><i className="dot land"/>Non-water</span><span><i className="dot invalid"/>Masked</span></div>
   );
   if (mode === 'change' || mode === 'hvchange') return (
     <div className="legend-heat"><span>−8 dB</span><div className="bar difference"/><span>+8 dB</span></div>
@@ -43,8 +56,8 @@ function App() {
   useEffect(() => {
     let active = true;
     Promise.all([
-      fetch('/data/meta.json').then(r=>{if(!r.ok)throw new Error('Missing dataset metadata');return r.json();}),
-      fetch('/data/pixels.bin').then(r=>{if(!r.ok)throw new Error('Missing measurement data');return r.arrayBuffer();}),
+      fetch(DATA_ROOT+'meta.json').then(r=>{if(!r.ok)throw new Error('Missing dataset metadata');return r.json();}),
+      fetch(DATA_ROOT+'pixels.bin').then(r=>{if(!r.ok)throw new Error('Missing measurement data');return r.arrayBuffer();}),
     ]).then(([m,b]) => {if(active){setMeta(m);setBuffer(b);}}).catch(e=>{if(active)setError(e.message);});
     return ()=>{active=false};
   }, []);
@@ -53,7 +66,7 @@ function App() {
     if(!meta || !buffer || !mapNode.current || mapRef.current) return;
     const map = new maplibregl.Map({
       container: mapNode.current,
-      center: [76.455,9.435],
+      center: ASSAM ? [90.315,26.195] : [76.455,9.435],
       zoom: 12.7,
       pitch: 0,
       attributionControl: false,
@@ -70,6 +83,7 @@ function App() {
     map.addControl(new maplibregl.NavigationControl({showCompass:false}), 'bottom-right');
     map.addControl(new maplibregl.AttributionControl({compact:true}), 'bottom-left');
     const len = meta.rows*meta.cols;
+    if(buffer.byteLength !== 17*len){setError('Measurement grid has an unexpected size');map.remove();mapRef.current=null;return;}
     const before = new Float32Array(buffer,0,len);
     const after = new Float32Array(buffer,4*len,len);
     const hvBefore = new Float32Array(buffer,8*len,len);
@@ -79,7 +93,7 @@ function App() {
     const lats=meta.image_coordinates_lonlat.map(x=>x[1]);
     map.on('load', () => {
       for(const layer of LAYERS){
-        map.addSource('image-'+layer.id,{type:'image',url:'/data/'+layer.file,
+        map.addSource('image-'+layer.id,{type:'image',url:DATA_ROOT+layer.file,
           coordinates:meta.image_coordinates_lonlat});
         map.addLayer({id:'layer-'+layer.id,source:'image-'+layer.id,type:'raster',
           layout:{visibility:layer.id==='change'?'visible':'none'},
@@ -90,7 +104,7 @@ function App() {
       setMapReady(true);
     });
     map.on('click',(e) => {
-      const [x,y]=proj4('EPSG:4326','EPSG:32643',[e.lngLat.lng,e.lngLat.lat]);
+      const [x,y]=proj4('EPSG:4326',meta.crs,[e.lngLat.lng,e.lngLat.lat]);
       const col=Math.floor((x-meta.x0)/meta.pixel_width_m);
       const row=Math.floor((meta.y0-y)/meta.pixel_height_m);
       if(col<0 || row<0 || col>=meta.cols || row>=meta.rows){
@@ -132,7 +146,7 @@ function App() {
   const active=LAYERS.find(l=>l.id===mode);
   return (
     <div className="shell">
-      <div className="map-canvas" ref={mapNode} role="region" aria-label="Interactive NISAR radar image map of Kuttanad, Kerala"/>
+      <div className="map-canvas" ref={mapNode} role="region" aria-label={"Interactive NISAR radar image map of "+(ASSAM?"Lower Assam":"Kuttanad")}/>
       <div className="map-grain" aria-hidden="true"/>
       <header className="top-bar">
         <a className="brand-mark" href="/brand/backscatter-original.png" target="_blank" rel="noreferrer" aria-label="View our original Backscatter globe-and-radar logo"><img src="/brand/backscatter-mark.png" alt="Backscatter globe-and-radar mark"/></a>
@@ -147,10 +161,16 @@ function App() {
 
       <main className="workspace">
         <section className="control-panel">
-          <div className="overline"><span className="overline-line"/> FIELD STUDY 01 <span className="overline-faint">/ KERALA, INDIA</span></div>
-          <h1>Kuttanad <em>through radar.</em></h1>
-          <p className="intro">See what NASA–ISRO NISAR measured between two observations. Explore changing radar signals without confusing them with confirmed flood extents.</p>
-          <div className="scene-meta"><span>09.43° N, 76.45° E</span><span className="bullet">·</span><span>10 m source data</span></div>
+          <nav className="study-switch" aria-label="Select satellite study area">
+            <a className={!ASSAM?'selected':''} href="/?study=kuttanad" aria-current={!ASSAM?'page':undefined}>01 / KUTTANAD</a>
+            <a className={ASSAM?'selected':''} href="/?study=assam" aria-current={ASSAM?'page':undefined}>02 / ASSAM</a>
+          </nav>
+          <div className="overline"><span className="overline-line"/> FIELD STUDY {ASSAM?'02':'01'} <span className="overline-faint">/ {ASSAM?'ASSAM':'KERALA'}, INDIA</span></div>
+          <h1>{ASSAM?'Lower Assam':'Kuttanad'} <em>through radar.</em></h1>
+          <p className="intro">{ASSAM
+            ? 'A second independent test: the same radar-darkness rule does not transfer reliably from Kerala. Inspect the measurements, not a claimed flood map.'
+            : 'See what NASA–ISRO NISAR measured between two observations. Explore changing radar signals without confusing them with confirmed flood extents.'}</p>
+          <div className="scene-meta"><span>{ASSAM?'26.20° N, 90.31° E':'09.43° N, 76.45° E'}</span><span className="bullet">·</span><span>10 m source radar</span></div>
           <div className="panel-rule"/>
           <div className="panel-label">OBSERVATION LAYERS</div>
           <div className="layer-options" role="group" aria-label="Choose observation layer">
@@ -170,14 +190,17 @@ function App() {
           <div className="panel-rule"/>
           <div className="status-block">
             <div className="status-top"><span className="panel-label">RESEARCH STATUS</span><span className="status-tag">EXPERIMENTAL</span></div>
-            <p><span className="signal-dot"/>HH + HV improves static-water agreement but worsens change-mask results. <strong>No validated flood detector yet.</strong></p>
-            <a href="https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md"
+            <p><span className="signal-dot"/>{ASSAM ? 'The threshold from Kerala fails to transfer to Assam. Change-mask agreement is especially poor.' : 'HH + HV improves static-water agreement but worsens change-mask results.'} <strong>No validated flood detector yet.</strong></p>
+            <a href={ASSAM
+              ? "https://github.com/Phloraxx/Backscatter/blob/main/research/assam_validated_2026_10_11/MEASURED_RESULTS.md"
+              : "https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md"}
               target="_blank" rel="noreferrer">Read the methods &amp; limitations <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
-        <div className="map-annotation"><span className="annotation-accent"/> {active?.detail?.toUpperCase()} <span className="annotation-sep">/</span> {mode === "opera" ? "SENTINEL-2B / OPERA DSWx-HLS V1.1" : mode === "hvchange" ? "HVHV / NISAR GCOV V1" : "HHHH / NISAR GCOV V1"}</div>
+        <div className="map-annotation"><span className="annotation-accent"/> {active?.detail?.toUpperCase()} <span className="annotation-sep">/</span> {mode==="opera" ? (ASSAM?"SENTINEL-1D / OPERA DSWx-S1 V1.0":"SENTINEL-2B / OPERA DSWx-HLS V1.1") : mode==="hvchange"?"HVHV / NISAR GCOV V1":"HHHH / NISAR GCOV V1"}</div>
 
+        <div className="right-stack">
         <section className="data-card">
           <div className="data-card-header"><span className="panel-label">MEASURED EVIDENCE</span><span className="data-indicator">VERIFIED</span></div>
           <div className="metric-main">
@@ -185,11 +208,14 @@ function App() {
             <span>Area with valid measurements on both dates</span>
           </div>
           <div className="metric-duo">
-            <div><strong>+{meta?.statistics?.radar_paired_median_delta_db?.toFixed(2) ?? '—'} <small>dB</small></strong><span>Median paired radar change</span></div>
-            <div><strong>{meta?.statistics?.same_day_opera_auc?.toFixed(3) ?? '—'}</strong><span>Oct 29 water/land ROC-AUC*</span></div>
+            <div><strong>{signedDb(meta?.statistics?.radar_paired_median_delta_db)} <small>dB</small></strong><span>Median paired radar change</span></div>
+            <div><strong>{meta?.statistics?.east_holdout_static_f1?.toFixed(3) ?? '—'}</strong><span>Held-out open-water F1*</span></div>
           </div>
           <div className="card-divider"/>
-          <p className="small-note">*OPERA product agreement, not field ground truth. HH-only change F1 gain/loss: <b>{meta?.statistics?.gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.loss_f1?.toFixed(3) ?? '—'}</b>. Dual-pol F1: <b>{meta?.statistics?.dualpol_gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.dualpol_loss_f1?.toFixed(3) ?? '—'}</b> (five-day reference gap).</p>
+          <p className="small-note">*Agreement with {ASSAM?'OPERA Sentinel-1 (C-band, +3/+1-day gaps)':'OPERA Sentinel-2 optical classes'}, not field truth. HH-only water gain/loss F1: <b>{meta?.statistics?.gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.loss_f1?.toFixed(3) ?? '—'}</b>.
+          {ASSAM
+            ? <> Unchanged Kerala threshold static F1: <b>{meta?.statistics?.kerala_threshold_transfer_f1?.toFixed(3) ?? '—'}</b>.</>
+            : <> Weighted HH/HV gain/loss F1: <b>{meta?.statistics?.dualpol_gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.dualpol_loss_f1?.toFixed(3) ?? '—'}</b> (5-day reference gap).</>}</p>
         </section>
 
         <section className="pixel-card">
@@ -197,26 +223,31 @@ function App() {
           {!selected ? <p className="empty-pixel">Click anywhere inside the study area to inspect the underlying measurements.</p> :
             <>
               <div className="coordinates">{selected.lat.toFixed(5)}° N &nbsp;/&nbsp; {selected.lng.toFixed(5)}° E</div>
-              <div className="pixel-row"><span>29 Oct · HHHH</span><b>{getDb(selected.a)}</b></div>
-              <div className="pixel-row"><span>10 Nov · HHHH</span><b>{getDb(selected.b)}</b></div>
+              <div className="pixel-row"><span>{dateLabel(meta?.primary_dates?.[0])} · HHHH</span><b>{getDb(selected.a)}</b></div>
+              <div className="pixel-row"><span>{dateLabel(meta?.primary_dates?.[1])} · HHHH</span><b>{getDb(selected.b)}</b></div>
               <div className="pixel-row emphasis"><span>HH change</span><b>{getDb(selected.delta)}</b></div>
-              <div className="pixel-row"><span>HV · 29 Oct / 10 Nov</span><b>{getDb(selected.hvA)} / {getDb(selected.hvB)}</b></div>
-              <div className="pixel-row emphasis"><span>HV change</span><b>{getDb(selected.hvDelta)}</b></div>
-              <div className="pixel-row"><span>OPERA · 29 Oct</span><b>{getOpClass(selected.reference)}</b></div>
+              {!ASSAM&& <>
+                <div className="pixel-row"><span>HV · 29 Oct / 10 Nov</span><b>{getDb(selected.hvA)} / {getDb(selected.hvB)}</b></div>
+                <div className="pixel-row emphasis"><span>HV change</span><b>{getDb(selected.hvDelta)}</b></div>
+              </>}
+              <div className="pixel-row"><span>OPERA · {dateLabel(meta?.opera_date)}</span><b>{getOpClass(selected.reference)}</b></div>
               <small className="pixel-disclaimer">Values sampled on the 30 m reference grid. No physical cause is assigned.</small>
             </>
           }
         </section>
+        </div>
 
         <div className="legend-panel">
           <div className="legend-caption"><span>DISPLAYING</span><strong>{active?.label}</strong></div>
           <Legend mode={mode}/>
-          <div className="legend-note">{mode==='opera'?'OPERA DSWx-HLS, 29 Oct 2026. Cloud/invalid cells transparent.':'Radar intensity is not water extent. Select OPERA to inspect a separate satellite-derived classification.'}</div>
+          <div className="legend-note">{mode==='opera'
+            ? (ASSAM?'OPERA DSWx-S1, 31 Oct. C-band classes are not direct ground truth.':'OPERA DSWx-HLS, 29 Oct. Cloud/invalid pixels transparent.')
+            : 'Radar intensity is not water extent. Select OPERA to inspect a different satellite-derived classification.'}</div>
         </div>
       </main>
       {error && <div className="error-toast" role="alert">{error}</div>}
       {!meta && !error && <div className="loading-box">LOADING EARTH OBSERVATIONS<span className="loading-ellipsis">…</span></div>}
-      <footer className="bottom-line"><span>NASA–ISRO NISAR / NASA OPERA</span><span>KERALA • 2026</span><span>OBSERVE FIRST. INTERPRET CAREFULLY.</span></footer>
+      <footer className="bottom-line"><span>NASA–ISRO NISAR / NASA OPERA</span><span>{ASSAM?'ASSAM':'KERALA'} • 2026</span><span>OBSERVE FIRST. INTERPRET CAREFULLY.</span></footer>
     </div>
   );
 }

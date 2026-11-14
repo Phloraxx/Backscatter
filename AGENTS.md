@@ -97,3 +97,12 @@ Measured static open-water held-out F1: HHHH 0.9435 vs weighted HH/HV 0.9533. **
 ## Next case: Lower Assam and calibration
 
 The second geography is a catalog-confirmed candidate, NOT an analyzed flood event. Run scripts/preflight_assam.py first. Check existing Mac NASA Harmony job state before using scripts/harmony_assam.py submit; run fetch, scripts/fetch_opera_assam.py, then scripts/compare_assam_opera.py only after authenticated source files exist. Never put the Earthdata token or signed URLs in Git. OPERA S1 WTR codes differ from optical HLS: 0 non-water, 1 open water, 3 inundated vegetation; 250/251/254/255 are masked. The NISAR pre-Nov12 calibration caveat remains unresolved for these exact granules. Keep the recovered Backscatter logo in web/public/brand.
+
+
+## Actual Lower Assam experiment complete (2026-11-14)
+
+Lower Assam contains real validated NISAR HHHH Oct 28/Nov 09 plus OPERA Sentinel-1 DSWx-S1 Oct 31/Nov 10 source GeoTIFFs and actual measured results. Consult research/assam_validated_2026_10_11/MEASURED_RESULTS.md and assam_nisar_opera_diagnostic.json; the earlier catalog-only status is superseded.
+
+Common paired radar area 54.576 km2; median HH change +0.1012 dB. Assam-specific -17.75 dB classifier: static held-out F1 0.6755; gain/loss F1 0.0353/0.0336. Unmodified Kuttanad -10.75 dB threshold: Assam static F1 0.4275, gains/losses F1 0/0. OPERA S1 class 3 is inundated vegetation, not HLS class 2. Field truth absent; OPERA dates offset +3/+1 days; no flooded-area claims.
+
+The website selects study by query URL (?study=assam or ?study=kuttanad). Assets generated from actual locally downloaded satellite images by scripts/export_assam_demo.py. Assam has no measured NISAR HV: do not generate/present an HV layer there. Use MapLibre v6 explicit worker URL import in web/src/main.jsx to ensure production build map tiles work. Preserve the original team Backscatter logo under web/public/brand.

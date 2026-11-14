@@ -89,3 +89,16 @@ Do not report 0.9435 as "flood detection accuracy". Complete experimental artifa
 The November 14 metadata preflight confirms two validated NISAR observations and two OPERA Sentinel-1 water references. No raster-level results are yet claimed. Native OPERA 30-metre water labels should be compared to coarsened NISAR **linear power** values converted to dB only after averaging. For OPERA DSWx-S1, class 3 is inundated vegetation (not partial water); exclude it from strict class-0/class-1 open-water evaluation and report it separately. Date offsets are +3 and +1 days, so OPERA is not simultaneous field truth.
 
 NASA ASF flags possible mode-specific calibration residuals around 1 dB before Nov 12, 2026. Check the affected radar mode or RCID before interpreting small median differences as physical change. Source: https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/.
+
+
+## Completed Lower Assam evaluation (14 November 2026)
+
+Actual validated NISAR GCOV Oct 28/Nov 09 and OPERA Sentinel-1 DSWx-S1 Oct 31/Nov 10 were downloaded and compared on an aligned 30 m grid. Linear NISAR power was averaged before log10. Common radar-valid cells: 60,640; strict OPERA WTR classes 0/1 on both dates: 50,500.
+
+A locally fitted Assam HH cutoff of -17.75 dB (trained on west-half OPERA 0 vs 1) gave held-out eastern-half F1 0.6755, precision 0.9081, recall 0.5377. Change-mask agreement with OPERA was gain F1 0.0353 (TP18, FP809, FN174) and loss F1 0.0336 (TP44, FP2253, FN275).
+
+An unmodified Kuttanad threshold of -10.75 dB transferred to Assam yields first-date static F1 0.4275 on all strict cells and change gain/loss F1 zero. This is a genuine threshold-transfer test but the reference product is different: Kuttanad uses optical HLS whereas Assam uses Sentinel-1 S1. Their scores are not a common field-truth benchmark.
+
+OPERA S1 class 3 inundated vegetation has median NISAR response -12.1886 dB, between open water -17.9358 and non-water -9.7867 dB on the first observation. The reference offset is +3/+1 days. ASF warns of possible mode-specific pre-Nov12 calibration residuals (~1 dB) whose scene-specific applicability is unknown.
+
+Measurements and source verification: [Assam results](../research/assam_validated_2026_10_11/MEASURED_RESULTS.md), [actual JSON](../research/assam_validated_2026_10_11/assam_nisar_opera_diagnostic.json).

@@ -1,0 +1,32 @@
+{
+  "description": "Source file checksums for measured Assam case; original GeoTIFFs are local and not committed. No credentials or signed URLs.",
+  "study": "Lower Assam, India",
+  "source_cmrs": [
+    "G4410147621-ASF",
+    "G4409018076-ASF",
+    "G4399391976-POCLOUD",
+    "G4408812788-POCLOUD"
+  ],
+  "products": [
+    {
+      "filename": "nisar_2026-10-28_HHHH.tif",
+      "size_bytes": 2629708,
+      "sha256": "e5a1d2ad9b56420c6d8992767a129f857d818b3b9de653db9d6292a3c75ea21a"
+    },
+    {
+      "filename": "nisar_2026-11-09_HHHH.tif",
+      "size_bytes": 2628954,
+      "sha256": "4e7a1a22706445f019fc0e4cc2c0b33b28d34bf7f81f80c1dc446d824921163d"
+    },
+    {
+      "filename": "OPERA_L3_DSWx-S1_T46RBQ_20261031T235432Z_20261101T200652Z_S1D_30_v1.0_B01_WTR.tif",
+      "size_bytes": 898961,
+      "sha256": "e007df674f517d4f4fe98976958eb546347e2ffffec50e5c1a580660b9a49c10"
+    },
+    {
+      "filename": "OPERA_L3_DSWx-S1_T46RBQ_20261110T120427Z_20261110T210338Z_S1D_30_v1.0_B01_WTR.tif",
+      "size_bytes": 757873,
+      "sha256": "468671c4abeba919bd94c0b2d6ebf8d5ec738079727c6bb69a928a4e7dc326fd"
+    }
+  ]
+}

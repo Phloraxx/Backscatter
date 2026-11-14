@@ -1,14 +1,19 @@
 # Backscatter
 
-**NISAR radar backscatter for water mapping in Kuttanad, Kerala.** A NASA Space Apps Challenge 2026 project (Team Afterimage) asking a narrow question: what can L-band SAR tell you about water on the ground, and where does it fail?
+**NISAR radar backscatter evidence for water mapping in Kuttanad, Kerala, and Lower Assam, India.** A NASA Space Apps Challenge 2026 project (Team Afterimage) asking a narrow question: what can L-band SAR tell you about water on the ground, and where does it fail?
 
-The answer so far: NISAR separates water from land well on this example, and radar-only change detection does not. Both results are in this repository, with the code and metrics that produced them.
+The answer so far: NISAR separates existing water from non-water in some scenes, but simple radar-only change detection is unreliable, and the threshold learned in Kuttanad fails to transfer to Assam. Every number is linked to a real satellite source and its particular reference product.
 
 - **Static water, same-day reference** — ROC-AUC **0.983** against OPERA DSWx-HLS open-water labels; a threshold calibrated on the west half scored F1 **0.944** on the spatially separated east half.
 - **Change detection** — agreement with OPERA for new and lost water was F1 **0.201 / 0.218**. The classifier is not a flood map, and the app does not present it as one.
 - **What ships** — an interactive MapLibre evidence viewer over real NISAR HHHH and HVHV subsets, a pixel inspector, and the evaluation scripts behind every number above.
+- **Independent Assam case** — fitted static-water F1 0.676 on the east-half holdout, gain/loss F1 0.035/0.034. The unchanged Kerala cutoff scores static F1 0.428, gain/loss F1 0/0 on the Assam Sentinel-1 reference. Different reference methods mean these are not directly comparable field-accuracy scores.
 
 ![Backscatter evidence viewer](web/preview.jpg)
+
+The original Backscatter logo appears in both views. Kuttanad and Assam can be selected in the local web application.
+
+![Measured Lower Assam study in the evidence viewer](web/preview-assam.jpg)
 
 [Run the viewer](web/README.md) · [Scientific evaluation and failure analysis](research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md) · [Metrics JSON](research/kuttanad_validated_2026_10_11/change_baseline.json)
 
@@ -18,11 +23,13 @@ The answer so far: NISAR separates water from land well on this example, and rad
 
 Newest first. Each entry is a dated record of what was measured.
 
-### Second study candidate: Lower Assam (November 14, 2026)
+### Second study measured: Lower Assam (November 14, 2026)
 
-We verified two compatible validated NISAR L-band GCOV catalog scenes from October 28 and November 9, plus independent OPERA Sentinel-1 DSWx-S1 water reference products from October 31 and November 10. Their calendar-day offsets are +3 and +1, respectively. **No Assam satellite pixels or water-change accuracy results are available yet.**
+Validated NISAR HHHH from October 28 and November 9 and OPERA Sentinel-1 DSWx-S1 WTR from October 31 and November 10 have been downloaded and analyzed. The reference dates lag the NISAR observations by +3/+1 days.
 
-See [Lower Assam research plan](research/assam_validated_2026_10_11/README.md) and [machine-readable source IDs](research/assam_validated_2026_10_11/scene_manifest.json).
+Measured common radar area is **54.576 km2**, with paired median NISAR signal difference **+0.1012 dB**. A new Assam-specific water threshold achieves held-out static F1 **0.6755**, but gain/loss F1 is only **0.0353/0.0336**; an unchanged Kerala cutoff is worse. These are satellite-product agreements, not field-confirmed floods.
+
+[Full results and failure analysis](research/assam_validated_2026_10_11/MEASURED_RESULTS.md) · [Actual metrics JSON](research/assam_validated_2026_10_11/assam_nisar_opera_diagnostic.json) · [Source checksums](research/assam_validated_2026_10_11/source_checksums.json).
 
 **Calibration caveat:** [ASF's validated NISAR release notes](https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/) warn of approximately 1 dB residuals in about 30% of observations in certain pre-November-12 radar modes. Whether our individual granules are affected is not established. Kuttanad's +0.6231 dB median paired signal difference is a measurement, not proof of environmental change.
 

@@ -1,6 +1,6 @@
 {
   "record_date": "2026-11-14",
-  "status": "CATALOG CONFIRMED ONLY. NISAR Harmony jobs submitted on a Mac; actual data inspection/validation not completed as of this snapshot.",
+  "status": "MEASURED_NISAR_AND_OPERA_RASTERS; satellite-reference comparison completed, NOT field flood validation",
   "purpose": "Second independent Lower Assam geographic case to test generalization beyond Kuttanad",
   "area_name": "Lower Assam, India",
   "bbox_lonlat_wgs84": [
@@ -53,15 +53,20 @@
     "255": "no data"
   },
   "known_limitations": [
-    "Actual NISAR or OPERA pixels not yet inspected on the second case; only CMR matches and source links verified",
     "OPERA dates are not simultaneous with NISAR, by 3 and 1 calendar days",
     "OPERA DSWx-S1 is a separate Sentinel-1 C-band satellite classification, not field ground truth",
     "NISAR validated data before November 12 may include ~1 dB radiometric residuals in about 30% of certain radar modes, per ASF release notes; no scene-specific affected-RCID check completed",
-    "No second-case flood change result, model score or measured water area established"
+    "Satellite-product agreement only. Locally fitted gain/loss F1 0.0353/0.0336; unchanged Kerala threshold gain/loss F1 0/0."
   ],
   "sources": {
     "cmr": "https://cmr.earthdata.nasa.gov/search/granules.json",
     "nisar_release_notes": "https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/",
     "opera_s1_classes": "https://developers.google.com/earth-engine/datasets/catalog/OPERA_DSWX_L3_V1_S1"
-  }
+  },
+  "analysis_date": "2026-11-14",
+  "analysis_json": "assam_nisar_opera_diagnostic.json",
+  "analysis_report": "MEASURED_RESULTS.md",
+  "source_checksums": "source_checksums.json",
+  "tested_common_30m_radar_cells": 60640,
+  "measured_median_delta_db": 0.1012
 }

@@ -1,0 +1,75 @@
+{
+  "title": "Backscatter \u2014 Lower Assam measured SAR surface-change case",
+  "study": "assam",
+  "region_name": "Lower Assam",
+  "region_state": "Assam, India",
+  "study_number": "02",
+  "crs": "EPSG:32646",
+  "rows": 263,
+  "cols": 238,
+  "x0": 228090.0,
+  "y0": 2904000.0,
+  "pixel_width_m": 30.0,
+  "pixel_height_m": 30.0,
+  "image_coordinates_lonlat": [
+    [
+      90.27831774,
+      26.22990018
+    ],
+    [
+      90.34972357,
+      26.23123553
+    ],
+    [
+      90.35133502,
+      26.16006835
+    ],
+    [
+      90.27997248,
+      26.15873716
+    ]
+  ],
+  "bbox_wgs84": [
+    90.28,
+    26.16,
+    90.35,
+    26.23
+  ],
+  "primary_dates": [
+    "2026-10-28",
+    "2026-11-09"
+  ],
+  "opera_date": "2026-10-31",
+  "opera_product": "OPERA_L3_DSWx-S1_T46RBQ_20261031T235432Z_20261101T200652Z_S1D_30_v1.0_B01_WTR.tif",
+  "opera_kind": "DSWx-S1",
+  "opera_reference_offsets_days": [
+    3,
+    1
+  ],
+  "radar_polarizations": [
+    "HHHH"
+  ],
+  "data_binary_format": "little-endian Float32 HH_before[N], Float32 HH_after[N], Float32 HV_before[N]=NaN, Float32 HV_after[N]=NaN, Uint8 OPERA_WTR[N]; N=rows*cols",
+  "statistics": {
+    "radar_shared_valid_km2": 54.576,
+    "radar_paired_median_delta_db": 0.1012,
+    "east_holdout_static_f1": 0.6755,
+    "gain_f1": 0.0353,
+    "loss_f1": 0.0336,
+    "kerala_threshold_transfer_f1": 0.4275,
+    "kerala_threshold_transfer_gain_f1": 0.0,
+    "kerala_threshold_transfer_loss_f1": 0.0,
+    "static_fitted_threshold_db": -17.75
+  },
+  "limitations": [
+    "Measured radar change only; not confirmed flooding",
+    "OPERA DSWx-S1 reference is Sentinel-1 C-band classification, not field ground truth",
+    "Radar and reference acquisitions are offset by 3 and 1 calendar days",
+    "Inundated vegetation is OPERA class 3; excluded from strict class 0-vs-1 F1",
+    "Same Kuttanad threshold transferred to Assam showed poor static and zero change-mask agreement",
+    "Mode-specific pre-Nov 12 2026 NISAR radiometric residuals may affect some acquisitions; scene status unknown"
+  ],
+  "credits": "NASA\u2013ISRO NISAR validated GCOV V1; NASA OPERA DSWx-S1 v1.0; Earthdata/ASF/PO.DAAC",
+  "source_manifest": "https://github.com/Phloraxx/Backscatter/blob/main/research/assam_validated_2026_10_11/scene_manifest.json",
+  "analysis_report": "https://github.com/Phloraxx/Backscatter/blob/main/research/assam_validated_2026_10_11/assam_nisar_opera_diagnostic.json"
+}

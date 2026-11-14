@@ -88,3 +88,12 @@ Investigate Lower Assam validated NISAR GCOV Oct 28 / Nov 09 using OPERA Sentine
 ## D-019 — Explicit pre-Nov-12 calibration caution
 
 ASF identifies approximately 1 dB radiometric residuals in some pre-Nov-12 NISAR acquisition modes. The affected status of the selected Kuttanad/Assam granules is not confirmed; a small difference in measured dB may therefore not be physically meaningful on its own.
+
+
+## D-020 — No single universal darkness threshold (2026-11-14)
+
+The Kerala-trained -10.75 dB rule transfers poorly to Lower Assam: static water F1 0.4275 and water gain/loss F1 0/0 against the OPERA S1 satellite classification. An Assam-fitted -17.75 dB cutoff also has weak change F1 0.0353/0.0336. This is not a controlled cross-region model benchmark because Kerala used HLS and Assam used S1 labels with different temporal offsets. Do not publish physical flood extent based on either threshold.
+
+## D-021 — Real dual-study interface without unmeasured polarizations
+
+A lightweight case selector allows Kuttanad/Assam comparisons, preserving each geographic grid and OPERA class meaning. HV layers are visible only in Kuttanad, because only that case has HVHV measurements; the Assam binary HV slots are NaN and hidden. Explicitly bundle MapLibre v6 worker with Vite worker&url before creating maps so that production tiles and overlays render.

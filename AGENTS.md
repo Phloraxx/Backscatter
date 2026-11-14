@@ -77,3 +77,8 @@ Review `docs/PROJECT_STATUS.md`, `research/kuttanad_2026_09/README.md`, and `res
 - Output should be actual HHHH backscatter (dB) and a difference raster. Do **not** label it water/flood without a separate physically defensible classifier and checks against independent observations.
 - October 29 DSWx-HLS and nearby OPERA DSWx-S1 are reference *candidates*, with cloud/quality/temporal limitations. Earlier September OPERA estimates belong only to the earlier reference experiment.
 - Relevant docs: `docs/VALIDATED_DATA_EXECUTION.md`, `research/kuttanad_validated_2026_10_11/README.md`, and `docs/PROJECT_STATUS.md`.
+
+
+## Verified extraction outcome — 2026-11-14
+
+Both real validated NISAR HHHH GeoTIFFs for Oct 29 and Nov 10 have been extracted through **NASA Harmony** and analyzed. Do not reuse the original `scripts/extract_validated_kuttanad.py` NETCDF-over-/vsicurl flow on macOS GDAL 3.9; it failed. Use `scripts/harmony_validated_kuttanad.py` (submit/fetch) and `scripts/analyze_harmony_kuttanad.py`, or the existing local raster results. Results: 594,958 common 10 m pixels; paired median delta +0.6231 dB. No flood inference or accuracy measurement yet. Read `research/kuttanad_validated_2026_10_11/README.md` and the summary JSON first. Never share/copy the Earthdata secret.

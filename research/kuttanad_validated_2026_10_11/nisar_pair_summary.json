@@ -1,0 +1,45 @@
+{
+  "dataset": "NISAR_L2_GCOV_V1 validated HHHH gamma0 power",
+  "dates": [
+    "2026-10-29",
+    "2026-11-10"
+  ],
+  "granule_ids": [
+    "NISAR_L2_PR_GCOV_034_077_D_084_4005_DHDH_A_20261029T132026_20261029T132100_P05036_N_F_J_001",
+    "NISAR_L2_PR_GCOV_035_077_D_084_4005_DHDH_A_20261110T132027_20261110T132100_P05036_N_F_J_001"
+  ],
+  "grid": {
+    "crs": "EPSG:32643",
+    "shape": [
+      776,
+      771
+    ],
+    "resolution_m": [
+      10,
+      10
+    ],
+    "bounds_m": [
+      655890,
+      1039400,
+      663600,
+      1047160
+    ]
+  },
+  "shared_valid_pixels": 594958,
+  "shared_valid_km2": 59.4958,
+  "median_before_db": -15.1419,
+  "median_after_db": -13.803,
+  "paired_median_delta_db": 0.6231,
+  "paired_mean_delta_db": 0.7921,
+  "delta_percentiles_db": [
+    -3.741,
+    -1.6064,
+    2.9424,
+    5.4038
+  ],
+  "fraction_delta_less_minus3db": 0.14024,
+  "fraction_delta_greater_plus3db": 0.24505,
+  "fraction_abs_delta_over3db": 0.38529,
+  "method": "10 * log10 of positive finite GCOV HHHH power; Nov 10 minus Oct 29 on common native grid",
+  "warning": "Unclassified radar backscatter changes; not validated flood or water coverage estimates"
+}

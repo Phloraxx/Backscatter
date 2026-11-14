@@ -57,3 +57,12 @@ Prefer **2026-10-29 and 2026-11-10** Kuttanad validated `NISAR_L2_GCOV_V1` obser
 ## D-012 — No false validation claim
 
 OPERA DSWx-HLS near Oct 29 and DSWx-S1 near Nov 2 are **candidate independent comparison inputs**, not an exact-date Nov 10 reference; do not report numerical model accuracy until proper temporal-quality checks.
+
+
+## D-013 — Use NASA Harmony to extract validated NISAR GCOV pixels (2026-11-14)
+
+Direct NETCDF-over-/vsicurl GDAL 3.9 raster reading failed on macOS. NASA Harmony variable+spatial subsetting completed for both dates, producing two measured 10 m HHHH GeoTIFFs. Retain full HDF5 source files remotely and run numerical analysis on small downloaded subregions. `scripts/harmony_validated_kuttanad.py` supersedes the experimental direct-GDAL path for this environment.
+
+## D-014 — Measured radar changes do not establish flooding
+
+Record actual paired NISAR HHHH differences (median +0.6231 dB, 594,958 common valid pixels), but do not label any proportion of positive/negative dB change as flood extent until independently checked.

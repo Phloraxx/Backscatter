@@ -1,5 +1,16 @@
 # Backscatter
 
+## Verified breakthrough — November 14, 2026
+
+**Actual validated NISAR radar pixels have now been extracted for Kuttanad, Kerala.** NASA Harmony produced HHHH GeoTIFFs for **2026-10-29 and 2026-11-10**. Both rasters share an identical EPSG:32643 grid at **10 m resolution** (776 × 771 pixels).
+
+Our first unclassified paired backscatter comparison covers **594,958** shared valid radar pixels (**59.4958 km²**), with a **+0.6231 dB median pixel-wise change**. These numbers show measured radar response, **not** water extent or flood detection.
+
+![Real NISAR before-and-after and measured HHHH change](research/kuttanad_validated_2026_10_11/nisar_hhhh_comparison_preview.jpg)
+
+[Verified research report](research/kuttanad_validated_2026_10_11/README.md) · [Scientific metrics](research/kuttanad_validated_2026_10_11/nisar_pair_summary.json) · [Reproducible Harmony retrieval](scripts/harmony_validated_kuttanad.py) · [Comparison script](scripts/analyze_harmony_kuttanad.py).
+
+
 **Team Afterimage · NASA Space Apps Challenge 2026 · Dancing with the SARs**
 
 > **See the evidence of Earth's changing waters.**

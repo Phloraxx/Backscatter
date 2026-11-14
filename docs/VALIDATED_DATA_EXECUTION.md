@@ -1,3 +1,21 @@
+## Working method — verified November 14, 2026
+
+The older direct-GDAL method described further below failed on the Mac because GDAL 3.9 NETCDF reading via `/vsicurl` is not supported on macOS. **Use Harmony instead**. NASA Harmony can spatially and variable-subset NISAR GCOV to Cloud-Optimized GeoTIFFs, with no full HDF5 download. <https://nisar-docs.asf.alaska.edu/harmony/>
+
+```bash
+python3 -m pip install numpy rasterio matplotlib
+python scripts/harmony_validated_kuttanad.py submit
+# After NASA Harmony marks the jobs successful:
+python scripts/harmony_validated_kuttanad.py fetch
+python scripts/analyze_harmony_kuttanad.py
+```
+
+The first two commands prompt for a NASA Earthdata token with input hidden. The job submission IDs are stored in `~/Downloads/backscatter-validated-kuttanad/harmony_submission_<date>.json`; no credentials are stored. The fetch command can be rerun to check the job states without submitting duplicates.
+
+**Verified outputs on Mac:** two 10 m HHHH raw GeoTIFFs, two dB-transformed GeoTIFFs, `nisar_delta_hhhh_db.tif`, `nisar_pair_summary.json` and `nisar_hhhh_comparison.png`. The report is **not a flood mask**. Both real Harmony jobs succeeded for this study case.
+
+---
+
 # Validated NISAR GCOV: Kuttanad extraction runbook
 
 As of November 14, 2026. This is the first actual measurement step for Backscatter, not a flood classifier.

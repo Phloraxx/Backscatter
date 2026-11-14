@@ -47,3 +47,11 @@ Do not cite this file as authority. Follow the links and verify the current offi
 - [NASA CMR catalog](https://cmr.earthdata.nasa.gov/search/granules.json): source IDs in [Assam manifest](../research/assam_validated_2026_10_11/scene_manifest.json).
 - [NISAR validated release notes](https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/): known pre-Nov-12 calibration issues.
 - [OPERA DSWx-S1 classification codes](https://developers.google.com/earth-engine/datasets/catalog/OPERA_DSWX_L3_V1_S1): 0, 1, 3 and mask classes.
+
+## Additional signal-filter sources
+
+- [NISAR validated availability](https://nisar-docs.asf.alaska.edu/availability-overview/) — validated data begin October 21, 2026.
+- [ASF NISAR maturity cautions](https://hyp3-docs.asf.alaska.edu/nisar-docs/products-overview/) — different processing maturities can cause artifacts when compared.
+- [NASA JPL OPERA suite](https://www.jpl.nasa.gov/go/opera/products/dswx-product-suite/) — DSWx-S1 and DSWx-HLS are not harmonized across sensors.
+- [ASF calibrated release notes](https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/) — some pre-November-12 acquisition modes have radiometric residuals.
+- [Original Backscatter signal-coherence experiment](../research/signal_coherence/README.md) — fixed parameters, metrics, limitations and reproduction.

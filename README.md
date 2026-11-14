@@ -1,5 +1,20 @@
 # Backscatter
 
+## Latest science: coherent radar signal regions (November 14, 2026)
+
+Backscatter now provides a SIGNAL CLUSTERS overlay for both Kuttanad and Lower Assam, displaying actual HH radar-signal changes—not flood extents. This reproducible no-training filter requires a 3 dB change, spatial 3×3 median filtering, and 6/9 neighboring pixels supporting the same change direction.
+
+- Kuttanad: 8.1108 km² of coherent **radar signal** (not water area). OPERA-classified stable non-water falsely highlighted: 4.303% with raw threshold versus 0.319% with spatial coherence (~92.6% reduction). OPERA gain F1: 0.42389 with coherence; simple median filtering scored 0.44509.
+- Assam: 0.4329 km² of coherent radar signal, but **zero strict OPERA open-water gains or losses detected**. Spatial filtering does not generalize as a reliable flood detector.
+- Each study's selected repeat track has only two validated acquisitions as of November 14. Mixing older provisional products would require careful calibration checks.
+
+![Kuttanad — coherent radar-signal changes, not flooding](web/preview-signal-kuttanad.jpg)
+
+[Lower Assam signal-change preview](web/preview-signal-assam.jpg) · [Scientific protocol and limitations](research/signal_coherence/README.md) · [Kerala metrics](research/signal_coherence/kuttanad_metrics.json) · [Assam metrics](research/signal_coherence/assam_metrics.json) · [Working web viewer](web/README.md).
+
+---
+
+
 **NISAR radar backscatter evidence for water mapping in Kuttanad, Kerala, and Lower Assam, India.** A NASA Space Apps Challenge 2026 project (Team Afterimage) asking a narrow question: what can L-band SAR tell you about water on the ground, and where does it fail?
 
 The answer so far: NISAR separates existing water from non-water in some scenes, but simple radar-only change detection is unreliable, and the threshold learned in Kuttanad fails to transfer to Assam. Every number is linked to a real satellite source and its particular reference product.

@@ -59,7 +59,9 @@
     "kerala_threshold_transfer_f1": 0.4275,
     "kerala_threshold_transfer_gain_f1": 0.0,
     "kerala_threshold_transfer_loss_f1": 0.0,
-    "static_fitted_threshold_db": -17.75
+    "static_fitted_threshold_db": -17.75,
+    "coherent_signal_area_km2": 0.4329,
+    "coherent_signal_fraction": 0.00793
   },
   "limitations": [
     "Measured radar change only; not confirmed flooding",
@@ -71,5 +73,7 @@
   ],
   "credits": "NASA\u2013ISRO NISAR validated GCOV V1; NASA OPERA DSWx-S1 v1.0; Earthdata/ASF/PO.DAAC",
   "source_manifest": "https://github.com/Phloraxx/Backscatter/blob/main/research/assam_validated_2026_10_11/scene_manifest.json",
-  "analysis_report": "https://github.com/Phloraxx/Backscatter/blob/main/research/assam_validated_2026_10_11/assam_nisar_opera_diagnostic.json"
+  "analysis_report": "https://github.com/Phloraxx/Backscatter/blob/main/research/assam_validated_2026_10_11/assam_nisar_opera_diagnostic.json",
+  "radar_signal_cluster_note": "HHHH radar signal only; fixed 3dB threshold plus 3x3 median and 6/9-neighbor agreement; NOT flood detection",
+  "radar_signal_cluster_source": "https://github.com/Phloraxx/Backscatter/blob/main/research/signal_coherence/assam_metrics.json"
 }

@@ -1,0 +1,130 @@
+{
+  "site": "kuttanad",
+  "experiment": "Fixed-parameter radar signal-change filter, not flood classification",
+  "radar_dates": [
+    "2026-10-29",
+    "2026-11-10"
+  ],
+  "reference_dates": [
+    "2026-10-29",
+    "2026-11-05"
+  ],
+  "reference": "OPERA DSWx-HLS optical",
+  "method_parameters": {
+    "magnitude_db": 3.0,
+    "local_median_window_pixels": 3,
+    "median_min_valid_neighbors": 5,
+    "coherent_same_sign_neighbors_required": 6,
+    "coherent_min_valid_neighbors": 7,
+    "OPERA_reference_labels_used_in_method": false
+  },
+  "grid": {
+    "shape": [
+      259,
+      257
+    ],
+    "pixel_area_km2": 0.0009
+  },
+  "common_valid_radar_cells": 66343,
+  "strict_opera_class_0_1_both_cells": 45184,
+  "ref_new_open_water_cells": 715,
+  "ref_lost_open_water_cells": 1314,
+  "reference_class_3_inundated_vegetation_counts": null,
+  "radar_delta_median_db": 0.51534,
+  "radar_delta_mad_db": 1.24138,
+  "methods": {
+    "raw": {
+      "candidate_decrease_cells": 3628,
+      "candidate_increase_cells": 9820,
+      "candidate_any_km2": 12.1032,
+      "fraction_of_shared_valid_radar_flagged": 0.2027,
+      "reference_diagnostic": {
+        "water_gain_vs_radar_decrease": {
+          "tp": 372,
+          "fp": 1095,
+          "fn": 343,
+          "tn": 43374,
+          "precision": 0.25358,
+          "recall": 0.52028,
+          "f1": 0.34097
+        },
+        "water_loss_vs_radar_increase": {
+          "tp": 826,
+          "fp": 6134,
+          "fn": 488,
+          "tn": 37736,
+          "precision": 0.11868,
+          "recall": 0.62861,
+          "f1": 0.19966
+        },
+        "stable_nonwater_flag_fraction": 0.04303,
+        "stable_openwater_flag_fraction": 0.24964
+      }
+    },
+    "median3": {
+      "candidate_decrease_cells": 3004,
+      "candidate_increase_cells": 9123,
+      "candidate_any_km2": 10.9143,
+      "fraction_of_shared_valid_radar_flagged": 0.18279,
+      "reference_diagnostic": {
+        "water_gain_vs_radar_decrease": {
+          "tp": 383,
+          "fp": 623,
+          "fn": 332,
+          "tn": 43846,
+          "precision": 0.38072,
+          "recall": 0.53566,
+          "f1": 0.44509
+        },
+        "water_loss_vs_radar_increase": {
+          "tp": 872,
+          "fp": 5660,
+          "fn": 442,
+          "tn": 38210,
+          "precision": 0.1335,
+          "recall": 0.66362,
+          "f1": 0.22228
+        },
+        "stable_nonwater_flag_fraction": 0.01386,
+        "stable_openwater_flag_fraction": 0.23301
+      }
+    },
+    "coherent": {
+      "candidate_decrease_cells": 2106,
+      "candidate_increase_cells": 6906,
+      "candidate_any_km2": 8.1108,
+      "fraction_of_shared_valid_radar_flagged": 0.13584,
+      "reference_diagnostic": {
+        "water_gain_vs_radar_decrease": {
+          "tp": 291,
+          "fp": 367,
+          "fn": 424,
+          "tn": 44102,
+          "precision": 0.44225,
+          "recall": 0.40699,
+          "f1": 0.42389
+        },
+        "water_loss_vs_radar_increase": {
+          "tp": 786,
+          "fp": 4476,
+          "fn": 528,
+          "tn": 39394,
+          "precision": 0.14937,
+          "recall": 0.59817,
+          "f1": 0.23905
+        },
+        "stable_nonwater_flag_fraction": 0.00319,
+        "stable_openwater_flag_fraction": 0.18473
+      }
+    }
+  },
+  "limitations": [
+    "Radar dimming/brightening is not synonymous with water gain/loss",
+    "OPERA WTR is an independent satellite product, not field ground truth",
+    "OPERA reference acquisition dates do not match radar exactly",
+    "Kuttanad OPERA HLS and Assam OPERA S1 are not cross-sensor harmonized",
+    "The fixed spatial filter can suppress real small changes and retain structured non-water changes",
+    "No multi-date same-track validated reference baseline exists for these sites as of Nov 14 2026",
+    "NISAR pre-Nov12 modes may have radiometric residuals near 1dB; scene-specific impact unknown"
+  ]
+}

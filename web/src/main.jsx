@@ -19,11 +19,13 @@ const LAYERS = ASSAM ? [
   { id:'oct29', label:'28 OCT', detail:'NISAR · before', file:'before.png' },
   { id:'nov10', label:'09 NOV', detail:'NISAR · after', file:'after.png' },
   { id:'change', label:'RADAR CHANGE', detail:'HH · 09 Nov − 28 Oct', file:'change.png' },
+  { id:'signal', label:'SIGNAL CLUSTERS', detail:'Coherent HH changes · NOT flood', file:'coherent_change.png' },
   { id:'opera', label:'OPERA WATER', detail:'Sentinel-1 · 31 Oct', file:'opera.png' },
 ] : [
   { id:'oct29', label:'29 OCT', detail:'NISAR · before', file:'oct29.png' },
   { id:'nov10', label:'10 NOV', detail:'NISAR · after', file:'nov10.png' },
   { id:'change', label:'RADAR CHANGE', detail:'HH · 10 Nov − 29 Oct', file:'change.png' },
+  { id:'signal', label:'SIGNAL CLUSTERS', detail:'Coherent HH changes · NOT flood', file:'coherent_change.png' },
   { id:'hvchange', label:'HV CHANGE', detail:'HV · 10 Nov − 29 Oct', file:'hv_change.png' },
   { id:'opera', label:'OPERA WATER', detail:'Sentinel-2 · 29 Oct', file:'opera_oct29.png' },
 ];
@@ -34,6 +36,12 @@ const getOpClass = (v) => ({0:'Non-water',1:'Open water',2:'Partial water (HLS)'
 function Legend({mode}) {
   if (mode === 'opera') return (
     <div className="legend-row"><span><i className="dot water"/>Open water</span><span><i className="dot partial"/>{ASSAM?'Inundated vegetation':'Partial water'}</span><span><i className="dot land"/>Non-water</span><span><i className="dot invalid"/>Masked</span></div>
+  );
+  if (mode === 'signal') return (
+    <div className="legend-row">
+      <span><i className="dot signal-down"/>HH signal decrease</span>
+      <span><i className="dot signal-up"/>HH signal increase</span>
+    </div>
   );
   if (mode === 'change' || mode === 'hvchange') return (
     <div className="legend-heat"><span>−8 dB</span><div className="bar difference"/><span>+8 dB</span></div>
@@ -190,7 +198,7 @@ function App() {
           <div className="panel-rule"/>
           <div className="status-block">
             <div className="status-top"><span className="panel-label">RESEARCH STATUS</span><span className="status-tag">EXPERIMENTAL</span></div>
-            <p><span className="signal-dot"/>{ASSAM ? 'The threshold from Kerala fails to transfer to Assam. Change-mask agreement is especially poor.' : 'HH + HV improves static-water agreement but worsens change-mask results.'} <strong>No validated flood detector yet.</strong></p>
+            <p><span className="signal-dot"/>{ASSAM ? 'The Kerala-trained water threshold fails in Assam; coherent radar-change clusters do not identify its reference transitions.' : 'Filtering makes radar signal patterns less noisy here, but the detected changes are not always water-related.'} <strong>No validated flood detector yet.</strong></p>
             <a href={ASSAM
               ? "https://github.com/Phloraxx/Backscatter/blob/main/research/assam_validated_2026_10_11/MEASURED_RESULTS.md"
               : "https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/DUAL_POLARIZATION.md"}
@@ -198,7 +206,7 @@ function App() {
           </div>
         </section>
 
-        <div className="map-annotation"><span className="annotation-accent"/> {active?.detail?.toUpperCase()} <span className="annotation-sep">/</span> {mode==="opera" ? (ASSAM?"SENTINEL-1D / OPERA DSWx-S1 V1.0":"SENTINEL-2B / OPERA DSWx-HLS V1.1") : mode==="hvchange"?"HVHV / NISAR GCOV V1":"HHHH / NISAR GCOV V1"}</div>
+        <div className="map-annotation"><span className="annotation-accent"/> {active?.detail?.toUpperCase()} <span className="annotation-sep">/</span> {mode==="opera" ? (ASSAM?"SENTINEL-1D / OPERA DSWx-S1 V1.0":"SENTINEL-2B / OPERA DSWx-HLS V1.1") : mode==="hvchange"?"HVHV / NISAR GCOV V1":mode==="signal"?"HHHH / FILTERED SIGNAL, NOT WATER":"HHHH / NISAR GCOV V1"}</div>
 
         <div className="right-stack">
         <section className="data-card">
@@ -212,6 +220,7 @@ function App() {
             <div><strong>{meta?.statistics?.east_holdout_static_f1?.toFixed(3) ?? '—'}</strong><span>Held-out open-water F1*</span></div>
           </div>
           <div className="card-divider"/>
+          {mode==='signal' && <p className="small-note signal-explain">Filtered strong HH radar-change signatures: <strong>{meta?.statistics?.coherent_signal_area_km2?.toFixed(2) ?? '—'} km²</strong>. Fixed ±3 dB rule, 3×3 median filter, at least 6 agreeing neighbors. <strong>This is not flooded area.</strong></p>}
           <p className="small-note">*Agreement with {ASSAM?'OPERA Sentinel-1 (C-band, +3/+1-day gaps)':'OPERA Sentinel-2 optical classes'}, not field truth. HH-only water gain/loss F1: <b>{meta?.statistics?.gain_f1?.toFixed(3) ?? '—'}</b> / <b>{meta?.statistics?.loss_f1?.toFixed(3) ?? '—'}</b>.
           {ASSAM
             ? <> Unchanged Kerala threshold static F1: <b>{meta?.statistics?.kerala_threshold_transfer_f1?.toFixed(3) ?? '—'}</b>.</>
@@ -242,7 +251,9 @@ function App() {
           <Legend mode={mode}/>
           <div className="legend-note">{mode==='opera'
             ? (ASSAM?'OPERA DSWx-S1, 31 Oct. C-band classes are not direct ground truth.':'OPERA DSWx-HLS, 29 Oct. Cloud/invalid pixels transparent.')
-            : 'Radar intensity is not water extent. Select OPERA to inspect a different satellite-derived classification.'}</div>
+            : mode==='signal'
+              ? 'Only strong, spatially consistent HH radar signal changes are highlighted. Teal = decrease, amber = increase. Neither color means flooding.'
+              : 'Radar intensity is not water extent. Select OPERA to inspect a different satellite-derived classification.'}</div>
         </div>
       </main>
       {error && <div className="error-toast" role="alert">{error}</div>}

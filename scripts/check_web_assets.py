@@ -13,12 +13,12 @@ PUB=ROOT/"web"/"public"
 EXPECTED={
     "kuttanad": {
         "base":PUB/"data", "dates":["2026-10-29","2026-11-10"],
-        "layers":["oct29.png","nov10.png","change.png","hv_change.png","opera_oct29.png"],
+        "layers":["oct29.png","nov10.png","change.png","coherent_change.png","hv_change.png","opera_oct29.png"],
         "expected_hv":True, "expected_crs":"EPSG:32643"
     },
     "assam": {
         "base":PUB/"data"/"assam", "dates":["2026-10-28","2026-11-09"],
-        "layers":["before.png","after.png","change.png","opera.png"],
+        "layers":["before.png","after.png","change.png","coherent_change.png","opera.png"],
         "expected_hv":False,"expected_crs":"EPSG:32646"
     }
 }
@@ -43,6 +43,9 @@ def main():
             raise ValueError(study+": incorrect georeferencing or observation dates")
         if len(metadata["image_coordinates_lonlat"])!=4:
             raise ValueError(study+": invalid overlay corners")
+        metrics=json.loads((ROOT/"research"/"signal_coherence"/(study+"_metrics.json")).read_text())
+        if metadata["statistics"].get("coherent_signal_area_km2")!=metrics["methods"]["coherent"]["candidate_any_km2"]:
+            raise ValueError(study+": inconsistent scientific summary for signal-change overlay")
         for layer in settings["layers"]:
             if png_size(directory/layer)!=(w,h):
                 raise ValueError(study+": overlay PNG dimensions mismatch: "+layer)

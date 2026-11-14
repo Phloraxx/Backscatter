@@ -47,7 +47,9 @@
     "loss_f1": 0.2185,
     "dualpol_static_east_f1": 0.9533,
     "dualpol_gain_f1": 0.1053,
-    "dualpol_loss_f1": 0.0981
+    "dualpol_loss_f1": 0.0981,
+    "coherent_signal_area_km2": 8.1108,
+    "coherent_signal_fraction": 0.13584
   },
   "limitations": [
     "Not a flood detection or prediction product",
@@ -58,5 +60,7 @@
     "HVHV helps static discrimination in this test but worsens candidate gain/loss mask F1"
   ],
   "credits": "NISAR validated GCOV V1 / NASA and ISRO; NASA OPERA DSWx-HLS v1.1; NASA Earthdata/ASF/PO.DAAC",
-  "source_manifest": "https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/scene_manifest.json"
+  "source_manifest": "https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/scene_manifest.json",
+  "radar_signal_cluster_note": "HHHH radar signal only; fixed 3dB threshold plus 3x3 median and 6/9-neighbor agreement; NOT flood detection",
+  "radar_signal_cluster_source": "https://github.com/Phloraxx/Backscatter/blob/main/research/signal_coherence/kuttanad_metrics.json"
 }

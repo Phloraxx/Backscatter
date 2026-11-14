@@ -1,0 +1,14 @@
+{
+  "experiment": "Fixed-parameter diagnostic SAR signal-change methods, not water/flood classifier",
+  "date": "2026-11-14",
+  "methods": [
+    "raw",
+    "median3",
+    "coherent"
+  ],
+  "site_metric_files": [
+    "kuttanad_metrics.json",
+    "assam_metrics.json"
+  ],
+  "key_caveat": "Different OPERA products and date offsets; do not pool F1 or claim field accuracy"
+}

@@ -97,3 +97,15 @@ The Kerala-trained -10.75 dB rule transfers poorly to Lower Assam: static water 
 ## D-021 — Real dual-study interface without unmeasured polarizations
 
 A lightweight case selector allows Kuttanad/Assam comparisons, preserving each geographic grid and OPERA class meaning. HV layers are visible only in Kuttanad, because only that case has HVHV measurements; the Assam binary HV slots are NaN and hidden. Explicitly bundle MapLibre v6 worker with Vite worker&url before creating maps so that production tiles and overlays render.
+
+## D-022 — Signal evidence, not flood detection (2026-11-14)
+
+Keep a clearly labeled SIGNAL CLUSTERS visualization of strong HH radar changes with an untuned 3 dB, 3×3 median, 6/9 neighbor spatial rule. It reduces Kuttanad's reference-stable non-water false highlighting (4.303% → 0.319%) but misses all strict OPERA water transitions in Assam. Teal and amber denote radar-signal decrease/increase, never flooded water.
+
+## D-023 — Do not fabricate a multi-date historical baseline
+
+As of November 14, 2026, the selected matched validated NISAR repeat tracks have only two acquisitions each. Older provisional imagery has different product maturity and may carry processing differences. Do not mix it uncritically or claim a validated 3+ date time series.
+
+## D-024 — Different OPERA products are not a common ground truth
+
+NASA JPL explicitly states that DSWx-HLS optical and DSWx-S1 radar products are not harmonized across sensors. OPERA references have different date offsets and class definitions. Our scores measure product agreement, not verified flood accuracy.

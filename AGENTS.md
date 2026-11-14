@@ -106,3 +106,11 @@ Lower Assam contains real validated NISAR HHHH Oct 28/Nov 09 plus OPERA Sentinel
 Common paired radar area 54.576 km2; median HH change +0.1012 dB. Assam-specific -17.75 dB classifier: static held-out F1 0.6755; gain/loss F1 0.0353/0.0336. Unmodified Kuttanad -10.75 dB threshold: Assam static F1 0.4275, gains/losses F1 0/0. OPERA S1 class 3 is inundated vegetation, not HLS class 2. Field truth absent; OPERA dates offset +3/+1 days; no flooded-area claims.
 
 The website selects study by query URL (?study=assam or ?study=kuttanad). Assets generated from actual locally downloaded satellite images by scripts/export_assam_demo.py. Assam has no measured NISAR HV: do not generate/present an HV layer there. Use MapLibre v6 explicit worker URL import in web/src/main.jsx to ensure production build map tiles work. Preserve the original team Backscatter logo under web/public/brand.
+
+## Latest coherent HH radar change study (2026-11-14)
+
+Run scripts/export_demo_assets.py and scripts/export_assam_demo.py, then scripts/evaluate_signal_coherence.py to rebuild both coherently filtered NISAR signal overlays AND synchronize web metadata, then scripts/check_web_assets.py.
+
+The filter applies 3 dB threshold to HH radar change, 3×3 per-date median, and 6/9-neighbor spatial coherence. It never uses OPERA WTR classes to create candidate overlays. Kuttanad's coherent radar area 8.1108 km² and Assam's 0.4329 km² are NOT flooded-area estimates. Kuttanad reference gain F1 0.42389 (median3 actually higher 0.44509); Assam gain/loss F1 zero. Preserve the negative result.
+
+Original Backscatter logo remains under web/public/brand. The viewer exposes SIGNAL CLUSTERS in both cases (teal HH decrease, amber HH increase, no flood label). Two matching validated acquisitions per site; no valid mature historical multi-date baseline yet. NASA/JPL notes OPERA HLS and S1 are not sensor-harmonized.

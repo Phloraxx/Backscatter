@@ -55,6 +55,8 @@ On a machine with the locally downloaded NISAR/OPERA GeoTIFFs from [the research
 ```bash
 python scripts/export_demo_assets.py
 python scripts/export_assam_demo.py   # after authenticated NISAR / OPERA Assam TIFFs exist
+python scripts/evaluate_signal_coherence.py  # rebuild coherent-signal overlays AND metadata
+python scripts/check_web_assets.py            # verify all source-derived study assets
 ```
 
 This generates small RGBA PNG layers and a little-endian binary 30-metre measurement grid. It does **not** export large source HDF5/GeoTIFFs or user tokens.
@@ -89,3 +91,23 @@ Build and test:
     npm run preview
 
 The original Backscatter PNG, derived mark and favicon are all available at public/brand/. The raster image overlays and 30 m measurement grids are served from public/data/ for Kerala and public/data/assam/ for Assam. The web demo requires no Earthdata bearer token or external analysis service.
+
+
+![Kuttanad signal clusters shown in the original-logo viewer](preview-signal-kuttanad.jpg)
+
+[Lower Assam signal-cluster screenshot](preview-signal-assam.jpg)
+
+## New: coherent radar signal highlights
+
+Both geographic studies now offer a **SIGNAL CLUSTERS** layer, identifying strong, spatially consistent **HHHH radar signal changes**, not floodwater:
+
+- Median-filter each date on the aligned OPERA 30 m grid using a 3×3 window (at least 5 valid neighboring cells).
+- Highlight cells changing by **at least 3 dB** whose 3×3 neighborhood has at least **6 cells with the same strong direction** and at least 7 valid cells.
+- Teal means radar signal decreased; amber means it increased. **Neither means flooding.**
+- This no-training method never reads OPERA WTR labels to produce the colored overlay. OPERA is used separately to evaluate its limitations.
+
+Kuttanad has **8.11 km²** of strong coherent radar signal regions, and Lower Assam **0.43 km²**. These areas are **not water extent** and are not claims about an actual flood.
+
+In Kuttanad the spatially coherent filter reduced the fraction of OPERA-classified stable non-water pixels flagged by ≈93% versus raw ±3 dB thresholding, but it missed additional true water-class changes. **In Assam it captured zero strict open-water transitions**, demonstrating that denoising cannot make the method universally reliable.
+
+[Full reproducible research](../research/signal_coherence/README.md) · [Kerala metrics](../research/signal_coherence/kuttanad_metrics.json) · [Assam metrics](../research/signal_coherence/assam_metrics.json).

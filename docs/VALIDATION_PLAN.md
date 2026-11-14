@@ -102,3 +102,11 @@ An unmodified Kuttanad threshold of -10.75 dB transferred to Assam yields first-
 OPERA S1 class 3 inundated vegetation has median NISAR response -12.1886 dB, between open water -17.9358 and non-water -9.7867 dB on the first observation. The reference offset is +3/+1 days. ASF warns of possible mode-specific pre-Nov12 calibration residuals (~1 dB) whose scene-specific applicability is unknown.
 
 Measurements and source verification: [Assam results](../research/assam_validated_2026_10_11/MEASURED_RESULTS.md), [actual JSON](../research/assam_validated_2026_10_11/assam_nisar_opera_diagnostic.json).
+
+## Executed conservative NISAR signal-coherence experiment (November 14, 2026)
+
+Evaluated three fixed, label-free methods against OPERA reference labels only after generating NISAR signal masks: RAW ±3 dB, MEDIAN3, COHERENT. HLS class 2 partial water and S1 class 3 inundated vegetation were excluded from strict 0/1 transition comparisons. Reference dates are offset relative to radar and OPERA products are not harmonized across sensors.
+
+Kuttanad: stable reference non-water flagged 4.303% RAW vs 0.319% COHERENT; gain F1 0.34097 RAW, 0.44509 MEDIAN3, 0.42389 COHERENT. Assam: gain/loss F1 0 with COHERENT, despite radar signal variation. The areas 8.1108 and 0.4329 km² represent signal change only, never confirmed flooding.
+
+Multi-date validated-only baselines require further same-track acquisitions. Detailed methodology, limitations and full metrics: [signal-coherence study](../research/signal_coherence/README.md).

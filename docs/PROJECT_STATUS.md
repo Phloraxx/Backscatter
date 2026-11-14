@@ -1,5 +1,20 @@
 # Backscatter status — updated November 14, 2026
 
+## Latest research: fixed-rule spatial filtering
+
+Completed real-data radar-change experiments for both cases: RAW (±3 dB), MEDIAN3 (per-date 3×3 median, then ±3 dB), and COHERENT (median-filtered ±3 dB, 6/9 same-direction pixel support). No OPERA water-class labels were used to generate the displayed candidate pixels.
+
+Kuttanad: RAW → COHERENT fraction of OPERA-classified stable non-water flagged falls from 4.303% to 0.319% (~92.6% reduction), but water-gain recall falls from 0.52028 to 0.40699. MEDIAN3 gain F1 0.44509; COHERENT gain F1 0.42389. 8.1108 km² of coherent radar signal changes are NOT a flood-area estimate.
+
+Assam: COHERENT covers 0.4329 km² of radar signal, but detects zero strictly OPERA-classified new/lost open-water transitions; gain/loss F1 both zero. This method is not a general flood detector.
+
+Web viewer: sixth Kuttanad and fifth Assam layers called SIGNAL CLUSTERS; teal=HH signal decreased, amber=HH signal increased. The original Backscatter logo is unchanged. Desktop and mobile tests pass. Validated same-track multi-date (three or more) baseline cannot yet be built from the available 2026-11-14 data.
+
+[Measured experiment](../research/signal_coherence/README.md) · [Reproducing source](../scripts/evaluate_signal_coherence.py).
+
+---
+
+
 ## Two real geographic studies and original-brand app
 
 - Kuttanad: NISAR validated HH/HV and OPERA optical HLS products analyzed. Existing-water held-out F1 0.944; HH-only gain/loss agreement F1 about 0.20/0.22, not reliable flooding estimates.

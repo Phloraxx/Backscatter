@@ -8,6 +8,19 @@
 
 **Status:** Draft for review. NOT submitted.
 
+## Official team roster
+
+The six names below are taken verbatim from the [AfterImage team page on NASA Space Apps](https://www.spaceappschallenge.org/2026/find-a-team/afterimage/) on November 14, 2026. They appear on the title slide of the seven-slide demo PDF; no member roles are invented.
+
+- Karthik Krishna M S
+- Ann Maria Johny
+- Sourav P Bijoy
+- Aradhana Rose
+- Ishan Sudarsan
+- YadhuKrishna T M
+
+**Demo requirement checked:** Project title, team name, names of all six members, and challenge "Dancing with the SARs" are on slide 1. Original team logo is retained; total slides = 7.
+
 ## Title and concise project description
 
 **Backscatter — Read the Surface, Question the Signal**

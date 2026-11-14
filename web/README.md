@@ -114,7 +114,7 @@ In Kuttanad the spatially coherent filter reduced the fraction of OPERA-classifi
 
 ## Public seven-slide NASA demonstration
 
-The [seven-slide Backscatter demonstration deck](public/backscatter-demo.pdf) accompanies the interactive website. It contains the **original team logo** and actual screenshots, measured Kuttanad/Assam results and scientific limitations. It is produced from the source [HTML slide design](../docs/space-apps-demo.html) and exported with Chromium to an exactly seven-page PDF. A link is available in the website header.
+The [seven-slide Backscatter demonstration deck](public/backscatter-demo.pdf) accompanies the interactive website. It contains the **original team logo**, all **six official AfterImage team members** on slide 1, the selected NASA challenge, actual screenshots, measured Kuttanad/Assam results and scientific limitations. It is produced from the source [HTML slide design](../docs/space-apps-demo.html) and exported with Chromium to an exactly seven-page PDF. A link is available in the website header.
 
 Public: https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf
 

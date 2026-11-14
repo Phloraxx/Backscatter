@@ -1,5 +1,22 @@
 # Backscatter
 
+## Interactive evidence map — 14 November 2026
+
+**The first working Backscatter web demo now exists.** Built in React + MapLibre, it displays real validated NISAR HHHH before/after imagery, a measured radar-difference overlay, and the independently classified OPERA October 29 water layer over Kuttanad. Click map cells to inspect actual before/after dB values and the OPERA class. Works on desktop and mobile.
+
+![Working Backscatter interactive map](web/preview.jpg)
+
+Run locally (no token needed for the prepared curated dataset):
+
+```bash
+cd web
+npm install
+npm run dev
+```
+
+The website is an **evidence viewer, not a flood detector**. The current simple gain/loss classifier has poor OPERA agreement (F1 about 0.20/0.22), and the map deliberately does not display those experimental masks as confirmed flooding. [App instructions](web/README.md) · [Science and limitations](research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md).
+
+
 ## November 14: Independent water-reference experiment
 
 **Current verified position: NISAR water/land discrimination works on this limited example; robust gain/loss detection does not.**

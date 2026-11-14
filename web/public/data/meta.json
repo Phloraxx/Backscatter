@@ -1,0 +1,58 @@
+{
+  "title": "Backscatter \u2014 Kuttanad experimental SAR surface-change viewer",
+  "bbox_wgs84": [
+    76.42,
+    9.4,
+    76.49,
+    9.47
+  ],
+  "crs": "EPSG:32643",
+  "rows": 259,
+  "cols": 257,
+  "x0": 655890.0,
+  "y0": 1047180.0,
+  "pixel_width_m": 30.0,
+  "pixel_height_m": 30.0,
+  "image_coordinates_lonlat": [
+    [
+      76.42003469,
+      9.47042831
+    ],
+    [
+      76.49025072,
+      9.47013694
+    ],
+    [
+      76.489949,
+      9.39988219
+    ],
+    [
+      76.41974718,
+      9.40017137
+    ]
+  ],
+  "primary_dates": [
+    "2026-10-29",
+    "2026-11-10"
+  ],
+  "opera_date": "2026-10-29",
+  "opera_product": "OPERA_L3_DSWx-HLS_T43PFL_20261029T050929Z_20261031T153533Z_S2B_30_v1.1_B01_WTR.tif",
+  "data_binary_format": "little-endian Float32 pre[N], Float32 post[N], Uint8 OPERA_WTR[N]; N=rows*cols",
+  "statistics": {
+    "radar_shared_valid_km2": 59.4958,
+    "radar_paired_median_delta_db": 0.6231,
+    "same_day_opera_auc": 0.98306,
+    "east_holdout_static_f1": 0.9435,
+    "gain_f1": 0.2013,
+    "loss_f1": 0.2181
+  },
+  "limitations": [
+    "Not a flood detection or prediction product",
+    "NISAR radar change does not uniquely imply water change",
+    "OPERA layer is an optical satellite classification, not ground truth",
+    "The second reference used in comparison was 2026-11-05; five days before NISAR 2026-11-10",
+    "Spatially correlated pixels and crops affect reference agreement"
+  ],
+  "credits": "NISAR validated GCOV V1 / NASA and ISRO; NASA OPERA DSWx-HLS v1.1; NASA Earthdata/ASF/PO.DAAC",
+  "source_manifest": "https://github.com/Phloraxx/Backscatter/blob/main/research/kuttanad_validated_2026_10_11/scene_manifest.json"
+}

@@ -1,5 +1,12 @@
 # Backscatter status — updated November 14, 2026
 
+## Interactive demonstration — implemented November 14, 2026
+
+The `web/` Vite/React/MapLibre app builds and runs with real, small local NISAR/OPERA sample assets (no token in browser). Desktop and 390×844 mobile headless Brave checks pass without JavaScript errors; map layer toggles and pixel inspector were tested with actual dB data. It shows before/after HHHH, unclassified dB change, and OPERA Oct 29 classified water. It is **not a validated water-gain/loss detector** and has not been deployed to a public URL. See `web/README.md` and `scripts/export_demo_assets.py`.
+
+---
+
+
 ## Scientific reference evaluation — November 14, 2026 (latest)
 
 - **Verified data:** validated NISAR Oct 29/Nov 10 HHHH radar rasters; OPERA DSWx-HLS WTR on Oct 29 (Sentinel-2B) and Nov 05 (Sentinel-2A). Both reference rasters contain ~90%+ valid classifications in the AOI. Also downloaded 4 other optical observations; two are entirely invalid in our AOI and excluded.

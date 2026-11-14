@@ -40,3 +40,10 @@ Do not cite this file as authority. Follow the links and verify the current offi
 - NASA Earthdata CMR: https://cmr.earthdata.nasa.gov/search/granules.json
 - OPERA DSWx-HLS collection `C2617126679-POCLOUD`
 - Reproducible reference tests: `research/kuttanad_validated_2026_10_11/INDEPENDENT_COMPARISON.md`
+
+
+## Lower Assam source and calibration references
+
+- [NASA CMR catalog](https://cmr.earthdata.nasa.gov/search/granules.json): source IDs in [Assam manifest](../research/assam_validated_2026_10_11/scene_manifest.json).
+- [NISAR validated release notes](https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/): known pre-Nov-12 calibration issues.
+- [OPERA DSWx-S1 classification codes](https://developers.google.com/earth-engine/datasets/catalog/OPERA_DSWX_L3_V1_S1): 0, 1, 3 and mask classes.

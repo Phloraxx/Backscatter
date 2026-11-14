@@ -1,5 +1,14 @@
 # Backscatter status — updated November 14, 2026
 
+## New status: Lower Assam second-case discovery (November 14, 2026)
+
+NASA CMR preflight confirmed all four scene identifiers and appropriate source assets. NISAR (Oct 28 / Nov 09) is a matching validated 12-day acquisition pair; OPERA DSWx-S1 (Oct 31 / Nov 10) is available for reference with +3/+1 calendar-day offsets. Pixel extraction, classification, and second-case validation remain pending. The Mac submitted the two Harmony jobs but disconnected before completion could be checked. Check existing local job files before making new submissions.
+
+New scripts: [preflight](../scripts/preflight_assam.py), [Harmony retrieval](../scripts/harmony_assam.py), [OPERA retrieval](../scripts/fetch_opera_assam.py), [comparison](../scripts/compare_assam_opera.py).
+
+The OPERA S1 WTR classes differ from OPERA HLS: class 3 is inundated vegetation; classes 0 and 1 distinguish non-water and open water; 250/251/254/255 are masked/invalid. Calibration uncertainty for some pre-Nov-12 NISAR radar modes can be around 1 dB, and our scene-level affected status is unknown.
+
+
 ## Latest experiment: dual-polarization and actual GCOV mask layers
 
 - **Six additional NASA Harmony subsets succeeded:** HVHV cross-pol, valid-subsample mask, and number-of-looks × both Kuttanad acquisitions.

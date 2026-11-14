@@ -79,3 +79,12 @@ Use OPERA DSWx-HLS class 0/1 for strict binary assessment; treat class 2 (partia
 ## D-017 — Dual-polarization evidence, not a flood classifier (2026-11-14)
 
 Both validated NISAR scenes now include extracted GCOV frequency-A HVHV, subswath mask and number-of-looks rasters. A weighted HH+HV score improves same-day held-out static open-water F1 from 0.9435 to 0.9533, **but worsens** gain/loss F1 from 0.2022/0.2185 to 0.1053/0.0981 against temporally offset OPERA reference. The mask marks all in-footprint pixels as valid, and a looks threshold did not fix the change problem. Add HVHV **measured radar change** as an evidence layer, but do not promote dual-pol masks as confirmed water gain/loss. Keep the HH change layer primary.
+
+
+## D-018 — Geographic generalization check
+
+Investigate Lower Assam validated NISAR GCOV Oct 28 / Nov 09 using OPERA Sentinel-1 DSWx-S1 Oct 31 / Nov 10 as a second case. Metadata and source links pass preflight; actual sensor pixels and validation do not yet exist. Never describe this candidate as completed flood detection.
+
+## D-019 — Explicit pre-Nov-12 calibration caution
+
+ASF identifies approximately 1 dB radiometric residuals in some pre-Nov-12 NISAR acquisition modes. The affected status of the selected Kuttanad/Assam granules is not confirmed; a small difference in measured dB may therefore not be physically meaningful on its own.

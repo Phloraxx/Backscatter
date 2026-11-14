@@ -1,0 +1,67 @@
+{
+  "record_date": "2026-11-14",
+  "status": "CATALOG CONFIRMED ONLY. NISAR Harmony jobs submitted on a Mac; actual data inspection/validation not completed as of this snapshot.",
+  "purpose": "Second independent Lower Assam geographic case to test generalization beyond Kuttanad",
+  "area_name": "Lower Assam, India",
+  "bbox_lonlat_wgs84": [
+    90.28,
+    26.16,
+    90.35,
+    26.23
+  ],
+  "target_crs": "EPSG:32646",
+  "nisar_collection": "C3622241360-ASF",
+  "nisar_gcov_v1": [
+    {
+      "date": "2026-10-28",
+      "cmr_id": "G4410147621-ASF",
+      "id": "NISAR_L2_PR_GCOV_034_069_A_015_4005_DHDH_A_20261028T232206_20261028T232240_P05036_N_F_J_001"
+    },
+    {
+      "date": "2026-11-09",
+      "cmr_id": "G4409018076-ASF",
+      "id": "NISAR_L2_PR_GCOV_035_069_A_015_4005_DHDH_A_20261109T232206_20261109T232241_P05036_N_F_J_001"
+    }
+  ],
+  "nisar_variable": {
+    "name": "/science/LSAR/GCOV/grids/frequencyA/HHHH",
+    "harmony_variable_id": "V4137651715-ASF"
+  },
+  "matched_geometry": "069_A_015_4005_DHDH, same P05036 validation processor",
+  "opera_collection": "C2949811996-POCLOUD",
+  "opera_dswx_s1": [
+    {
+      "date": "2026-10-31",
+      "cmr_id": "G4399391976-POCLOUD",
+      "id": "OPERA_L3_DSWx-S1_T46RBQ_20261031T235432Z_20261101T200652Z_S1D_30_v1.0",
+      "calendar_day_offset_from_nisar": 3
+    },
+    {
+      "date": "2026-11-10",
+      "cmr_id": "G4408812788-POCLOUD",
+      "id": "OPERA_L3_DSWx-S1_T46RBQ_20261110T120427Z_20261110T210338Z_S1D_30_v1.0",
+      "calendar_day_offset_from_nisar": 1
+    }
+  ],
+  "opera_water_class_codes": {
+    "0": "not water",
+    "1": "open water",
+    "3": "inundated vegetation",
+    "250": "HAND-masked",
+    "251": "layover/shadow masked",
+    "254": "ocean mask",
+    "255": "no data"
+  },
+  "known_limitations": [
+    "Actual NISAR or OPERA pixels not yet inspected on the second case; only CMR matches and source links verified",
+    "OPERA dates are not simultaneous with NISAR, by 3 and 1 calendar days",
+    "OPERA DSWx-S1 is a separate Sentinel-1 C-band satellite classification, not field ground truth",
+    "NISAR validated data before November 12 may include ~1 dB radiometric residuals in about 30% of certain radar modes, per ASF release notes; no scene-specific affected-RCID check completed",
+    "No second-case flood change result, model score or measured water area established"
+  ],
+  "sources": {
+    "cmr": "https://cmr.earthdata.nasa.gov/search/granules.json",
+    "nisar_release_notes": "https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/",
+    "opera_s1_classes": "https://developers.google.com/earth-engine/datasets/catalog/OPERA_DSWX_L3_V1_S1"
+  }
+}

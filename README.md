@@ -1,5 +1,14 @@
 # Backscatter
 
+## Second study candidate: Lower Assam (November 14, 2026)
+
+We verified two compatible validated NISAR L-band GCOV catalog scenes from October 28 and November 9, plus independent OPERA Sentinel-1 DSWx-S1 water reference products from October 31 and November 10. Their calendar-day offsets are +3 and +1, respectively. **No Assam satellite pixels or water-change accuracy results are available yet.**
+
+See [Lower Assam research plan](research/assam_validated_2026_10_11/README.md) and [machine-readable source IDs](research/assam_validated_2026_10_11/scene_manifest.json).
+
+**Calibration caveat:** [ASF's validated NISAR release notes](https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/) warn of approximately 1 dB residuals in about 30% of observations in certain pre-November-12 radar modes. Whether our individual granules are affected is not established. Kuttanad's +0.6231 dB median paired signal difference is a measurement, not proof of environmental change.
+
+
 **Team identity:** The web app now uses our original Backscatter logo (globe, radar beam, returning echoes and wordmark), preserved unchanged in [web/public/brand/backscatter-original.png](web/public/brand/backscatter-original.png). The logo mark also powers the site header and favicon.
 
 

@@ -92,3 +92,8 @@ Run `scripts/fetch_opera_hls.py`, `scripts/compare_nisar_opera_hls.py`, `scripts
 Scripts: \`scripts/harmony_extra_layers.py\` obtains GCOV frequency-A HVHV, mask and numberOfLooks for both dates; \`scripts/evaluate_dualpol_quality.py\` reproduces OPERA agreement metrics and ablations; \`scripts/export_demo_assets.py\` prepares five web map layers. Native extra TIFFs remain local; compact JSON and figures are in \`research/kuttanad_validated_2026_10_11/\`.
 
 Measured static open-water held-out F1: HHHH 0.9435 vs weighted HH/HV 0.9533. **Change masks worsened**: gain 0.2022→0.1053; loss 0.2185→0.0981. Subswath mask had no invalid in-coverage pixels. Do not confuse these with field-validation scores or flood extent. The OPERA November reference is 5 days earlier than NISAR. Read \`DUAL_POLARIZATION.md\` before implementing classifier claims.
+
+
+## Next case: Lower Assam and calibration
+
+The second geography is a catalog-confirmed candidate, NOT an analyzed flood event. Run scripts/preflight_assam.py first. Check existing Mac NASA Harmony job state before using scripts/harmony_assam.py submit; run fetch, scripts/fetch_opera_assam.py, then scripts/compare_assam_opera.py only after authenticated source files exist. Never put the Earthdata token or signed URLs in Git. OPERA S1 WTR codes differ from optical HLS: 0 non-water, 1 open water, 3 inundated vegetation; 250/251/254/255 are masked. The NISAR pre-Nov12 calibration caveat remains unresolved for these exact granules. Keep the recovered Backscatter logo in web/public/brand.

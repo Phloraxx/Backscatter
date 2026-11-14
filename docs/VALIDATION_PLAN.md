@@ -82,3 +82,10 @@ OPERA DSWx-S1 WTR tiles `T43PFL` for 2026-09-15 and 2026-09-27 have been acquire
 - Failure modes: changing crops/field water management, partial-water categories, radar speckle, different sensing times, optical clouds/quality masks, and spatially correlated classification labels.
 
 Do not report 0.9435 as "flood detection accuracy". Complete experimental artifacts and source granule IDs are under `research/kuttanad_validated_2026_10_11/`.
+
+
+## Lower Assam second-case plan
+
+The November 14 metadata preflight confirms two validated NISAR observations and two OPERA Sentinel-1 water references. No raster-level results are yet claimed. Native OPERA 30-metre water labels should be compared to coarsened NISAR **linear power** values converted to dB only after averaging. For OPERA DSWx-S1, class 3 is inundated vegetation (not partial water); exclude it from strict class-0/class-1 open-water evaluation and report it separately. Date offsets are +3 and +1 days, so OPERA is not simultaneous field truth.
+
+NASA ASF flags possible mode-specific calibration residuals around 1 dB before Nov 12, 2026. Check the affected radar mode or RCID before interpreting small median differences as physical change. Source: https://hyp3-docs.asf.alaska.edu/nisar-docs/release-notes/.

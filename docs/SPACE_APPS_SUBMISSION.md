@@ -10,7 +10,7 @@
 
 ## Copy-ready form and release review
 
-Use [the fully drafted NASA project fields](PROJECT_FORM_READY.md) and [attribution/release checklist](ATTRIBUTION_AND_RELEASE.md) to avoid omitting required credits. The repository is private and has no team-approved source license yet; this is an **unresolved team decision**, not a completed compliance check.
+Use [the fully drafted NASA project fields](PROJECT_FORM_READY.md) and [attribution/release checklist](ATTRIBUTION_AND_RELEASE.md) to avoid omitting required credits. The repository is currently PUBLIC but has no team-approved source license; this is an **unresolved team decision**, not a completed compliance check.
 
 ## Official team roster
 
@@ -62,7 +62,7 @@ Keep the demo within **seven slides**, including title and closing slides. Alter
 - **Verified production website:** https://backscatter-afterimage-2026.pages.dev/ — published, independently tested for both geographic studies.
 - **Public demonstration deck:** https://backscatter-afterimage-2026.pages.dev/backscatter-demo.pdf — a visually verified, exactly seven-page landscape PDF, accessible in a browser.
 - **Public scientific methods/results:** https://backscatter-afterimage-2026.pages.dev/research.html — includes all three studies, raw-source identifiers, metrics and caveats.
-- **Code repository:** https://github.com/Phloraxx/Backscatter — currently **private**; reviewers cannot access it without permission. Do not list this as the only public final-project link.
+- **Public source repository:** https://github.com/Phloraxx/Backscatter — accessible without signing in. The source is currently UNLICENSED; public visibility alone does not grant reuse rights. The live website remains the recommended final-project link.
 - **Official submission:** https://www.spaceappschallenge.org/2026/ — Project tab on Team Afterimage's page; submitting is a separate user action.
 
 ## Source and tool credits

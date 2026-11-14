@@ -2,6 +2,8 @@
 
 > **Current-status precedence (2026-11-14):** This file preserves dated historical checkpoints, some of which say experiments were not yet completed. For current facts, use docs/PROJECT_STATUS.md, research/arnab_event/MEASURED_RESULTS.md and the verified per-case JSON. Earlier TODO/status lines below are **historical** and should not override later measured results.
 
+- **Visibility update as of November 14:** GitHub API reports Phloraxx/Backscatter PUBLIC, though historical notes below refer to the earlier private state. No original-work LICENSE is present; do not assume code reuse is authorized merely because the repo is public.
+
 
 This file is the operating contract for AI coding/research agents working on Backscatter.
 
